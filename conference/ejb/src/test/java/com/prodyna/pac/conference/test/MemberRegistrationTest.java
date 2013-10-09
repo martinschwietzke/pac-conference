@@ -38,6 +38,7 @@ import org.junit.runner.RunWith;
 public class MemberRegistrationTest {
     @Deployment
     public static Archive<?> createTestArchive() {
+    	
         return ShrinkWrap.create(WebArchive.class, "test.war")
                 .addClasses(Member.class, MemberRegistration.class, Resources.class)
                 .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
@@ -49,18 +50,24 @@ public class MemberRegistrationTest {
     @Inject
     MemberRegistration memberRegistration;
 
-    @Inject
-    Logger log;
+    //@Inject
+   // Logger log;
+    
+    @Test
+    public void testFoo() throws Exception {
+    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    }	
 
     @Test
     public void testRegister() throws Exception {
+    	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         Member newMember = new Member();
         newMember.setName("Jane Doe");
         newMember.setEmail("jane@mailinator.com");
         newMember.setPhoneNumber("2125551234");
         memberRegistration.register(newMember);
         assertNotNull(newMember.getId());
-        log.info(newMember.getName() + " was persisted with id " + newMember.getId());
+       // log.info(newMember.getName() + " was persisted with id " + newMember.getId());
     }
 
 }
