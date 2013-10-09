@@ -1,21 +1,22 @@
 package com.prodyna.pac.conference.model;
 
-import java.io.Serializable;
-import java.lang.Long;
-import java.lang.String;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entity implementation class for Entity: Speaker
  * 
  */
 @Entity
+@XmlRootElement
 @NamedQuery(name = Speaker.FIND_ALL, query = "SELECT s FROM Speaker s")
-public class Speaker implements Serializable {
+public class Speaker extends AbstractEntity {
 
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.speaker.findAll";
 

@@ -1,87 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-    JBoss, Home of Professional Open Source
-    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
-    contributors by the @authors tag. See the copyright.txt in the
-    distribution for a full listing of individual contributors.
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-    http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:ui="http://java.sun.com/jsf/facelets"
-   xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:h="http://java.sun.com/jsf/html"
-   template="/WEB-INF/templates/default.xhtml">
-   <ui:define name="content">
-      <h1>Welcome to JBoss!</h1>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>Welcome to PAC Conference!</h1>
 
-      <div>
-         <p>You have successfully deployed a Java EE 6 Enterprise Application.</p>
-         <h3>Your application can run on:</h3>
-         <img src="resources/gfx/dualbrand_as7eap.png"/>
-      </div>
+		<h:form id="conferenceForm">
+			<h2>
+				<h:outputText value="#{i18n['create-conference']}"
+					rendered="#{newRoom.id == null}" />
+				<h:outputText value="#{i18n['edit-conference']}"
+					rendered="#{newRoom.id != null}" />
+			</h2>
 
-      <h:form id="reg">
-         <h2>Member Registration</h2>
-         <p>Enforces annotation-based constraints defined on the model class.</p>
-         <h:panelGrid columns="3" columnClasses="titleCell">
-            <h:outputLabel for="name" value="Name:"/>
-            <h:inputText id="name" value="#{newMember.name}" />
-            <h:message for="name" errorClass="invalid"/>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="name" value="#{i18n['name']}" />
+				<h:inputText id="name" value="#{newConference.name}" />
+				<h:message for="name" errorClass="invalid" />
 
-            <h:outputLabel for="email" value="Email:"/>
-            <h:inputText id="email" value="#{newMember.email}"/>
-            <h:message for="email" errorClass="invalid"/>
+				<h:outputLabel for="location" value="#{i18n['location']}" />
+				<h:inputText id="location" value="#{newConference.location}" />
+				<h:message for="location" errorClass="invalid" />
 
-            <h:outputLabel for="phoneNumber" value="Phone #:"/>
-            <h:inputText id="phoneNumber" value="#{newMember.phoneNumber}"/>
-            <h:message for="phoneNumber" errorClass="invalid"/>
-         </h:panelGrid>
+				<h:outputLabel for="description" value="#{i18n['description']}" />
+				<h:inputTextarea id="description"
+					value="#{newConference.description}" />
+				<h:message for="description" errorClass="invalid" />
 
-         <p>
-            <h:panelGrid columns="2">
-               <h:commandButton id="register" action="#{memberController.register}" value="Register" styleClass="register"/>
-               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
-                           globalOnly="true"/>
-            </h:panelGrid>
-         </p>
-      </h:form>
-      <h2>Members</h2>
-      <h:panelGroup rendered="#{empty members}">
-         <em>No registered members.</em>
-      </h:panelGroup>
-      <h:dataTable var="_member" value="#{members}" rendered="#{not empty members}" styleClass="simpletablestyle">
-         <h:column>
-            <f:facet name="header">Id</f:facet>
-                #{_member.id}
+				<h:outputLabel for="start" value="#{i18n['start']}" />
+				<h:inputText id="start" value="#{newConference.start}">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:inputText>
+				<h:message for="start" errorClass="invalid" />
+
+				<h:outputLabel for="end" value="#{i18n['end']}" />
+				<h:inputText id="end" value="#{newConference.end}">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:inputText>
+				<h:message for="end" errorClass="invalid" />
+
+			</h:panelGrid>
+
+			<p>
+				<h:panelGrid columns="2">
+					<h:commandButton id="saveConference"
+						action="#{conferenceController.createConference}"
+						value="#{i18n['save']}" styleClass="register" />
+					<h:commandButton action="#{roomController.cancelEditing}"
+						value="#{i18n['cancel']}" />
+					<h:messages styleClass="messages" errorClass="invalid"
+						infoClass="valid" warnClass="warning" globalOnly="true" />
+				</h:panelGrid>
+			</p>
+		</h:form>
+		<h2>#{i18n['conferences']}</h2>
+		<h:panelGroup rendered="#{empty conferences}">
+			<em>#{i18n['no-conferences-exists']}</em>
+		</h:panelGroup>
+		<h:form>
+			<h:dataTable var="currConference" value="#{conferences}"
+				rendered="#{not empty conferences}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">#{i18n['id']}</f:facet>
+                #{currConference.id}
             </h:column>
-         <h:column>
-            <f:facet name="header">Name</f:facet>
-                #{_member.name}
+				<h:column>
+					<f:facet name="header">#{i18n['name']}</f:facet>
+                #{currConference.name}
             </h:column>
-         <h:column>
-            <f:facet name="header">Email</f:facet>
-                #{_member.email}
-            </h:column>
-         <h:column>
-            <f:facet name="header">Phone #</f:facet>
-                #{_member.phoneNumber}
-            </h:column>
-         <h:column>
-            <f:facet name="header">REST URL</f:facet>
-            <a href="#{request.contextPath}/rest/members/#{_member.id}">/rest/members/#{_member.id}</a>
-         </h:column>
-         <f:facet name="footer">
-            REST URL for all members: <a href="#{request.contextPath}/rest/members">/rest/members</a>
-         </f:facet>
-      </h:dataTable>
-   </ui:define>
+				<h:column>
+					<f:facet name="header">#{i18n['start']}</f:facet>
+					<h:outputText value="#{currConference.start}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['end']}</f:facet>
+					<h:outputText value="#{currConference.end}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="actions">#{i18n['actions']}</f:facet>
+					<h:column>
+						<f:facet name="actions">#{i18n['actions']}</f:facet>
+						<h:commandButton
+							action="#{conferenceController.editConference(currConference)}"
+							value="#{i18n['edit']}" />
+
+						<h:link outcome="conferenceDetails" value="show">
+							<f:param name="id" value="#{currConference.id}"></f:param>
+						</h:link>
+
+					</h:column>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
 </ui:composition>

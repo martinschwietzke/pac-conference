@@ -1,32 +1,39 @@
 package com.prodyna.pac.conference.model;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entity implementation class for Entity: Talk
  * 
  */
 @Entity
+@XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = Talk.FIND_ALL, query = "SELECT t FROM Talk t"),
 		@NamedQuery(name = Talk.FIND_BY_CONFERENCE_ID, query = "SELECT t FROM Talk t WHERE t.conference.id = :conferenceId"),
 		@NamedQuery(name = Talk.FIND_BY_ROOM_ID, query = "SELECT t FROM Talk t WHERE t.room.id = :roomId"),
 		@NamedQuery(name = Talk.FIND_BY_SPEAKER, query = "SELECT t FROM Talk t WHERE :speaker MEMBER OF t.speakers") })
-public class Talk implements Serializable {
+public class Talk extends AbstractEntity {
 
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.talk.findAll";
 	public final static String FIND_BY_CONFERENCE_ID = "de.prodyna.pac.conference.model.talk.findByConferenceId";
@@ -45,15 +52,18 @@ public class Talk implements Serializable {
 	private String description;
 
 	@NotNull
+	private Date start;
+
+	@NotNull
 	@Min(1)
 	private int duration;
 
 	@NotNull
+	@OneToOne
 	private Room room;
 
-	@OneToMany
-	@Size(min = 1, message = "Must have at least one speaker")
-	private Set<Speaker> speakers;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Speaker> speakers;
 
 	@ManyToOne
 	@NotNull
@@ -105,9 +115,9 @@ public class Talk implements Serializable {
 		this.room = room;
 	}
 
-	public Set<Speaker> getSpeakers() {
+	public List<Speaker> getSpeakers() {
 		// return a copy to prevent direct access to our list
-		return new LinkedHashSet<Speaker>(this.speakers);
+		return new ArrayList<Speaker>(this.speakers);
 	}
 
 	public void addSpeaker(Speaker speaker) {
@@ -124,5 +134,13 @@ public class Talk implements Serializable {
 
 	public void setConference(Conference conference) {
 		this.conference = conference;
+	}
+
+	public Date getStart() {
+		return start;
+	}
+
+	public void setStart(Date start) {
+		this.start = start;
 	}
 }

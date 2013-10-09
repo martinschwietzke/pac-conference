@@ -1,22 +1,22 @@
 package com.prodyna.pac.conference.model;
 
-import java.io.Serializable;
-import java.lang.Long;
-import java.lang.String;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entity implementation class for Entity: Room
  * 
  */
 @Entity
+@XmlRootElement
 @NamedQuery(name = Room.FIND_ALL, query = "SELECT r FROM Room r")
-public class Room implements Serializable {
+public class Room extends AbstractEntity {
 
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.room.findAll";
 
@@ -26,7 +26,6 @@ public class Room implements Serializable {
 
 	@NotNull
 	@Size(min = 1, max = 30)
-	@Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
 	private String name;
 
 	@NotNull

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="id" value="#{speakerDetails.id}"
+				converterMessage="Unknown product, please use a link from within the system."
+				required="true"
+				requiredMessage="Bad request, please use a link from within the system." />
+		</f:metadata>
+
+		<h:form rendered="#{not empty speakerDetails.speaker}">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="#{i18n['name']}" />
+				<h:outputText value="#{speakerDetails.speaker.name}" />
+
+				<h:outputLabel value="#{i18n['description']}" />
+				<h:outputText value="#{speakerDetails.speaker.description}" />
+
+				<h:outputLabel value="#{i18n['talks']}" />
+				<h:panelGroup>
+					<ui:repeat var="currTalk" value="#{speakerDetails.talks}">
+						<h:link outcome="talkDetails" value="#{currTalk.name}">
+							<f:param name="id" value="#{currTalk.id}" />
+						</h:link>
+(
+						<h:link outcome="conferenceDetails"
+							value="#{currTalk.conference.name}">
+							<f:param name="id" value="#{currTalk.conference.id}" />
+						</h:link>)
+						<br />
+					</ui:repeat>
+				</h:panelGroup>
+
+			</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

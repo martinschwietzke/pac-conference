@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="id" value="#{conferenceDetails.id}"
+				required="true" />
+		</f:metadata>
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="#{i18n['name']}" />
+			<h:outputText value="#{conferenceDetails.conference.name}" />
+
+			<h:outputLabel value="#{i18n['location']}" />
+			<h:outputText value="#{conferenceDetails.conference.location}" />
+
+			<h:outputLabel value="#{i18n['start']}" />
+			<h:outputText value="#{conferenceDetails.conference.start}">
+				<f:convertDateTime pattern="EEEE, dd.MM.yyyy" />
+			</h:outputText>
+
+			<h:outputLabel value="#{i18n['end']}" />
+			<h:outputText value="#{conferenceDetails.conference.end}">
+				<f:convertDateTime pattern="EEEE, dd.MM.yyyy" />
+			</h:outputText>
+
+			<h:outputLabel value="#{i18n['description']}" />
+			<h:outputText value="#{conferenceDetails.conference.description}" />
+
+			<h:outputLabel value="#{i18n['agenda']}" />
+			<h:panelGroup>
+				<ui:repeat var="currDayAgenda"
+					value="#{conferenceDetails.conferenceAgenda.dayAgendas}">
+
+					<h2>
+						<h:outputText value="#{currDayAgenda.date}">
+							<f:convertDateTime pattern="EEEE, dd.MM.yyyy" />
+						</h:outputText>
+					</h2>
+
+					<ui:repeat var="currTalk" value="#{currDayAgenda.talks}">
+						<p>
+							<h:outputText value="#{currTalk.start}">
+								<f:convertDateTime pattern="HH:ss" />
+							</h:outputText>
+							#{currTalk.name}, (#{currTalk.room.name},
+							#{currTalk.room.capacity} Teilnehmer)
+							<h:link outcome="talkDetails" value="show">
+								<f:param name="id" value="#{currTalk.id}" />
+							</h:link>
+						</p>
+					</ui:repeat>
+
+				</ui:repeat>
+			</h:panelGroup>
+
+		</h:panelGrid>
+
+
+
+	</ui:define>
+</ui:composition>

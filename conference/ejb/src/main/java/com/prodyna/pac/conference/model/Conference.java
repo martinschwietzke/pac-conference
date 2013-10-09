@@ -1,6 +1,5 @@
 package com.prodyna.pac.conference.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,14 +9,16 @@ import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entity implementation class for Entity: Conference
  * 
  */
 @Entity
+@XmlRootElement
 @NamedQuery(name = Conference.FIND_ALL, query = "SELECT c FROM Conference c")
-public class Conference implements Serializable {
+public class Conference extends AbstractEntity {
 
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.conference.findAll";
 
@@ -27,7 +28,6 @@ public class Conference implements Serializable {
 
 	@NotNull
 	@Size(min = 1, max = 75)
-	@Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
 	private String name;
 
 	@NotNull
@@ -35,6 +35,7 @@ public class Conference implements Serializable {
 	@Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
 	private String location;
 
+	@Size(max = 255)
 	private String description;
 
 	@NotNull
