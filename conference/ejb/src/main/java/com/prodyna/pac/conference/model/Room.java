@@ -15,15 +15,18 @@ import javax.validation.constraints.Size;
  * 
  */
 @Entity
+@NamedQuery(name = Room.FIND_ALL, query = "SELECT r FROM Room r")
 public class Room implements Serializable {
+
+	public final static String FIND_ALL = "de.prodyna.pac.conference.model.room.findAll";
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
 	@NotNull
-    @Size(min = 1, max = 30)
-    @Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
+	@Size(min = 1, max = 30)
+	@Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
 	private String name;
 
 	@NotNull

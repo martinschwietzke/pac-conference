@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -15,7 +16,10 @@ import javax.validation.constraints.Size;
  * 
  */
 @Entity
+@NamedQuery(name = Conference.FIND_ALL, query = "SELECT c FROM Conference c")
 public class Conference implements Serializable {
+
+	public final static String FIND_ALL = "de.prodyna.pac.conference.model.conference.findAll";
 
 	@Id
 	@GeneratedValue
@@ -38,6 +42,9 @@ public class Conference implements Serializable {
 
 	@NotNull
 	private Date end;
+
+	@NotNull
+	private boolean archived;
 
 	private static final long serialVersionUID = 1L;
 
@@ -91,6 +98,14 @@ public class Conference implements Serializable {
 
 	public void setEnd(Date end) {
 		this.end = end;
+	}
+
+	public boolean isArchived() {
+		return archived;
+	}
+
+	public void setArchived(boolean archived) {
+		this.archived = archived;
 	}
 
 }

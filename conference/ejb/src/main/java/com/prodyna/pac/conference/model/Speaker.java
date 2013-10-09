@@ -14,7 +14,10 @@ import javax.validation.constraints.Size;
  * 
  */
 @Entity
+@NamedQuery(name = Speaker.FIND_ALL, query = "SELECT s FROM Speaker s")
 public class Speaker implements Serializable {
+
+	public final static String FIND_ALL = "de.prodyna.pac.conference.model.speaker.findAll";
 
 	@Id
 	@GeneratedValue
@@ -68,5 +71,9 @@ public class Speaker implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getName() {
+		return getFirstname() + " " + getLastname();
 	}
 }

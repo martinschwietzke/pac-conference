@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -19,7 +21,17 @@ import javax.validation.constraints.Size;
  * 
  */
 @Entity
+@NamedQueries({
+		@NamedQuery(name = Talk.FIND_ALL, query = "SELECT t FROM Talk t"),
+		@NamedQuery(name = Talk.FIND_BY_CONFERENCE_ID, query = "SELECT t FROM Talk t WHERE t.conference.id = :conferenceId"),
+		@NamedQuery(name = Talk.FIND_BY_ROOM_ID, query = "SELECT t FROM Talk t WHERE t.room.id = :roomId"),
+		@NamedQuery(name = Talk.FIND_BY_SPEAKER, query = "SELECT t FROM Talk t WHERE :speaker MEMBER OF t.speakers") })
 public class Talk implements Serializable {
+
+	public final static String FIND_ALL = "de.prodyna.pac.conference.model.talk.findAll";
+	public final static String FIND_BY_CONFERENCE_ID = "de.prodyna.pac.conference.model.talk.findByConferenceId";
+	public final static String FIND_BY_ROOM_ID = "de.prodyna.pac.conference.model.talk.findByRoomId";
+	public final static String FIND_BY_SPEAKER = "de.prodyna.pac.conference.model.talk.findSpeakerId";
 
 	@Id
 	@GeneratedValue
