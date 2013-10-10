@@ -13,6 +13,10 @@ import javax.inject.Named;
 import com.prodyna.pac.conference.model.Room;
 import com.prodyna.pac.conference.service.RoomService;
 
+/**
+ * @author Martin Schwietzke, PRODYNA AG
+ *
+ */
 @RequestScoped
 public class RoomListProducer {
 

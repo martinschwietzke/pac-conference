@@ -12,7 +12,10 @@ import javax.persistence.EntityManager;
 import com.prodyna.pac.conference.model.Room;
 import com.prodyna.pac.conference.service.RoomService;
 
-// The @Stateless annotation eliminates the need for manual transaction demarcation
+/**
+ * @author Martin Schwietzke, PRODYNA AG
+ *
+ */
 @Stateless
 @Local(RoomService.class)
 public class RoomServiceBean implements RoomService {

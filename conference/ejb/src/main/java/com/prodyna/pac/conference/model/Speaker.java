@@ -11,7 +11,9 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Entity implementation class for Entity: Speaker
+ * Entity implementation class for Entity Speaker
+ * 
+ * @author Martin Schwietzke, PRODYNA AG
  * 
  */
 @Entity

@@ -11,7 +11,9 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Entity implementation class for Entity: Room
+ * Entity implementation class for Entity Room
+ * 
+ * @author Martin Schwietzke, PRODYNA AG
  * 
  */
 @Entity

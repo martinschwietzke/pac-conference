@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.prodyna.pac.conference.model.Speaker;
 
+/**
+ * @author Martin Schwietzke, PRODYNA AG
+ *
+ */
 public interface SpeakerService {
 
 	void createSpeaker(Speaker speaker) throws Exception;

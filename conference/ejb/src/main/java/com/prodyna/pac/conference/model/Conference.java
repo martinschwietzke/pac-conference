@@ -15,6 +15,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Entity implementation class for Entity: Conference
  * 
+ * @author Martin Schwietzke, PRODYNA AG
+ * 
  */
 @Entity
 @XmlRootElement

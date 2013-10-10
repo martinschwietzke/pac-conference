@@ -21,7 +21,9 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Entity implementation class for Entity: Talk
+ * Entity implementation class for Entity Talk
+ * 
+ * @author Martin Schwietzke, PRODYNA AG
  * 
  */
 @Entity

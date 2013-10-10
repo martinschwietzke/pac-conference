@@ -14,7 +14,10 @@ import com.prodyna.pac.conference.model.Speaker;
 import com.prodyna.pac.conference.model.Talk;
 import com.prodyna.pac.conference.service.TalkService;
 
-// The @Stateless annotation eliminates the need for manual transaction demarcation
+/**
+ * @author Martin Schwietzke, PRODYNA AG
+ *
+ */
 @Stateless
 @Local(TalkService.class)
 public class TalkServiceBean implements TalkService {

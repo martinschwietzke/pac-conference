@@ -1,15 +1,20 @@
 package com.prodyna.pac.conference.data;
 
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.List;
 
 import com.prodyna.pac.conference.model.Member;
 
+/**
+ * @author Martin Schwietzke, PRODYNA AG
+ *
+ */
 @ApplicationScoped
 public class MemberRepository {
 

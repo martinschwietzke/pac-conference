@@ -5,6 +5,10 @@ import java.util.List;
 import com.prodyna.pac.conference.model.Speaker;
 import com.prodyna.pac.conference.model.Talk;
 
+/**
+ * @author Martin Schwietzke, PRODYNA AG
+ *
+ */
 public interface TalkService {
 
 	void createTalk(Talk talk) throws Exception;

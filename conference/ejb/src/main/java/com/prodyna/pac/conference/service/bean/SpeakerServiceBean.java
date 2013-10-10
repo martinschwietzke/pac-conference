@@ -12,7 +12,10 @@ import javax.persistence.EntityManager;
 import com.prodyna.pac.conference.model.Speaker;
 import com.prodyna.pac.conference.service.SpeakerService;
 
-// The @Stateless annotation eliminates the need for manual transaction demarcation
+/**
+ * @author Martin Schwietzke, PRODYNA AG
+ *
+ */
 @Stateless
 @Local(SpeakerService.class)
 public class SpeakerServiceBean implements SpeakerService {

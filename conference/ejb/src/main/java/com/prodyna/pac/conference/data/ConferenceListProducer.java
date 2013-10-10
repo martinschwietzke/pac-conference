@@ -13,6 +13,10 @@ import javax.inject.Named;
 import com.prodyna.pac.conference.model.Conference;
 import com.prodyna.pac.conference.service.ConferenceService;
 
+/**
+ * @author Martin Schwietzke, PRODYNA AG
+ *
+ */
 @RequestScoped
 public class ConferenceListProducer {
 
