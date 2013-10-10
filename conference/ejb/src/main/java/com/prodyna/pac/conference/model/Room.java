@@ -2,6 +2,7 @@ package com.prodyna.pac.conference.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.Min;
@@ -21,7 +22,7 @@ public class Room extends AbstractEntity {
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.room.findAll";
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotNull
