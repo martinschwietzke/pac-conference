@@ -13,7 +13,7 @@ import com.prodyna.pac.conference.model.Member;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
- *
+ * 
  */
 @ApplicationScoped
 public class MemberRepository {
@@ -21,11 +21,13 @@ public class MemberRepository {
 	@Inject
 	private EntityManager em;
 
-	public Member findById(Long id) {
+	public Member findById(Long id)
+	{
 		return em.find(Member.class, id);
 	}
 
-	public Member findByEmail(String email) {
+	public Member findByEmail(String email)
+	{
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Member> criteria = cb.createQuery(Member.class);
 		Root<Member> member = criteria.from(Member.class);
@@ -38,7 +40,8 @@ public class MemberRepository {
 		return em.createQuery(criteria).getSingleResult();
 	}
 
-	public List<Member> findAllOrderedByName() {
+	public List<Member> findAllOrderedByName()
+	{
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Member> criteria = cb.createQuery(Member.class);
 		Root<Member> member = criteria.from(Member.class);

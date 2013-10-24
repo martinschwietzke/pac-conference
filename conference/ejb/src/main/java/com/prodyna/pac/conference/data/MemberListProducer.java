@@ -14,7 +14,7 @@ import com.prodyna.pac.conference.model.Member;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
- *
+ * 
  */
 @RequestScoped
 public class MemberListProducer {
@@ -26,17 +26,20 @@ public class MemberListProducer {
 
 	@Produces
 	@Named("members")
-	public List<Member> getMembers() {
+	public List<Member> getMembers()
+	{
 		return members;
 	}
 
 	public void onMemberListChanged(
-			@Observes(notifyObserver = Reception.IF_EXISTS) final Member member) {
+			@Observes(notifyObserver = Reception.IF_EXISTS) final Member member)
+	{
 		retrieveAllMembersOrderedByName();
 	}
 
 	@PostConstruct
-	public void retrieveAllMembersOrderedByName() {
+	public void retrieveAllMembersOrderedByName()
+	{
 		members = memberRepository.findAllOrderedByName();
 	}
 }

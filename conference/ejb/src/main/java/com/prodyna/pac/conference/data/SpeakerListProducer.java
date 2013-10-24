@@ -15,7 +15,7 @@ import com.prodyna.pac.conference.service.SpeakerService;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
- *
+ * 
  */
 @RequestScoped
 public class SpeakerListProducer {
@@ -27,18 +27,21 @@ public class SpeakerListProducer {
 
 	@Produces
 	@Named("speakers")
-	public List<Speaker> getSpeakers() {
+	public List<Speaker> getSpeakers()
+	{
 		return speakers;
 	}
 
 	public void onMemberListChanged(
 			@Observes(notifyObserver = Reception.IF_EXISTS) final Speaker room)
-			throws Exception {
+			throws Exception
+	{
 		retrieveAllSpeakersOrderedByName();
 	}
 
 	@PostConstruct
-	public void retrieveAllSpeakersOrderedByName() throws Exception {
+	public void retrieveAllSpeakersOrderedByName() throws Exception
+	{
 		speakers = speakerService.getAllSpeakers();
 	}
 }

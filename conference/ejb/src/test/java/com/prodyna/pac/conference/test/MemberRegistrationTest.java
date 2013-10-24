@@ -8,9 +8,11 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+
+import com.prodyna.pac.conference.init.ResourcesProducer;
 import com.prodyna.pac.conference.model.Member;
 import com.prodyna.pac.conference.service.MemberRegistration;
-import com.prodyna.pac.conference.util.Resources;
+
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -26,7 +28,7 @@ public class MemberRegistrationTest {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
 				.addClasses(Member.class, MemberRegistration.class,
-						Resources.class)
+						ResourcesProducer.class)
 				.addAsResource("META-INF/test-persistence.xml",
 						"META-INF/persistence.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")

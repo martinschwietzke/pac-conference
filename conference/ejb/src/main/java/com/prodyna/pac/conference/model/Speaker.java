@@ -45,39 +45,48 @@ public class Speaker extends AbstractEntity {
 		super();
 	}
 
-	public Long getId() {
+	public Long getId()
+	{
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Long id)
+	{
 		this.id = id;
 	}
 
-	public String getFirstname() {
+	public String getFirstname()
+	{
 		return this.firstname;
 	}
 
-	public void setFirstname(String firstname) {
+	public void setFirstname(String firstname)
+	{
 		this.firstname = firstname;
 	}
 
-	public String getLastname() {
+	public String getLastname()
+	{
 		return this.lastname;
 	}
 
-	public void setLastname(String lastname) {
+	public void setLastname(String lastname)
+	{
 		this.lastname = lastname;
 	}
 
-	public String getDescription() {
+	public String getDescription()
+	{
 		return this.description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return getFirstname() + " " + getLastname();
 	}
 }

@@ -6,7 +6,7 @@ import com.prodyna.pac.conference.model.Room;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
- *
+ * 
  */
 public interface RoomService {
 

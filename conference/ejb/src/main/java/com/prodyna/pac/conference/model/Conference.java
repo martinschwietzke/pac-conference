@@ -56,59 +56,73 @@ public class Conference extends AbstractEntity {
 		super();
 	}
 
-	public Long getId() {
+	public Long getId()
+	{
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Long id)
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return this.name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public String getLocation() {
+	public String getLocation()
+	{
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(String location)
+	{
 		this.location = location;
 	}
 
-	public String getDescription() {
+	public String getDescription()
+	{
 		return this.description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
-	public Date getStart() {
+	public Date getStart()
+	{
 		return this.start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(Date start)
+	{
 		this.start = start;
 	}
 
-	public Date getEnd() {
+	public Date getEnd()
+	{
 		return this.end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(Date end)
+	{
 		this.end = end;
 	}
 
-	public boolean isArchived() {
+	public boolean isArchived()
+	{
 		return archived;
 	}
 
-	public void setArchived(boolean archived) {
+	public void setArchived(boolean archived)
+	{
 		this.archived = archived;
 	}
 

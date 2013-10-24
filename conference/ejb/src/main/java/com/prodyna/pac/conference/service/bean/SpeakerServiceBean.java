@@ -9,15 +9,19 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import com.prodyna.pac.conference.interceptor.Logged;
+import com.prodyna.pac.conference.interceptor.Performance;
 import com.prodyna.pac.conference.model.Speaker;
 import com.prodyna.pac.conference.service.SpeakerService;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
- *
+ * 
  */
 @Stateless
 @Local(SpeakerService.class)
+@Logged
+@Performance
 public class SpeakerServiceBean implements SpeakerService {
 
 	@Inject
@@ -29,33 +33,48 @@ public class SpeakerServiceBean implements SpeakerService {
 	@Inject
 	private Event<Speaker> roomEventSrc;
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.service.SpeakerService#createSpeaker(com.prodyna.pac.conference.model.Speaker)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.SpeakerService#createSpeaker(com.prodyna
+	 * .pac.conference.model.Speaker)
 	 */
 	@Override
-	public void createSpeaker(Speaker speaker) throws Exception {
+	public void createSpeaker(Speaker speaker) throws Exception
+	{
 
 		log.info("Creating Speaker [" + speaker.getName() + "]");
 		em.persist(speaker);
 		roomEventSrc.fire(speaker);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.service.SpeakerService#deleteSpeaker(com.prodyna.pac.conference.model.Speaker)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.SpeakerService#deleteSpeaker(com.prodyna
+	 * .pac.conference.model.Speaker)
 	 */
 	@Override
-	public void deleteSpeaker(Speaker speaker) throws Exception {
+	public void deleteSpeaker(Speaker speaker) throws Exception
+	{
 
 		log.info("Deleting Speaker [" + speaker.getName() + "]");
 		em.remove(speaker);
 		roomEventSrc.fire(speaker);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.service.SpeakerService#updateSpeaker(com.prodyna.pac.conference.model.Speaker)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.SpeakerService#updateSpeaker(com.prodyna
+	 * .pac.conference.model.Speaker)
 	 */
 	@Override
-	public void updateSpeaker(Speaker speaker) throws Exception {
+	public void updateSpeaker(Speaker speaker) throws Exception
+	{
 
 		log.info("Updating Speaker [" + speaker.getName() + "]");
 		em.merge(speaker);
@@ -63,20 +82,27 @@ public class SpeakerServiceBean implements SpeakerService {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.service.SpeakerService#getSpeakerById(long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.SpeakerService#getSpeakerById(long)
 	 */
 	@Override
-	public Speaker getSpeakerById(long speakerId) throws Exception {
+	public Speaker getSpeakerById(long speakerId) throws Exception
+	{
 
 		return em.find(Speaker.class, speakerId);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.prodyna.pac.conference.service.SpeakerService#getAllSpeakers()
 	 */
 	@Override
-	public List<Speaker> getAllSpeakers() throws Exception {
+	public List<Speaker> getAllSpeakers() throws Exception
+	{
 
 		return em.createNamedQuery(Speaker.FIND_ALL, Speaker.class)
 				.getResultList();

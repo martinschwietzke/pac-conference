@@ -10,16 +10,20 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import com.prodyna.pac.conference.interceptor.Logged;
+import com.prodyna.pac.conference.interceptor.Performance;
 import com.prodyna.pac.conference.model.Speaker;
 import com.prodyna.pac.conference.model.Talk;
 import com.prodyna.pac.conference.service.TalkService;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
- *
+ * 
  */
 @Stateless
 @Local(TalkService.class)
+@Logged
+@Performance
 public class TalkServiceBean implements TalkService {
 
 	@Inject
@@ -31,33 +35,48 @@ public class TalkServiceBean implements TalkService {
 	@Inject
 	private Event<Talk> roomEventSrc;
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.service.TalkService#createTalk(com.prodyna.pac.conference.model.Talk)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.TalkService#createTalk(com.prodyna
+	 * .pac.conference.model.Talk)
 	 */
 	@Override
-	public void createTalk(Talk talk) throws Exception {
+	public void createTalk(Talk talk) throws Exception
+	{
 
 		log.info("Creating Talk [" + talk.getName() + "]");
 		em.persist(talk);
 		roomEventSrc.fire(talk);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.service.TalkService#deleteTalk(com.prodyna.pac.conference.model.Talk)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.TalkService#deleteTalk(com.prodyna
+	 * .pac.conference.model.Talk)
 	 */
 	@Override
-	public void deleteTalk(Talk talk) throws Exception {
+	public void deleteTalk(Talk talk) throws Exception
+	{
 
 		log.info("Deleting Talk [" + talk.getName() + "]");
 		em.remove(talk);
 		roomEventSrc.fire(talk);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.service.TalkService#updateTalk(com.prodyna.pac.conference.model.Talk)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.TalkService#updateTalk(com.prodyna
+	 * .pac.conference.model.Talk)
 	 */
 	@Override
-	public void updateTalk(Talk talk) throws Exception {
+	public void updateTalk(Talk talk) throws Exception
+	{
 
 		log.info("Updating Talk [" + talk.getName() + "]");
 		em.merge(talk);
@@ -65,30 +84,40 @@ public class TalkServiceBean implements TalkService {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.prodyna.pac.conference.service.TalkService#getTalkById(long)
 	 */
 	@Override
-	public Talk getTalkById(long talkId) throws Exception {
+	public Talk getTalkById(long talkId) throws Exception
+	{
 
 		return em.find(Talk.class, talkId);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.prodyna.pac.conference.service.TalkService#getAllTalks()
 	 */
 	@Override
-	public List<Talk> getAllTalks() throws Exception {
+	public List<Talk> getAllTalks() throws Exception
+	{
 
 		return em.createNamedQuery(Talk.FIND_ALL, Talk.class).getResultList();
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.service.TalkService#getTalksByConference(long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.TalkService#getTalksByConference(long)
 	 */
 	@Override
-	public List<Talk> getTalksByConference(long conferenceId) throws Exception {
+	public List<Talk> getTalksByConference(long conferenceId) throws Exception
+	{
 
 		TypedQuery<Talk> q = em.createNamedQuery(Talk.FIND_BY_CONFERENCE_ID,
 				Talk.class);
@@ -98,11 +127,14 @@ public class TalkServiceBean implements TalkService {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.prodyna.pac.conference.service.TalkService#getTalksByRoom(long)
 	 */
 	@Override
-	public List<Talk> getTalksByRoom(long roomId) throws Exception {
+	public List<Talk> getTalksByRoom(long roomId) throws Exception
+	{
 
 		TypedQuery<Talk> q = em.createNamedQuery(Talk.FIND_BY_ROOM_ID,
 				Talk.class);
@@ -112,11 +144,16 @@ public class TalkServiceBean implements TalkService {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.prodyna.pac.conference.service.TalkService#getTalksBySpeaker(com.prodyna.pac.conference.model.Speaker)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.TalkService#getTalksBySpeaker(com.
+	 * prodyna.pac.conference.model.Speaker)
 	 */
 	@Override
-	public List<Talk> getTalksBySpeaker(Speaker speaker) throws Exception {
+	public List<Talk> getTalksBySpeaker(Speaker speaker) throws Exception
+	{
 
 		TypedQuery<Talk> q = em.createNamedQuery(Talk.FIND_BY_SPEAKER,
 				Talk.class);

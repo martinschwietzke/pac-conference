@@ -15,7 +15,7 @@ import com.prodyna.pac.conference.service.RoomService;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
- *
+ * 
  */
 @RequestScoped
 public class RoomListProducer {
@@ -27,18 +27,21 @@ public class RoomListProducer {
 
 	@Produces
 	@Named("rooms")
-	public List<Room> getRooms() {
+	public List<Room> getRooms()
+	{
 		return rooms;
 	}
 
 	public void onMemberListChanged(
 			@Observes(notifyObserver = Reception.IF_EXISTS) final Room room)
-			throws Exception {
+			throws Exception
+	{
 		retrieveAllRoomsOrderedByName();
 	}
 
 	@PostConstruct
-	public void retrieveAllRoomsOrderedByName() throws Exception {
+	public void retrieveAllRoomsOrderedByName() throws Exception
+	{
 		rooms = roomService.getAllRooms();
 	}
 }

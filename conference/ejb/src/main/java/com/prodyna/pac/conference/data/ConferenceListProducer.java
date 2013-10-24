@@ -15,7 +15,7 @@ import com.prodyna.pac.conference.service.ConferenceService;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
- *
+ * 
  */
 @RequestScoped
 public class ConferenceListProducer {
@@ -27,18 +27,21 @@ public class ConferenceListProducer {
 
 	@Produces
 	@Named("conferences")
-	public List<Conference> getConferences() {
+	public List<Conference> getConferences()
+	{
 		return conferences;
 	}
 
 	public void onMemberListChanged(
 			@Observes(notifyObserver = Reception.IF_EXISTS) final Conference conference)
-			throws Exception {
+			throws Exception
+	{
 		retrieveAllMembersOrderedByName();
 	}
 
 	@PostConstruct
-	public void retrieveAllMembersOrderedByName() throws Exception {
+	public void retrieveAllMembersOrderedByName() throws Exception
+	{
 		conferences = conferenceService.getAllConferences();
 	}
 }

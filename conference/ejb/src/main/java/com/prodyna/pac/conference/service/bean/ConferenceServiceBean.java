@@ -9,6 +9,8 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import com.prodyna.pac.conference.interceptor.Logged;
+import com.prodyna.pac.conference.interceptor.Performance;
 import com.prodyna.pac.conference.model.Conference;
 import com.prodyna.pac.conference.service.ConferenceService;
 
@@ -18,6 +20,8 @@ import com.prodyna.pac.conference.service.ConferenceService;
  */
 @Stateless
 @Local(ConferenceService.class)
+@Logged
+@Performance
 public class ConferenceServiceBean implements ConferenceService {
 
 	@Inject
@@ -37,7 +41,8 @@ public class ConferenceServiceBean implements ConferenceService {
 	 * (com.prodyna.pac.conference.model.Conference)
 	 */
 	@Override
-	public void createConference(Conference conference) throws Exception {
+	public void createConference(Conference conference) throws Exception
+	{
 
 		log.info("Creating conference [" + conference.getName() + "]");
 		em.persist(conference);
@@ -52,7 +57,8 @@ public class ConferenceServiceBean implements ConferenceService {
 	 * (com.prodyna.pac.conference.model.Conference)
 	 */
 	@Override
-	public void deleteConference(Conference conference) throws Exception {
+	public void deleteConference(Conference conference) throws Exception
+	{
 
 		log.info("Deleting conference [" + conference.getName() + "]");
 		em.remove(conference);
@@ -67,7 +73,8 @@ public class ConferenceServiceBean implements ConferenceService {
 	 * (com.prodyna.pac.conference.model.Conference)
 	 */
 	@Override
-	public void updateConference(Conference conference) throws Exception {
+	public void updateConference(Conference conference) throws Exception
+	{
 
 		log.info("Updating conference [" + conference.getName() + "]");
 		em.merge(conference);
@@ -83,7 +90,8 @@ public class ConferenceServiceBean implements ConferenceService {
 	 * (long)
 	 */
 	@Override
-	public Conference getConferenceById(long conferenceId) throws Exception {
+	public Conference getConferenceById(long conferenceId) throws Exception
+	{
 
 		return em.find(Conference.class, conferenceId);
 	}
@@ -95,7 +103,8 @@ public class ConferenceServiceBean implements ConferenceService {
 	 * com.prodyna.pac.conference.service.ConferenceService#getAllConferences()
 	 */
 	@Override
-	public List<Conference> getAllConferences() throws Exception {
+	public List<Conference> getAllConferences() throws Exception
+	{
 
 		return em.createNamedQuery(Conference.FIND_ALL, Conference.class)
 				.getResultList();

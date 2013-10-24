@@ -7,7 +7,7 @@ import com.prodyna.pac.conference.model.Talk;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
- *
+ * 
  */
 public interface TalkService {
 

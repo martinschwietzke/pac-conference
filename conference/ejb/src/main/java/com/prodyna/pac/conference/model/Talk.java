@@ -75,72 +75,89 @@ public class Talk extends AbstractEntity {
 		super();
 	}
 
-	public Long getId() {
+	public Long getId()
+	{
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Long id)
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return this.name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public String getDescription() {
+	public String getDescription()
+	{
 		return this.description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
-	public int getDuration() {
+	public int getDuration()
+	{
 		return this.duration;
 	}
 
-	public void setDuration(int duration) {
+	public void setDuration(int duration)
+	{
 		this.duration = duration;
 	}
 
-	public Room getRoom() {
+	public Room getRoom()
+	{
 		return this.room;
 	}
 
-	public void setRoom(Room room) {
+	public void setRoom(Room room)
+	{
 		this.room = room;
 	}
 
-	public List<Speaker> getSpeakers() {
+	public List<Speaker> getSpeakers()
+	{
 		// return a copy to prevent direct access to our list
 		return new ArrayList<Speaker>(this.speakers);
 	}
 
-	public void addSpeaker(Speaker speaker) {
+	public void addSpeaker(Speaker speaker)
+	{
 		this.speakers.add(speaker);
 	}
 
-	public void removeSpeaker(Speaker speaker) {
+	public void removeSpeaker(Speaker speaker)
+	{
 		this.speakers.remove(speaker);
 	}
 
-	public Conference getConference() {
+	public Conference getConference()
+	{
 		return conference;
 	}
 
-	public void setConference(Conference conference) {
+	public void setConference(Conference conference)
+	{
 		this.conference = conference;
 	}
 
-	public Date getStart() {
+	public Date getStart()
+	{
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(Date start)
+	{
 		this.start = start;
 	}
 }

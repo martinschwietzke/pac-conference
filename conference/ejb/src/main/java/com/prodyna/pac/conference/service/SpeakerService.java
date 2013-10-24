@@ -6,7 +6,7 @@ import com.prodyna.pac.conference.model.Speaker;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
- *
+ * 
  */
 public interface SpeakerService {
 
