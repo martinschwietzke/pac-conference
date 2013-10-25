@@ -10,6 +10,6 @@ public abstract class AbstractEntity implements Entity {
 
 	public boolean isNew()
 	{
-		return getId() != null && getId() > 0;
+		return getId() == null || getId() <= 0;
 	}
 }

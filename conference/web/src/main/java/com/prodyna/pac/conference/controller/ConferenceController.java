@@ -1,9 +1,9 @@
 package com.prodyna.pac.conference.controller;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,7 +11,8 @@ import javax.inject.Named;
 import com.prodyna.pac.conference.model.Conference;
 import com.prodyna.pac.conference.service.ConferenceService;
 
-@Model
+@ManagedBean
+@SessionScoped
 public class ConferenceController {
 
 	@Inject
@@ -20,28 +21,46 @@ public class ConferenceController {
 	@Inject
 	private ConferenceService conferenceService;
 
-	private Conference newConference;
+	private Conference conferenceToEdit = new Conference();
 
-	@Produces
-	@Named
-	public Conference getNewConference() {
-		return newConference;
+	public Conference getEditedConference()
+	{
+		return conferenceToEdit;
 	}
 
-	public void cancelEditing() {
-		newConference = null;
+	public void initNewConference()
+	{
+		conferenceToEdit = new Conference();
 	}
 
-	public void editConference(Conference conference) {
-		newConference = conference;
+	public void setConference(Conference conferenceToEdit)
+	{
+		this.conferenceToEdit = conferenceToEdit;
 	}
 
-	public void createConference() throws Exception {
+	public void discardConference()
+	{
+		initNewConference();
+	}
+
+	public void cancelEditing()
+	{
+		conferenceToEdit = new Conference();
+	}
+
+	public void editConference(long conferenceId) throws Exception
+	{
+		Conference c = conferenceService.getConferenceById(conferenceId);
+		conferenceToEdit = c;
+	}
+
+	public void createConference() throws Exception
+	{
 		try {
-			conferenceService.createConference(newConference);
+			conferenceService.createConference(conferenceToEdit);
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Saved!", "Conference saved"));
-			initNewMember();
+			conferenceToEdit = null;
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -50,12 +69,24 @@ public class ConferenceController {
 		}
 	}
 
-	@PostConstruct
-	public void initNewMember() {
-		newConference = new Conference();
+	public void updateConference() throws Exception
+	{
+		try {
+			conferenceService.updateConference(conferenceToEdit);
+			facesContext.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Update!",
+							"Conference updated"));
+
+		} catch (Exception e) {
+			String errorMessage = getRootErrorMessage(e);
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					errorMessage, "Updating conferennce unsuccessful");
+			facesContext.addMessage(null, m);
+		}
 	}
 
-	private String getRootErrorMessage(Exception e) {
+	private String getRootErrorMessage(Exception e)
+	{
 		// Default to general error message that registration failed.
 		String errorMessage = "Saving Confernce failed. See server log for more information";
 		if (e == null) {

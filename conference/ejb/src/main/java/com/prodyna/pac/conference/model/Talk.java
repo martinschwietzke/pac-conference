@@ -1,15 +1,11 @@
 package com.prodyna.pac.conference.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,13 +28,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 		@NamedQuery(name = Talk.FIND_ALL, query = "SELECT t FROM Talk t"),
 		@NamedQuery(name = Talk.FIND_BY_CONFERENCE_ID, query = "SELECT t FROM Talk t WHERE t.conference.id = :conferenceId"),
 		@NamedQuery(name = Talk.FIND_BY_ROOM_ID, query = "SELECT t FROM Talk t WHERE t.room.id = :roomId"),
-		@NamedQuery(name = Talk.FIND_BY_SPEAKER, query = "SELECT t FROM Talk t WHERE :speaker MEMBER OF t.speakers") })
+		@NamedQuery(name = Talk.FIND_SPEAKERS_BY_TALK_ID, query = "SELECT ts.speaker FROM TalkSpeaker ts WHERE ts.talk.id = :talkId") })
 public class Talk extends AbstractEntity {
 
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.talk.findAll";
 	public final static String FIND_BY_CONFERENCE_ID = "de.prodyna.pac.conference.model.talk.findByConferenceId";
 	public final static String FIND_BY_ROOM_ID = "de.prodyna.pac.conference.model.talk.findByRoomId";
-	public final static String FIND_BY_SPEAKER = "de.prodyna.pac.conference.model.talk.findSpeakerId";
+	public final static String FIND_SPEAKERS_BY_TALK_ID = "de.prodyna.pac.conference.model.talk.findSpeakersByTalkId";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,9 +57,6 @@ public class Talk extends AbstractEntity {
 	@NotNull
 	@OneToOne
 	private Room room;
-
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Speaker> speakers;
 
 	@ManyToOne
 	@NotNull
@@ -123,22 +116,6 @@ public class Talk extends AbstractEntity {
 	public void setRoom(Room room)
 	{
 		this.room = room;
-	}
-
-	public List<Speaker> getSpeakers()
-	{
-		// return a copy to prevent direct access to our list
-		return new ArrayList<Speaker>(this.speakers);
-	}
-
-	public void addSpeaker(Speaker speaker)
-	{
-		this.speakers.add(speaker);
-	}
-
-	public void removeSpeaker(Speaker speaker)
-	{
-		this.speakers.remove(speaker);
 	}
 
 	public Conference getConference()

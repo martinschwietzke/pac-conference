@@ -23,6 +23,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQuery(name = Conference.FIND_ALL, query = "SELECT c FROM Conference c")
 public class Conference extends AbstractEntity {
 
+	@Override
+	public String toString()
+	{
+		return "Conference [id=" + id + ", name=" + name + "]";
+	}
+
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.conference.findAll";
 
 	@Id

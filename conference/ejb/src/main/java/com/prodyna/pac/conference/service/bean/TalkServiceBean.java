@@ -14,6 +14,7 @@ import com.prodyna.pac.conference.interceptor.Logged;
 import com.prodyna.pac.conference.interceptor.Performance;
 import com.prodyna.pac.conference.model.Speaker;
 import com.prodyna.pac.conference.model.Talk;
+import com.prodyna.pac.conference.model.TalkSpeaker;
 import com.prodyna.pac.conference.service.TalkService;
 
 /**
@@ -155,9 +156,27 @@ public class TalkServiceBean implements TalkService {
 	public List<Talk> getTalksBySpeaker(Speaker speaker) throws Exception
 	{
 
-		TypedQuery<Talk> q = em.createNamedQuery(Talk.FIND_BY_SPEAKER,
-				Talk.class);
-		q.setParameter("speaker", speaker);
+		TypedQuery<Talk> q = em.createNamedQuery(
+				TalkSpeaker.FIND_TALK_BY_SPEAKER_ID, Talk.class);
+		q.setParameter("speaker", speaker.getId());
+
+		return q.getResultList();
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.TalkService#getSpeakersByTalk(long)
+	 */
+	@Override
+	public List<Speaker> getSpeakersByTalk(long talk) throws Exception
+	{
+
+		TypedQuery<Speaker> q = em.createNamedQuery(
+				Talk.FIND_SPEAKERS_BY_TALK_ID, Speaker.class);
+		q.setParameter("talkId", talk);
 
 		return q.getResultList();
 

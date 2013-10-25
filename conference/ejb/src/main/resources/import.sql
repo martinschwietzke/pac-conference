@@ -20,9 +20,9 @@ insert into Talk(id, name, duration, room_id, conference_id, description, start)
 insert into Talk(id, name, duration, room_id, conference_id, description, start) values (4, 'Talk 4', 180, 3, 1, 'Description 3', '2013-10-02 09:00:00') 
 insert into Talk(id, name, duration, room_id, conference_id, description, start) values (5, 'Talk 5', 180, 1, 1, 'Description 3', '2013-10-02 11:00:00')
 
-insert into talk_speaker (speakers_id, talk_id) values (1, 1);
-insert into talk_speaker (speakers_id, talk_id) values (2, 1);
-insert into talk_speaker (speakers_id, talk_id) values (2, 2);
-insert into talk_speaker (speakers_id, talk_id) values (3, 3);
-insert into talk_speaker (speakers_id, talk_id) values (3, 4);
+insert into talkspeaker (speaker_id, talk_id) values (1, 1);
+insert into talkspeaker (speaker_id, talk_id) values (2, 1);
+insert into talkspeaker (speaker_id, talk_id) values (2, 2);
+insert into talkspeaker (speaker_id, talk_id) values (3, 3);
+insert into talkspeaker (speaker_id, talk_id) values (3, 4);
 

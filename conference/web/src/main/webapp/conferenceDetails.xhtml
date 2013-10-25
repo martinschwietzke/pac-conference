@@ -4,7 +4,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/WEB-INF/templates/default.xhtml">
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
 	<ui:define name="content">
 
 		<f:metadata>
@@ -19,10 +21,13 @@
 			<h:outputLabel value="#{i18n['location']}" />
 			<h:outputText value="#{conferenceDetails.conference.location}" />
 
+			
 			<h:outputLabel value="#{i18n['start']}" />
+			<rich:calendar></rich:calendar>
+			<!--  
 			<h:outputText value="#{conferenceDetails.conference.start}">
 				<f:convertDateTime pattern="EEEE, dd.MM.yyyy" />
-			</h:outputText>
+			</h:outputText>-->
 
 			<h:outputLabel value="#{i18n['end']}" />
 			<h:outputText value="#{conferenceDetails.conference.end}">

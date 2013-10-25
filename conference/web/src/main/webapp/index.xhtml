@@ -8,7 +8,10 @@
 	<ui:define name="content">
 		<h1>Welcome to PAC Conference!</h1>
 
-		<h:form id="conferenceForm">
+		<h:messages styleClass="messages" errorClass="invalid"
+			infoClass="valid" warnClass="warning" />
+
+		<h:form id="conferenceEditForm">
 			<h2>
 				<h:outputText value="#{i18n['create-conference']}"
 					rendered="#{newRoom.id == null}" />
@@ -18,26 +21,30 @@
 
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="name" value="#{i18n['name']}" />
-				<h:inputText id="name" value="#{newConference.name}" />
+				<h:inputText id="name"
+					value="#{conferenceController.editedConference.name}" />
 				<h:message for="name" errorClass="invalid" />
 
 				<h:outputLabel for="location" value="#{i18n['location']}" />
-				<h:inputText id="location" value="#{newConference.location}" />
+				<h:inputText id="location"
+					value="#{conferenceController.editedConference.location}" />
 				<h:message for="location" errorClass="invalid" />
 
 				<h:outputLabel for="description" value="#{i18n['description']}" />
 				<h:inputTextarea id="description"
-					value="#{newConference.description}" />
+					value="#{conferenceController.editedConference.description}" />
 				<h:message for="description" errorClass="invalid" />
 
 				<h:outputLabel for="start" value="#{i18n['start']}" />
-				<h:inputText id="start" value="#{newConference.start}">
+				<h:inputText id="start"
+					value="#{conferenceController.editedConference.start}">
 					<f:convertDateTime pattern="yyyy-MM-dd" />
 				</h:inputText>
 				<h:message for="start" errorClass="invalid" />
 
 				<h:outputLabel for="end" value="#{i18n['end']}" />
-				<h:inputText id="end" value="#{newConference.end}">
+				<h:inputText id="end"
+					value="#{conferenceController.editedConference.end}">
 					<f:convertDateTime pattern="yyyy-MM-dd" />
 				</h:inputText>
 				<h:message for="end" errorClass="invalid" />
@@ -48,11 +55,17 @@
 				<h:panelGrid columns="2">
 					<h:commandButton id="saveConference"
 						action="#{conferenceController.createConference}"
-						value="#{i18n['save']}" styleClass="register" />
+						value="#{i18n['create']}"
+						rendered="${conferenceController.editedConference.new}" />
+
+					<h:commandButton id="updateConference"
+						action="#{conferenceController.updateConference}"
+						value="#{i18n['save']}"
+						rendered="${!conferenceController.editedConference.new}" />
+
 					<h:commandButton action="#{roomController.cancelEditing}"
 						value="#{i18n['cancel']}" />
-					<h:messages styleClass="messages" errorClass="invalid"
-						infoClass="valid" warnClass="warning" globalOnly="true" />
+
 				</h:panelGrid>
 			</p>
 		</h:form>
@@ -88,7 +101,7 @@
 					<h:column>
 						<f:facet name="actions">#{i18n['actions']}</f:facet>
 						<h:commandButton
-							action="#{conferenceController.editConference(currConference)}"
+							action="#{conferenceController.editConference(currConference.id)}"
 							value="#{i18n['edit']}" />
 
 						<h:link outcome="conferenceDetails" value="show">

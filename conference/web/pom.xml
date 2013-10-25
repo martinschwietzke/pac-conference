@@ -80,6 +80,12 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+			<groupId>org.richfaces</groupId>
+			<artifactId>richfaces-bom</artifactId>
+			<version>4.3.3.Final</version>
+			<type>pom</type>
+		</dependency>
 	</dependencies>
 
 	<build>

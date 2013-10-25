@@ -27,4 +27,6 @@ public interface TalkService {
 
 	List<Talk> getTalksBySpeaker(Speaker speaker) throws Exception;
 
+	List<Speaker> getSpeakersByTalk(long talk) throws Exception;
+
 }
