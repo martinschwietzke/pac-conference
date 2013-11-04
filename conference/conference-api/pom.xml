@@ -7,7 +7,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>conference-api</artifactId>
-	<name>Conference API</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>

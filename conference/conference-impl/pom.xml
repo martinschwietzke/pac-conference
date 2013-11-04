@@ -7,7 +7,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>conference-impl</artifactId>
-	<name>Conference API Implementation</name>
 	<packaging>ejb</packaging>
 	<dependencies>
 
@@ -35,7 +34,7 @@
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>conference-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile,test</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
@@ -64,6 +63,12 @@
 		<dependency>
 			<groupId>org.jboss.arquillian.protocol</groupId>
 			<artifactId>arquillian-protocol-servlet</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.as</groupId>
+			<artifactId>jboss-as-arquillian-container-remote</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -59,7 +59,7 @@
             </h:column>
 				<h:column>
 					<f:facet name="actions">#{i18n['actions']}</f:facet>
-					<h:commandButton action="#{roomController.editRoom(currRoom)}"
+					<h:commandButton action="#{roomController.editRoom(currRoom.id)}"
 						value="#{i18n['edit']}" />
 				</h:column>
 			</h:dataTable>

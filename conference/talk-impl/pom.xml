@@ -7,7 +7,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>talk-impl</artifactId>
-	<name>Conference Talk API Implementation</name>
 	<packaging>ejb</packaging>
 	<dependencies>
 		<dependency>
@@ -34,7 +33,7 @@
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>room-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile,test</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>

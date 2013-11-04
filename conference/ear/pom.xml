@@ -12,8 +12,6 @@
 	<artifactId>conference-ear</artifactId>
 	<packaging>ear</packaging>
 
-	<name>conference - ear</name>
-
 	<url>http://jboss.org/jbossas</url>
 	<licenses>
 		<license>
@@ -35,34 +33,53 @@
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>conference-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<type>ejb</type>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>conference-impl</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<type>ejb</type>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>speaker-impl</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<type>ejb</type>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>room-impl</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<type>ejb</type>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>talk-impl</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<type>ejb</type>
-		</dependency>				
+		</dependency>
 
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>conference-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>speaker-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>room-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>talk-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
 	</dependencies>
 
 	<build>

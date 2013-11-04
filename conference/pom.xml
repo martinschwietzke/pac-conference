@@ -19,6 +19,7 @@
 	<modules>
 		<module>web</module>
 		<module>ear</module>
+		<module>conference-common</module>
 		<module>conference-api</module>
 		<module>conference-impl</module>
 		<module>talk-api</module>
@@ -132,6 +133,12 @@
 				<scope>import</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>com.prodyna.pac</groupId>
+				<artifactId>conference-common</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<type>ejb</type>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

@@ -12,8 +12,6 @@
 	<artifactId>conference-web</artifactId>
 	<packaging>war</packaging>
 
-	<name>conference - web</name>
-
 	<url>http://jboss.org/jbossas</url>
 	<licenses>
 		<license>
@@ -26,14 +24,8 @@
 	<dependencies>
 
 		<!-- Dependency on the EJB module so we can use it's services if needed -->
-		<!-- 
-		<dependency>
-			<groupId>com.prodyna.pac</groupId>
-			<artifactId>conference-ejb</artifactId>
-			<type>ejb</type>
-			<scope>provided</scope>
-		</dependency>
-		 -->
+		<!-- <dependency> <groupId>com.prodyna.pac</groupId> <artifactId>conference-ejb</artifactId> 
+			<type>ejb</type> <scope>provided</scope> </dependency> -->
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>speaker-api</artifactId>
@@ -114,6 +106,32 @@
 			<artifactId>talk-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>conference-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- Test scope dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.arquillian.protocol</groupId>
+			<artifactId>arquillian-protocol-servlet</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

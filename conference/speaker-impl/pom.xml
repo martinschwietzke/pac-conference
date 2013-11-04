@@ -7,7 +7,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>speaker-impl</artifactId>
-	<name>Conference Speaker API Implementation</name>
 	<packaging>ejb</packaging>
 	<dependencies>
 
@@ -35,13 +34,13 @@
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>speaker-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile,test</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>conference-common</artifactId>
-			<scope>provided</scope>
 			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Test scope dependencies -->

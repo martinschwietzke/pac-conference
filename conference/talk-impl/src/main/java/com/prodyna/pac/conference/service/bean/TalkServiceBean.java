@@ -158,7 +158,7 @@ public class TalkServiceBean implements TalkService {
 
 		TypedQuery<Talk> q = em.createNamedQuery(
 				TalkSpeaker.FIND_TALK_BY_SPEAKER_ID, Talk.class);
-		q.setParameter("speaker", speaker.getId());
+		q.setParameter("speakerId", speaker.getId());
 
 		return q.getResultList();
 
