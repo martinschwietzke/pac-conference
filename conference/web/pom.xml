@@ -26,10 +26,19 @@
 	<dependencies>
 
 		<!-- Dependency on the EJB module so we can use it's services if needed -->
+		<!-- 
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>conference-ejb</artifactId>
 			<type>ejb</type>
+			<scope>provided</scope>
+		</dependency>
+		 -->
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>speaker-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
 
@@ -85,6 +94,26 @@
 			<artifactId>richfaces-bom</artifactId>
 			<version>4.3.3.Final</version>
 			<type>pom</type>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>room-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>conference-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>talk-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

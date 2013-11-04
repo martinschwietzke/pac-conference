@@ -24,18 +24,45 @@
 	</licenses>
 
 	<dependencies>
-
 		<!-- Depend on the ejb module and war so that we can package them -->
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>conference-web</artifactId>
 			<type>war</type>
 		</dependency>
+		<!-- <dependency> <groupId>com.prodyna.pac</groupId> <artifactId>conference-ejb</artifactId> 
+			<type>ejb</type> </dependency> -->
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
-			<artifactId>conference-ejb</artifactId>
+			<artifactId>conference-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 			<type>ejb</type>
 		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>conference-impl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>speaker-impl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>room-impl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>talk-impl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>				
+
 	</dependencies>
 
 	<build>

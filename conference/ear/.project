@@ -3,6 +3,7 @@
 	<name>conference-ear</name>
 	<comment></comment>
 	<projects>
+		<project>conference-common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

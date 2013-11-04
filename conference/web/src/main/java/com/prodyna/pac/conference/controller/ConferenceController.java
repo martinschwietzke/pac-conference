@@ -1,12 +1,10 @@
 package com.prodyna.pac.conference.controller;
 
-import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import com.prodyna.pac.conference.model.Conference;
 import com.prodyna.pac.conference.service.ConferenceService;
@@ -45,7 +43,7 @@ public class ConferenceController {
 
 	public void cancelEditing()
 	{
-		conferenceToEdit = new Conference();
+		initNewConference();
 	}
 
 	public void editConference(long conferenceId) throws Exception

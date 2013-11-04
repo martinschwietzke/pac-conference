@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.prodyna.pac.conference.model.Conference;
 import com.prodyna.pac.conference.model.Room;
 import com.prodyna.pac.conference.service.RoomService;
 
@@ -20,34 +21,42 @@ public class RoomController {
 	@Inject
 	private RoomService roomService;
 
-	private Room newRoom;
+	private Room roomToEdit = new Room();
 
-	@Produces
-	@Named("newRoom")
-	public Room getNewRoom() {
-		return newRoom;
+	public Room getEditedRoom()
+	{
+		return roomToEdit;
 	}
 
-	public void cancelEditing() {
-		newRoom = null;
+	public void initNewRoom()
+	{
+		roomToEdit = new Room();
 	}
 
-	public void editRoom(Room room) {
-		newRoom = room;
+	public void setRoom(Room room)
+	{
+		this.roomToEdit = room;
 	}
 
-	public void createRoom() throws Exception {
+	public void cancelEditing()
+	{
+		initNewRoom();
+	}
+
+	public void editRoom(long roomId) throws Exception
+	{
+		Room r = roomService.getRoomById(roomId);
+		roomToEdit = r;
+	}
+
+	public void createRoom() throws Exception
+	{
 		try {
-
-			if (newRoom.isNew()) {
-				roomService.createRoom(newRoom);
-			} else {
-				roomService.updateRoom(newRoom);
-			}
+			roomService.createRoom(roomToEdit);
 
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Saved!", "Room saved"));
-			initNewMember();
+			initNewRoom();
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -56,12 +65,23 @@ public class RoomController {
 		}
 	}
 
-	@PostConstruct
-	public void initNewMember() {
-		newRoom = new Room();
+	public void updateConference() throws Exception
+	{
+		try {
+			roomService.updateRoom(roomToEdit);
+			facesContext.addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Update!", "Room updated"));
+
+		} catch (Exception e) {
+			String errorMessage = getRootErrorMessage(e);
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					errorMessage, "Updating Room unsuccessful");
+			facesContext.addMessage(null, m);
+		}
 	}
 
-	private String getRootErrorMessage(Exception e) {
+	private String getRootErrorMessage(Exception e)
+	{
 		// Default to general error message that registration failed.
 		String errorMessage = "Saving Room failed. See server log for more information";
 		if (e == null) {

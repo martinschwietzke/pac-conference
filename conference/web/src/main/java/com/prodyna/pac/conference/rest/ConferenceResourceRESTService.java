@@ -23,11 +23,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.prodyna.pac.conference.data.MemberRepository;
 import com.prodyna.pac.conference.model.Conference;
-import com.prodyna.pac.conference.model.Member;
 import com.prodyna.pac.conference.service.ConferenceService;
-import com.prodyna.pac.conference.service.MemberRegistration;
 
 /**
  * JAX-RS Example
@@ -38,6 +35,7 @@ import com.prodyna.pac.conference.service.MemberRegistration;
 @Path("/conference")
 @RequestScoped
 public class ConferenceResourceRESTService {
+
 	@Inject
 	private Logger log;
 
@@ -47,22 +45,23 @@ public class ConferenceResourceRESTService {
 	@Inject
 	ConferenceService conferenceService;
 
-	@Inject
-	private MemberRepository repository;
-
-	@Inject
-	MemberRegistration registration;
-
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Member> listAllConferences() {
-		return repository.findAllOrderedByName();
+	public List<Conference> listAllConferences()
+	{
+		try {
+			return conferenceService.getAllConferences();
+		} catch (Exception e) {
+			throw new WebApplicationException(
+					Response.Status.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Conference lookupConferenceById(@PathParam("id") long id) {
+	public Conference lookupConferenceById(@PathParam("id") long id)
+	{
 		try {
 			Conference conference = conferenceService.getConferenceById(id);
 			if (conference == null) {
@@ -85,7 +84,8 @@ public class ConferenceResourceRESTService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createConference(Conference conference) {
+	public Response createConference(Conference conference)
+	{
 
 		Response.ResponseBuilder builder = null;
 
@@ -139,7 +139,8 @@ public class ConferenceResourceRESTService {
 	 *             If enddate is before startdate
 	 */
 	private void validateConference(Conference conference)
-			throws ConstraintViolationException, ValidationException {
+			throws ConstraintViolationException, ValidationException
+	{
 		// Create a bean validator and check for issues.
 		Set<ConstraintViolation<Conference>> violations = validator
 				.validate(conference);
@@ -166,7 +167,8 @@ public class ConferenceResourceRESTService {
 	 * @return JAX-RS response containing all violations
 	 */
 	private Response.ResponseBuilder createViolationResponse(
-			Set<ConstraintViolation<?>> violations) {
+			Set<ConstraintViolation<?>> violations)
+	{
 		log.fine("Validation completed. violations found: " + violations.size());
 
 		Map<String, String> responseObj = new HashMap<String, String>();
@@ -179,7 +181,8 @@ public class ConferenceResourceRESTService {
 		return Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
 	}
 
-	public boolean validateEndDateBeforeStartDate(Conference conference) {
+	public boolean validateEndDateBeforeStartDate(Conference conference)
+	{
 
 		return conference.getEnd().compareTo(conference.getStart()) > 0;
 	}

@@ -17,9 +17,16 @@
 		</license>
 	</licenses>
 	<modules>
-		<module>ejb</module>
 		<module>web</module>
 		<module>ear</module>
+		<module>conference-api</module>
+		<module>conference-impl</module>
+		<module>talk-api</module>
+		<module>talk-impl</module>			
+		<module>room-api</module>
+		<module>room-impl</module>						
+		<module>speaker-api</module>
+		<module>speaker-impl</module>
 	</modules>
 
 	<properties>
@@ -67,10 +74,29 @@
 				ourselves in every module -->
 			<dependency>
 				<groupId>com.prodyna.pac</groupId>
-				<artifactId>conference-ejb</artifactId>
+				<artifactId>conference-impl</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac</groupId>
+				<artifactId>speaker-impl</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac</groupId>
+				<artifactId>room-impl</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac</groupId>
+				<artifactId>talk-impl</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+			
 
 			<!-- Define the version of the WAR so that we don't need to repeat ourselves 
 				in every module -->
@@ -128,5 +154,22 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	
+        <distributionManagement>
+                <repository>
+                        <id>file-repository</id>
+                        <name>Local Repository</name>
+                        <url>file://${user.dir}/target/deploy/repository</url>
+                </repository>
+                <site>
+                        <id>local-site</id>
+                        <name>Local deployed site</name>
+                        <url>file://${user.dir}/target/deploy/site</url>
+                </site>
+        </distributionManagement>
+        <scm>
+                <developerConnection>scm:git:ssh://martinschwietzke@github.com//martinschwietzke/pac-conference.git</developerConnection>
+                <url>https://github.com/martinschwietzke/pac-conference.git</url>
+        </scm>	
 
 </project>
