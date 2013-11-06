@@ -1,18 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="         http://java.sun.com/xml/ns/javaee         http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
-	<application>
-		<locale-config>
-			<default-locale>de</default-locale>
-			<supported-locale>de</supported-locale>
-			<supported-locale>en</supported-locale>
-		</locale-config>
-		<resource-bundle>
-			<base-name>com.prodyna.pac.conference.i18n.Language</base-name>
-			<var>i18n</var>
-		</resource-bundle>
-	</application>
-	<!-- This descriptor activates the JSF 2.0 Servlet Write your navigation 
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://java.sun.com/xml/ns/javaee         http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+ <navigation-rule>
+  <from-view-id>/conferenceEdit.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>conferenceList</from-outcome>
+   <to-view-id>/conferenceList.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/roomEdit.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>roomList</from-outcome>
+   <to-view-id>/roomList.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/speakerEdit.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>speakerList</from-outcome>
+   <to-view-id>/speakerList.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/talkEdit.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>talkList</from-outcome>
+   <to-view-id>/talkList.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <application>
+  <locale-config>
+   <default-locale>de</default-locale>
+   <supported-locale>de</supported-locale>
+   <supported-locale>en</supported-locale>
+  </locale-config>
+  <resource-bundle>
+   <base-name>com.prodyna.pac.conference.i18n.Language</base-name>
+   <var>i18n</var>
+  </resource-bundle>
+ </application>
+ <!-- This descriptor activates the JSF 2.0 Servlet Write your navigation 
 		rules here. You are encouraged to use CDI for creating @Named managed beans. -->
 </faces-config>

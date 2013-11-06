@@ -133,6 +133,26 @@
 			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces</artifactId>
+			<version>3.3.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces-ace</artifactId>
+			<version>3.3.0</version>
+			<scope>compile</scope>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces-compat</artifactId>
+			<version>3.3.0</version>
+			<scope>compile</scope>
+			<type>jar</type>
+		</dependency>
 	</dependencies>
 
 	<build>

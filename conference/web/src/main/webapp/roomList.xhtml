@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+
+
+		<h2>#{i18n['rooms']}</h2>
+		<h:panelGroup rendered="#{empty rooms}">
+			<em>#{i18n['no-rooms-exists']}</em>
+		</h:panelGroup>
+		<h:form>
+			<h:dataTable var="currRoom" value="#{rooms}"
+				rendered="#{not empty rooms}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">#{i18n['id']}</f:facet>
+                #{currRoom.id}
+            </h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['name']}</f:facet>
+                #{currRoom.name}
+            </h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['capacity']}</f:facet>
+                #{currRoom.capacity}
+            </h:column>
+				<h:column>
+					<f:facet name="actions">#{i18n['actions']}</f:facet>
+
+					<h:link id="edit" outcome="roomEdit" value="#{i18n['edit']}">
+						<f:param name="id" value="#{currRoom.id}" />
+					</h:link>
+
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

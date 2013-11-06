@@ -3,8 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core">
 
 <ui:insert name="metadata">
 
@@ -20,11 +22,12 @@
 <h:body>
 	<div id="container">
 		<div id="navigation">
-			<h:outputLink value="index.jsf">#{i18n['conferences']}</h:outputLink>
-			<h:outputLink value="rooms.jsf">#{i18n['rooms']}</h:outputLink>
-			<h:outputLink value="speakers.jsf">#{i18n['speakers']}</h:outputLink>
+			<h:link outcome="conferenceList" value="#{i18n['conferences']}" />
+			<h:link outcome="roomList" value="#{i18n['rooms']}" />
+			<h:link outcome="speakerList" value="#{i18n['speakers']}" />
 		</div>
 		<div id="content">
+
 			<ui:insert name="content">
                     [Template content will be inserted here]
          </ui:insert>

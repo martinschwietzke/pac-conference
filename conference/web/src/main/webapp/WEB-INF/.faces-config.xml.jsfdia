@@ -1,2 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PROCESS model-entity="JSFProcess"/>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#conferenceEdit.xhtml"
+  PATH="/conferenceEdit.xhtml" SHAPE="40,88,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#conferenceEdit.xhtml:0" NAME="item"
+   PATH="/conferenceEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="conferenceList::#conferenceList.xhtml"
+    NAME="output" PATH="/conferenceList.xhtml"
+    TARGET="rules:#conferenceList.xhtml" TITLE="conferenceList" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#conferenceList.xhtml"
+  PATH="/conferenceList.xhtml" SHAPE="480,112,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#roomEdit.xhtml" PATH="/roomEdit.xhtml"
+  SHAPE="48,192,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#roomEdit.xhtml:0" NAME="item"
+   PATH="/roomEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="roomList::#roomList.xhtml" NAME="output"
+    PATH="/roomList.xhtml" TARGET="rules:#roomList.xhtml"
+    TITLE="roomList" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#roomList.xhtml" PATH="/roomList.xhtml"
+  SHAPE="488,216,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#speakerList.xhtml" PATH="/speakerList.xhtml"
+  SHAPE="496,328,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#speakerEdit.xhtml" PATH="/speakerEdit.xhtml"
+  SHAPE="48,304,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#speakerEdit.xhtml:0" NAME="item"
+   PATH="/speakerEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="speakerList::#speakerList.xhtml"
+    NAME="output" PATH="/speakerList.xhtml"
+    TARGET="rules:#speakerList.xhtml" TITLE="speakerList" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#talkEdit.xhtml" PATH="/talkEdit.xhtml"
+  SHAPE="48,408,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#talkEdit.xhtml:0" NAME="item"
+   PATH="/talkEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="talkList::#talkList.xhtml" NAME="output"
+    PATH="/talkList.xhtml" SHAPE="97,440,184,440,184,440,495,440"
+    TARGET="rules:#talkList.xhtml" TITLE="talkList" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#talkList.xhtml" PATH="/talkList.xhtml"
+  SHAPE="496,432,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+</PROCESS>

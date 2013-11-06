@@ -2,6 +2,7 @@ package com.prodyna.pac.conference.beans;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -10,10 +11,12 @@ import com.prodyna.pac.conference.model.Speaker;
 import com.prodyna.pac.conference.model.Talk;
 import com.prodyna.pac.conference.service.SpeakerService;
 import com.prodyna.pac.conference.service.TalkService;
+import com.prodyna.pac.conference.web.constants.ViewConstants;
 
 @ManagedBean(name = "speakerDetails")
 @ViewScoped
-public class SpeakerDetails {
+public class SpeakerDetails extends AbstractEditEntityMaskBean {
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	SpeakerService speakerService;
@@ -23,27 +26,66 @@ public class SpeakerDetails {
 
 	private Speaker speaker;
 
-	private Long id;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) throws Exception {
-		this.id = id;
-		speaker = speakerService.getSpeakerById(id);
-	}
-
-	public Speaker getSpeaker() {
+	public Speaker getSpeaker() throws Exception
+	{
+		if (speaker == null) {
+			speaker = speakerService.getSpeakerById(getId());
+		}
 		return speaker;
 	}
 
-	public void setSpeaker(Speaker speaker) {
+	public void setSpeaker(Speaker speaker)
+	{
 		this.speaker = speaker;
 	}
 
-	public List<Talk> getTalks() throws Exception {
-		return talkService.getTalksBySpeaker(speaker);
+	public List<Talk> getTalks() throws Exception
+	{
+		return talkService.getTalksBySpeaker(getSpeaker());
+	}
+
+	public void initNewSpeaker()
+	{
+		speaker = new Speaker();
+	}
+
+	@Override
+	public String cancelEditing()
+	{
+		initNewSpeaker();
+
+		return ViewConstants.VIEW_SPEAKER_LIST;
+	}
+
+	public void createSpeaker() throws Exception
+	{
+		try {
+			speakerService.createSpeaker(speaker);
+			facesContext.addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Saved!", "Speaker saved"));
+			speaker = null;
+		} catch (Exception e) {
+			String errorMessage = getRootErrorMessage(e);
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					errorMessage, "Saving unsuccessful");
+			facesContext.addMessage(null, m);
+		}
+	}
+
+	public void updateSpeaker() throws Exception
+	{
+		try {
+			speakerService.updateSpeaker(speaker);
+			facesContext.addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Update!", "Speaker updated"));
+
+		} catch (Exception e) {
+			String errorMessage = getRootErrorMessage(e);
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					errorMessage, "Updating speaker unsuccessful");
+			facesContext.addMessage(null, m);
+		}
+
 	}
 
 }
