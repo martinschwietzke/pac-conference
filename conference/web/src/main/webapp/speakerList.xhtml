@@ -8,9 +8,16 @@
 	<ui:define name="content">
 
 		<h2>#{i18n['speakers']}</h2>
+
+		<h:messages styleClass="messages" errorClass="invalid"
+			infoClass="valid" warnClass="warning" globalOnly="true" />
+
 		<h:panelGroup rendered="#{empty speakers}">
 			<em>#{i18n['no-speakers-exists']}</em>
 		</h:panelGroup>
+
+		<h:link outcome="speakerEdit" value="#{i18n['add']}" />
+
 		<h:dataTable var="currSpeaker" value="#{speakers}"
 			rendered="#{not empty speakers}" styleClass="simpletablestyle">
 			<h:column>

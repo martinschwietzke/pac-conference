@@ -29,7 +29,11 @@ public class SpeakerDetails extends AbstractEditEntityMaskBean {
 	public Speaker getSpeaker() throws Exception
 	{
 		if (speaker == null) {
-			speaker = speakerService.getSpeakerById(getId());
+			if (isNewMode()) {
+				initNewSpeaker();
+			} else {
+				speaker = speakerService.getSpeakerById(getId());
+			}
 		}
 		return speaker;
 	}
@@ -57,35 +61,41 @@ public class SpeakerDetails extends AbstractEditEntityMaskBean {
 		return ViewConstants.VIEW_SPEAKER_LIST;
 	}
 
-	public void createSpeaker() throws Exception
+	public String createSpeaker() throws Exception
 	{
+		String outcome = ViewConstants.VIEW_SPEAKER_EDIT;
+
 		try {
 			speakerService.createSpeaker(speaker);
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Saved!", "Speaker saved"));
-			speaker = null;
+
+			outcome = ViewConstants.VIEW_SPEAKER_LIST;
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					errorMessage, "Saving unsuccessful");
 			facesContext.addMessage(null, m);
 		}
+
+		return outcome;
 	}
 
-	public void updateSpeaker() throws Exception
+	public String updateSpeaker() throws Exception
 	{
+		String outcome = ViewConstants.VIEW_SPEAKER_EDIT;
 		try {
 			speakerService.updateSpeaker(speaker);
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Update!", "Speaker updated"));
-
+			outcome = ViewConstants.VIEW_SPEAKER_LIST;
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					errorMessage, "Updating speaker unsuccessful");
 			facesContext.addMessage(null, m);
 		}
-
+		return outcome;
 	}
 
 }

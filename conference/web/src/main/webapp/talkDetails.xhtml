@@ -44,6 +44,19 @@
 					</ui:repeat>
 				</h:panelGroup>
 			</h:panelGrid>
+
+			<p>
+
+				<h:commandButton id="save"
+					action="#{speakerController.createSpeaker}" value="#{i18n['save']}"
+					styleClass="register" />
+
+				<h:link styleClass="button" outcome="speakerList"
+					value="#{i18n['cancel']}" />
+
+
+
+			</p>
 		</h:form>
 
 	</ui:define>

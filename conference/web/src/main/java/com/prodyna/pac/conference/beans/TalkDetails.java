@@ -1,5 +1,6 @@
 package com.prodyna.pac.conference.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -7,8 +8,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import com.prodyna.pac.conference.model.Conference;
+import com.prodyna.pac.conference.model.Room;
 import com.prodyna.pac.conference.model.Speaker;
 import com.prodyna.pac.conference.model.Talk;
+import com.prodyna.pac.conference.service.ConferenceService;
+import com.prodyna.pac.conference.service.RoomService;
 import com.prodyna.pac.conference.service.TalkService;
 import com.prodyna.pac.conference.web.constants.ViewConstants;
 
@@ -21,12 +26,22 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 	@Inject
 	TalkService talkService;
 
+	@Inject()
+	ConferenceService conferenceService;
+
+	@Inject()
+	RoomService roomService;
+
 	private Talk talk;
 
 	public Talk getTalk() throws Exception
 	{
 		if (talk == null) {
-			talk = talkService.getTalkById(getId());
+			if (isNewMode()) {
+				initNewTalk();
+			} else {
+				talk = talkService.getTalkById(getId());
+			}
 		}
 		return talk;
 	}
@@ -36,24 +51,69 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 		this.talk = talk;
 	}
 
-	public List<Speaker> getSpeakers() throws Exception
+	public void setConferenceId(Long conferenceId) throws Exception
 	{
-		return talkService.getSpeakersByTalk(getId());
+
+		Conference conferenceById = conferenceService
+				.getConferenceById(conferenceId);
+
+		getTalk().setConference(conferenceById);
 	}
 
-	public void createTalk() throws Exception
+	public Long getConferenceId() throws Exception
 	{
+		if (getTalk().getConference() == null) {
+			return null;
+		} else {
+			return getTalk().getConference().getId();
+		}
+	}
+
+	public void setRoomId(Long roomId) throws Exception
+	{
+
+		Room room = roomService.getRoomById(roomId);
+
+		getTalk().setRoom(room);
+	}
+
+	public Long getRoomId() throws Exception
+	{
+		if (getTalk().getRoom() == null) {
+			return null;
+		} else {
+			return getTalk().getId();
+		}
+	}
+
+	public List<Speaker> getSpeakers() throws Exception
+	{
+		if (isNewMode()) {
+			return new ArrayList<Speaker>();
+		} else {
+			return talkService.getSpeakersByTalk(getId());
+		}
+	}
+
+	public String createTalk() throws Exception
+	{
+
+		String outcome = ViewConstants.VIEW_TALK_EDIT;
 		try {
 			talkService.createTalk(talk);
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Saved!", "Talk saved"));
 			talk = null;
+
+			outcome = ViewConstants.VIEW_TALK_LIST;
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					errorMessage, "Saving unsuccessful");
 			facesContext.addMessage(null, m);
 		}
+
+		return outcome;
 	}
 
 	public void updateTalk() throws Exception
@@ -84,5 +144,4 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 
 		return ViewConstants.VIEW_TALK_LIST;
 	}
-
 }

@@ -42,7 +42,6 @@ public class Talk extends AbstractEntity {
 
 	@NotNull
 	@Size(min = 1, max = 75)
-	@Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
 	private String name;
 
 	private String description;

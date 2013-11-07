@@ -51,9 +51,14 @@ public class Room extends AbstractEntity {
 		this.id = id;
 	}
 
-	public String getName()
+	public String capacity()
 	{
 		return this.name;
+	}
+
+	public String getName()
+	{
+		return name;
 	}
 
 	public void setName(String name)

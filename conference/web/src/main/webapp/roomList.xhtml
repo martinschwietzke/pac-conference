@@ -7,11 +7,16 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 
-
 		<h2>#{i18n['rooms']}</h2>
+
+		<h:messages styleClass="messages" errorClass="invalid"
+			infoClass="valid" warnClass="warning" globalOnly="true" />
+
 		<h:panelGroup rendered="#{empty rooms}">
 			<em>#{i18n['no-rooms-exists']}</em>
 		</h:panelGroup>
+
+		<h:link outcome="roomEdit" value="#{i18n['add']}" />
 		<h:form>
 			<h:dataTable var="currRoom" value="#{rooms}"
 				rendered="#{not empty rooms}" styleClass="simpletablestyle">

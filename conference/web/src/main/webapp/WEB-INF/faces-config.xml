@@ -30,6 +30,50 @@
    <to-view-id>/talkList.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/talkList.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>talkDetails</from-outcome>
+   <to-view-id>/talkDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>talkEdit</from-outcome>
+   <to-view-id>/talkEdit.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/conferenceList.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>conferenceDetails</from-outcome>
+   <to-view-id>/conferenceDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>conferenceEdit</from-outcome>
+   <to-view-id>/conferenceEdit.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/speakerList.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>speakerDetails</from-outcome>
+   <to-view-id>/speakerDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>speakerEdit</from-outcome>
+   <to-view-id>/speakerEdit.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/roomList.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>roomDetails</from-outcome>
+   <to-view-id>/roomDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>roomEdit</from-outcome>
+   <to-view-id>/roomEdit.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
  <application>
   <locale-config>
    <default-locale>de</default-locale>

@@ -24,7 +24,7 @@ public class ConferenceDetails extends AbstractEditEntityMaskBean implements
 
 	@Inject
 	TalkService talkService;
-	
+
 	private Conference conference;
 
 	private static final long serialVersionUID = 1L;
@@ -32,7 +32,12 @@ public class ConferenceDetails extends AbstractEditEntityMaskBean implements
 	public Conference getConference() throws Exception
 	{
 		if (conference == null) {
-			conference = conferenceService.getConferenceById(super.getId());
+			if (isNewMode()) {
+				initNewConference();
+			} else {
+
+				conference = conferenceService.getConferenceById(super.getId());
+			}
 		}
 
 		return conference;
@@ -64,28 +69,37 @@ public class ConferenceDetails extends AbstractEditEntityMaskBean implements
 		conference = new Conference();
 	}
 
-	public void createConference() throws Exception
+	public String createConference() throws Exception
 	{
+		String outcome = ViewConstants.VIEW_CONFERENCE_EDIT;
 		try {
 			conferenceService.createConference(conference);
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Saved!", "Conference saved"));
 			conference = null;
+
+			outcome = ViewConstants.VIEW_CONFERENCE_LIST;
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					errorMessage, "Saving unsuccessful");
 			facesContext.addMessage(null, m);
 		}
+
+		return outcome;
 	}
 
-	public void updateConference() throws Exception
+	public String updateConference() throws Exception
 	{
+
+		String outcome = ViewConstants.VIEW_CONFERENCE_EDIT;
 		try {
 			conferenceService.updateConference(conference);
 			facesContext.addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Update!",
 							"Conference updated"));
+
+			outcome = ViewConstants.VIEW_CONFERENCE_LIST;
 
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
@@ -94,6 +108,7 @@ public class ConferenceDetails extends AbstractEditEntityMaskBean implements
 			facesContext.addMessage(null, m);
 		}
 
-	}
+		return outcome;
 
+	}
 }
