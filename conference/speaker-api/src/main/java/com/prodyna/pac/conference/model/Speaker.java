@@ -39,6 +39,18 @@ public class Speaker extends AbstractEntity {
 
 	private String description;
 
+	private String profileImage;
+
+	public String getProfileImage()
+	{
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage)
+	{
+		this.profileImage = profileImage;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	public Speaker() {

@@ -12,7 +12,7 @@ public interface RoomService {
 
 	void createRoom(Room room) throws Exception;
 
-	void deleteRoom(Room room) throws Exception;
+	void deleteRoom(Room room) throws RoomReferencedException, Exception;
 
 	void updateRoom(Room room) throws Exception;
 

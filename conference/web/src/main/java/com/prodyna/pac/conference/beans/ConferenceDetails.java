@@ -27,6 +27,18 @@ public class ConferenceDetails extends AbstractEditEntityMaskBean implements
 
 	private Conference conference;
 
+	private PopupBean speakersPopup = new PopupBean();
+
+	public PopupBean getSpeakersPopup()
+	{
+		return speakersPopup;
+	}
+
+	public void setSpeakersPopup(PopupBean speakersPopup)
+	{
+		this.speakersPopup = speakersPopup;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	public Conference getConference() throws Exception
@@ -110,5 +122,10 @@ public class ConferenceDetails extends AbstractEditEntityMaskBean implements
 
 		return outcome;
 
+	}
+
+	public void deleteConference(Conference conference) throws Exception
+	{
+		conferenceService.deleteConference(conference);
 	}
 }

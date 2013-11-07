@@ -55,6 +55,9 @@
 						<f:param name="id" value="#{currConference.id}" />
 					</h:link>
 
+					<h:commandLink action="#{conferenceDetails.deleteConference(currConference)}"
+						value="#{i18n['delete']}" />
+
 				</h:column>
 			</h:dataTable>
 		</h:form>

@@ -7,19 +7,23 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import com.prodyna.pac.conference.model.Room;
+import com.prodyna.pac.conference.service.RoomReferencedException;
 import com.prodyna.pac.conference.service.RoomService;
 import com.prodyna.pac.conference.service.TalkService;
 import com.prodyna.pac.conference.web.constants.ViewConstants;
 
-@ManagedBean(name = "roomDetails")
+@ManagedBean(name = RoomDetails.BEAN_NAME)
 @ViewScoped
 public class RoomDetails extends AbstractEditEntityMaskBean {
+
+	static final String BEAN_NAME = "roomDetails";
 
 	@Inject
 	RoomService roomService;
 
 	@Inject
 	TalkService talkService;
+
 	@Inject
 	private FacesContext facesContext;
 
@@ -92,6 +96,24 @@ public class RoomDetails extends AbstractEditEntityMaskBean {
 		initNewRoom();
 
 		return ViewConstants.VIEW_ROOM_LIST;
+	}
+
+	public void deleteRoom(Room room) throws Exception
+	{
+		try {
+			roomService.deleteRoom(room);
+		} catch (RoomReferencedException e) {
+			facesContext
+					.addMessage(
+							null,
+							new FacesMessage(
+									FacesMessage.SEVERITY_INFO,
+									"Room '"
+											+ room.getName()
+											+ "' cannot be deleted because it is still in use.",
+									null));
+
+		}
 	}
 
 }

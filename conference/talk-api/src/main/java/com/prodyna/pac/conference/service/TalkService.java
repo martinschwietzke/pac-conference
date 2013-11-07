@@ -11,11 +11,11 @@ import com.prodyna.pac.conference.model.Talk;
  */
 public interface TalkService {
 
-	void createTalk(Talk talk) throws Exception;
+	Talk createTalk(Talk talk) throws Exception;
 
 	void deleteTalk(Talk talk) throws Exception;
 
-	void updateTalk(Talk talk) throws Exception;
+	Talk updateTalk(Talk talk) throws Exception;
 
 	Talk getTalkById(long talkId) throws Exception;
 
@@ -28,5 +28,10 @@ public interface TalkService {
 	List<Talk> getTalksBySpeaker(Speaker speaker) throws Exception;
 
 	List<Speaker> getSpeakersByTalk(long talk) throws Exception;
+
+	void updateTalkSpeakers(long talkId, List<Speaker> speakers)
+			throws Exception;
+
+	void updateTalkSpeakers(Talk talk, List<Speaker> speakers) throws Exception;
 
 }

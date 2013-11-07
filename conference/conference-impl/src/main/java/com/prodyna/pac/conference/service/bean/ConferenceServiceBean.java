@@ -62,7 +62,8 @@ public class ConferenceServiceBean implements ConferenceService {
 	{
 
 		log.info("Deleting conference [" + conference.getName() + "]");
-		em.remove(conference);
+		Conference merge = em.merge(conference);
+		em.remove(merge);
 		conferenceEventSrc.fire(conference);
 	}
 

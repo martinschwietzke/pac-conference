@@ -13,8 +13,14 @@
 				required="true"
 				requiredMessage="Bad request, please use a link from within the system." />
 		</f:metadata>
+		
+		<h:link outcome="speakerEdit" value="#{i18n['edit']}">
+			<f:param name="id" value="${speakerDetails.id}" />
+		</h:link>
 
 		<h:form rendered="#{not empty speakerDetails.speaker}">
+			<h:graphicImage rendered="#{speakerDetails.hasProfileImage()}"
+				value="#{speakerDetails.profileImagePath}" width="75px" />
 			<h:panelGrid columns="2">
 				<h:outputLabel value="#{i18n['name']}" />
 				<h:outputText value="#{speakerDetails.speaker.name}" />
@@ -39,6 +45,5 @@
 
 			</h:panelGrid>
 		</h:form>
-
 	</ui:define>
 </ui:composition>

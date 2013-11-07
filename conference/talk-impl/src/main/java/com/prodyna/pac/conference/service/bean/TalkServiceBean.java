@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.prodyna.pac.conference.interceptor.Logged;
@@ -44,12 +45,14 @@ public class TalkServiceBean implements TalkService {
 	 * .pac.conference.model.Talk)
 	 */
 	@Override
-	public void createTalk(Talk talk) throws Exception
+	public Talk createTalk(Talk talk) throws Exception
 	{
 
 		log.info("Creating Talk [" + talk.getName() + "]");
 		em.persist(talk);
 		roomEventSrc.fire(talk);
+
+		return talk;
 	}
 
 	/*
@@ -64,7 +67,8 @@ public class TalkServiceBean implements TalkService {
 	{
 
 		log.info("Deleting Talk [" + talk.getName() + "]");
-		em.remove(talk);
+		Talk merge = em.merge(talk);
+		em.remove(merge);
 		roomEventSrc.fire(talk);
 	}
 
@@ -76,12 +80,13 @@ public class TalkServiceBean implements TalkService {
 	 * .pac.conference.model.Talk)
 	 */
 	@Override
-	public void updateTalk(Talk talk) throws Exception
+	public Talk updateTalk(Talk talk) throws Exception
 	{
 
 		log.info("Updating Talk [" + talk.getName() + "]");
-		em.merge(talk);
+		Talk merge = em.merge(talk);
 		roomEventSrc.fire(talk);
+		return merge;
 
 	}
 
@@ -180,5 +185,39 @@ public class TalkServiceBean implements TalkService {
 
 		return q.getResultList();
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.service.TalkService#updateTalkSpeakers(long,
+	 * java.util.List)
+	 */
+	@Override
+	public void updateTalkSpeakers(long talkId, List<Speaker> speakers)
+			throws Exception
+	{
+
+		Talk talk = getTalkById(talkId);
+
+		updateTalkSpeakers(talk, speakers);
+	}
+
+	@Override
+	public void updateTalkSpeakers(Talk talk, List<Speaker> speakers)
+			throws Exception
+	{
+
+		Query q = em.createNamedQuery(Talk.DELETE_TALK_SPEAKERS_BY_TALK_ID);
+		q.setParameter("talkId", talk.getId());
+		q.executeUpdate();
+
+		for (Speaker speaker : speakers) {
+			TalkSpeaker ts = new TalkSpeaker();
+			ts.setSpeaker(speaker);
+			ts.setTalk(talk);
+			em.persist(ts);
+		}
 	}
 }

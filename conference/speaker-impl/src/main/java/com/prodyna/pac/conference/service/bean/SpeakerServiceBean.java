@@ -12,7 +12,10 @@ import javax.persistence.EntityManager;
 import com.prodyna.pac.conference.interceptor.Logged;
 import com.prodyna.pac.conference.interceptor.Performance;
 import com.prodyna.pac.conference.model.Speaker;
+import com.prodyna.pac.conference.model.Talk;
+import com.prodyna.pac.conference.service.SpeakerReferencedException;
 import com.prodyna.pac.conference.service.SpeakerService;
+import com.prodyna.pac.conference.service.TalkService;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
@@ -32,6 +35,9 @@ public class SpeakerServiceBean implements SpeakerService {
 
 	@Inject
 	private Event<Speaker> roomEventSrc;
+
+	@Inject
+	TalkService talkService;
 
 	/*
 	 * (non-Javadoc)
@@ -57,11 +63,24 @@ public class SpeakerServiceBean implements SpeakerService {
 	 * .pac.conference.model.Speaker)
 	 */
 	@Override
-	public void deleteSpeaker(Speaker speaker) throws Exception
+	public void deleteSpeaker(Speaker speaker)
+			throws SpeakerReferencedException, Exception
 	{
 
+		if (speaker == null || speaker.getId() == null) {
+			throw new IllegalArgumentException(
+					"Speaker must not be null and have an id set.");
+		}
+
+		List<Talk> talks = talkService.getTalksBySpeaker(speaker);
+		if (!talks.isEmpty()) {
+			throw new SpeakerReferencedException();
+		}
+
 		log.info("Deleting Speaker [" + speaker.getName() + "]");
-		em.remove(speaker);
+
+		Speaker merge = em.merge(speaker);
+		em.remove(merge);
 		roomEventSrc.fire(speaker);
 	}
 

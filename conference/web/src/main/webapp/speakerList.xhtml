@@ -17,39 +17,43 @@
 		</h:panelGroup>
 
 		<h:link outcome="speakerEdit" value="#{i18n['add']}" />
-
-		<h:dataTable var="currSpeaker" value="#{speakers}"
-			rendered="#{not empty speakers}" styleClass="simpletablestyle">
-			<h:column>
-				<f:facet name="header">#{i18n['id']}</f:facet>
+		<h:form>
+			<h:dataTable var="currSpeaker" value="#{speakers}"
+				rendered="#{not empty speakers}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">#{i18n['id']}</f:facet>
                 #{currSpeaker.id}
             </h:column>
-			<h:column>
-				<f:facet name="header">#{i18n['firstname']}</f:facet>
-				<h:link outcome="speakerDetails" value=" #{currSpeaker.firstname}">
-					<f:param name="id" value="#{currSpeaker.id}"></f:param>
-				</h:link>
+				<h:column>
+					<f:facet name="header">#{i18n['firstname']}</f:facet>
+					<h:link outcome="speakerDetails" value=" #{currSpeaker.firstname}">
+						<f:param name="id" value="#{currSpeaker.id}"></f:param>
+					</h:link>
 
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{i18n['lastname']}</f:facet>
-				<h:link outcome="speakerDetails" value=" #{currSpeaker.lastname}">
-					<f:param name="id" value="#{currSpeaker.id}"></f:param>
-				</h:link>
-			</h:column>
-			<h:column>
-				<f:facet name="actions">#{i18n['actions']}</f:facet>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['lastname']}</f:facet>
+					<h:link outcome="speakerDetails" value=" #{currSpeaker.lastname}">
+						<f:param name="id" value="#{currSpeaker.id}"></f:param>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="actions">#{i18n['actions']}</f:facet>
 
-				<h:link outcome="speakerEdit" value="#{i18n['edit']}">
-					<f:param name="id" value="#{currSpeaker.id}" />
-				</h:link>
+					<h:link outcome="speakerEdit" value="#{i18n['edit']}">
+						<f:param name="id" value="#{currSpeaker.id}" />
+					</h:link>
 
-				<h:link outcome="speakerDetails" value="#{i18n['show']}">
-					<f:param name="id" value="#{currSpeaker.id}" />
-				</h:link>
-			</h:column>
-		</h:dataTable>
+					<h:link outcome="speakerDetails" value="#{i18n['show']}">
+						<f:param name="id" value="#{currSpeaker.id}" />
+					</h:link>
 
+					<h:commandLink
+						action="#{speakerDetails.deleteSpeaker(currSpeaker)}"
+						value="#{i18n['delete']}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
 
 	</ui:define>
 </ui:composition>

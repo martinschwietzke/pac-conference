@@ -12,7 +12,10 @@ import javax.persistence.EntityManager;
 import com.prodyna.pac.conference.interceptor.Logged;
 import com.prodyna.pac.conference.interceptor.Performance;
 import com.prodyna.pac.conference.model.Room;
+import com.prodyna.pac.conference.model.Talk;
+import com.prodyna.pac.conference.service.RoomReferencedException;
 import com.prodyna.pac.conference.service.RoomService;
+import com.prodyna.pac.conference.service.TalkService;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG
@@ -32,6 +35,9 @@ public class RoomServiceBean implements RoomService {
 
 	@Inject
 	private Event<Room> roomEventSrc;
+
+	@Inject
+	TalkService talkService;
 
 	/*
 	 * (non-Javadoc)
@@ -57,11 +63,23 @@ public class RoomServiceBean implements RoomService {
 	 * .pac.conference.model.Room)
 	 */
 	@Override
-	public void deleteRoom(Room room) throws Exception
+	public void deleteRoom(Room room) throws RoomReferencedException, Exception
 	{
 
+		if (room == null || room.getId() == null) {
+			throw new IllegalArgumentException(
+					"Room must not be null and have an id set.");
+		}
+
+		List<Talk> talks = talkService.getTalksByRoom(room.getId());
+		if (!talks.isEmpty()) {
+			throw new RoomReferencedException();
+		}
+
 		log.info("Deleting Room [" + room.getName() + "]");
-		em.remove(room);
+		Room merge = em.merge(room);
+		em.remove(merge);
+
 		roomEventSrc.fire(room);
 	}
 

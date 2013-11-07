@@ -32,6 +32,8 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 	@Inject()
 	RoomService roomService;
 
+	List<Speaker> speakers;
+
 	private Talk talk;
 
 	public Talk getTalk() throws Exception
@@ -88,11 +90,15 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 
 	public List<Speaker> getSpeakers() throws Exception
 	{
-		if (isNewMode()) {
-			return new ArrayList<Speaker>();
-		} else {
-			return talkService.getSpeakersByTalk(getId());
+		if (speakers == null) {
+			if (isNewMode()) {
+				speakers = new ArrayList<Speaker>();
+			} else {
+				speakers = talkService.getSpeakersByTalk(getId());
+			}
 		}
+
+		return speakers;
 	}
 
 	public String createTalk() throws Exception
@@ -101,9 +107,9 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 		String outcome = ViewConstants.VIEW_TALK_EDIT;
 		try {
 			talkService.createTalk(talk);
+			talkService.updateTalkSpeakers(talk, speakers);
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Saved!", "Talk saved"));
-			talk = null;
 
 			outcome = ViewConstants.VIEW_TALK_LIST;
 		} catch (Exception e) {
@@ -119,7 +125,8 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 	public void updateTalk() throws Exception
 	{
 		try {
-			talkService.updateTalk(talk);
+			Talk talkUpdate = talkService.updateTalk(talk);
+			talkService.updateTalkSpeakers(talkUpdate, speakers);
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Update!", "Talk updated"));
 
@@ -130,6 +137,16 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 			facesContext.addMessage(null, m);
 		}
 
+	}
+
+	public void assignSpeaker(Speaker speaker)
+	{
+		speakers.add(speaker);
+	}
+
+	public void unassignSpeaker(Speaker speaker)
+	{
+		speakers.remove(speaker);
 	}
 
 	public void initNewTalk()
@@ -144,4 +161,10 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 
 		return ViewConstants.VIEW_TALK_LIST;
 	}
+
+	public void deleteTalk(Talk talk) throws Exception
+	{
+		talkService.deleteTalk(talk);
+	}
+
 }

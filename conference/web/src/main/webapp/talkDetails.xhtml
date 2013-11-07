@@ -16,7 +16,9 @@
 
 		<h:form rendered="#{not empty talkDetails.talk}">
 
-			<h:outputLink value="talkEdit.jsf?id=${talkDetails.id}">bearbeiten</h:outputLink>
+			<h:link outcome="talkEdit" value="#{i18n['edit']}">
+				<f:param name="id" value="${talkDetails.id}" />
+			</h:link>
 
 			<h:panelGrid columns="2">
 				<h:outputLabel value="#{i18n['name']}" />
@@ -45,18 +47,6 @@
 				</h:panelGroup>
 			</h:panelGrid>
 
-			<p>
-
-				<h:commandButton id="save"
-					action="#{speakerController.createSpeaker}" value="#{i18n['save']}"
-					styleClass="register" />
-
-				<h:link styleClass="button" outcome="speakerList"
-					value="#{i18n['cancel']}" />
-
-
-
-			</p>
 		</h:form>
 
 	</ui:define>

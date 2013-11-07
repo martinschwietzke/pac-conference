@@ -65,6 +65,12 @@
 			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>talk-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

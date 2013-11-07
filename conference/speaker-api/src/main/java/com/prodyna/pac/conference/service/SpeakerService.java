@@ -12,7 +12,8 @@ public interface SpeakerService {
 
 	void createSpeaker(Speaker speaker) throws Exception;
 
-	void deleteSpeaker(Speaker speaker) throws Exception;
+	void deleteSpeaker(Speaker speaker) throws SpeakerReferencedException,
+			Exception;
 
 	void updateSpeaker(Speaker speaker) throws Exception;
 

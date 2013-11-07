@@ -39,6 +39,9 @@
 						<f:param name="id" value="#{currRoom.id}" />
 					</h:link>
 
+					<h:commandLink action="#{roomDetails.deleteRoom(currRoom)}"
+						value="#{i18n['delete']}" />
+
 				</h:column>
 			</h:dataTable>
 		</h:form>

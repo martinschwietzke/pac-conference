@@ -1,0 +1,63 @@
+package com.prodyna.pac.conference.init;
+
+import java.lang.management.ManagementFactory;
+import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.inject.Inject;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+
+import com.prodyna.pac.conference.monitoring.Performance;
+import com.prodyna.pac.conference.monitoring.PerformanceMXBean;
+
+/**
+ * @author Martin Schwietzke, PRODYNA AG
+ * 
+ */
+@Startup
+@Singleton
+public class MBeanRegistrationStartup {
+
+	@Inject
+	private Logger log;
+
+	@PostConstruct
+	private void registerMBeans()
+	{
+
+		MBeanServer ms = ManagementFactory.getPlatformMBeanServer();
+
+		try {
+
+			ms.registerMBean(new Performance(), new ObjectName(
+					PerformanceMXBean.OBJECT_NAME));
+
+		} catch (Exception e) {
+			log.severe("Error while registering MBean ["
+					+ PerformanceMXBean.OBJECT_NAME + "]. Error message: ["
+					+ e.getMessage() + "]");
+		}
+	}
+
+	@PreDestroy
+	private void unregisterMBeans()
+	{
+
+		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+
+		try {
+
+			mbs.unregisterMBean(new ObjectName(PerformanceMXBean.OBJECT_NAME));
+
+		} catch (Exception e) {
+			log.severe("Error while unregistering MBean ["
+					+ PerformanceMXBean.OBJECT_NAME + "]. Error message: ["
+					+ e.getMessage() + "]");
+		}
+	}
+
+}

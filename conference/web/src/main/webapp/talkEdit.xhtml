@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ace="http://www.icefaces.org/icefaces/components"
-	template="/WEB-INF/templates/default.xhtml">
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
 
 
 	<ui:define name="metadata">
@@ -15,6 +16,9 @@
 	</ui:define>
 
 	<ui:define name="content">
+
+		<h:messages styleClass="messages" errorClass="invalid"
+			infoClass="valid" warnClass="warning" globalOnly="true" />
 
 		<h:form rendered="#{not empty talkDetails.talk}">
 			<h:panelGrid columns="3">
@@ -63,12 +67,18 @@
 
 				<h:outputLabel value="#{i18n['speakers']}" />
 				<h:panelGroup>
-					<ui:repeat var="currSpeaker" value="#{talkDetails.speakers}">
-						<h:link outcome="speakerDetails" value="#{currSpeaker.name}">
-							<f:param name="id" value="#{currSpeaker.id}"></f:param>
-						</h:link>
-						<br />
-					</ui:repeat>
+					<h:panelGrid columns="2">
+						<ui:repeat var="currSpeaker" value="#{talkDetails.speakers}">
+							<h:link outcome="speakerDetails" value="#{currSpeaker.name}">
+								<f:param name="id" value="#{currSpeaker.id}"></f:param>
+							</h:link>
+							<h:commandLink
+								action="#{conferenceDetails.unassign(currSpeaker)}"
+								value="#{i18n['unassign']}" />
+						</ui:repeat>
+					</h:panelGrid>
+					<h:commandLink action="#{conferenceDetails.speakersPopup.open}"
+						value="#{i18n['assign-speakers']}" />
 				</h:panelGroup>
 			</h:panelGrid>
 
@@ -78,7 +88,7 @@
 						value="#{i18n['create']}" rendered="${talkDetails.talk.new}" />
 
 					<h:commandButton id="update" action="#{talkDetails.updateTalk}"
-						value="#{i18n['save']}" rendered="${!talkDetails.talk.new}" />
+						value="#{i18n['save']}" rendered="#{!talkDetails.talk.new}" />
 
 					<h:link id="cancel" styleClass="button" outcome="talkList"
 						value="#{i18n['cancel']}" />
@@ -86,6 +96,42 @@
 				</h:panelGrid>
 			</p>
 		</h:form>
+
+		<h:form>
+			<ice:panelPopup visible="true"
+				rendered="#{conferenceDetails.speakersPopup.opened}"
+				modal="#{conferenceDetails.speakersPopup.opened}">
+				<f:facet name="header">
+				Assign Speakers 
+				
+				<h:commandLink action="#{conferenceDetails.speakersPopup.close()}"
+						value="#{i18n['close']}" />
+				</f:facet>
+
+				<f:facet name="body">
+
+					<h:dataTable var="currSpeaker" value="#{speakers}"
+						rendered="#{not empty speakers}" styleClass="simpletablestyle">
+						<h:column>
+							<f:facet name="header">#{i18n['firstname']}</f:facet>
+               					 #{currSpeaker.firstname}
+           				 </h:column>
+						<h:column>
+							<f:facet name="header">#{i18n['lastname']}</f:facet>
+               					 #{currSpeaker.lastname}
+           				 </h:column>
+						<h:column>
+							<h:commandButton value="#{i18n['add']}"
+								action="#{talkDetails.assignSpeaker(currSpeaker)}">
+
+							</h:commandButton>
+						</h:column>
+					</h:dataTable>
+
+				</f:facet>
+			</ice:panelPopup>
+		</h:form>
+
 
 	</ui:define>
 </ui:composition>
