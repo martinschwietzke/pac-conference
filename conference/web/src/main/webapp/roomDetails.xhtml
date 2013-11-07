@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="id" value="#{roomDetails.id}"
+				converterMessage="Unknown product, please use a link from within the system."
+				required="true"
+				requiredMessage="Bad request, please use a link from within the system." />
+		</f:metadata>
+
+		<h:form rendered="#{not empty roomDetails.room}">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="#{i18n['name']}" />
+				<h:outputText value="#{roomDetails.room.name}" />
+
+				<h:outputLabel value="#{i18n['capacity']}" />
+				<h:outputText value="#{roomDetails.room.capacity}" />
+
+			</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

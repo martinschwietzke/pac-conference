@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+
+		<h2>#{i18n['conferences']}</h2>
+
+		<h:messages styleClass="messages" errorClass="invalid"
+			infoClass="valid" warnClass="warning" globalOnly="true" />
+
+		<h:panelGroup rendered="#{empty conferences}">
+			<em>#{i18n['no-conferences-exists']}</em>
+		</h:panelGroup>
+
+		<h:link outcome="conferenceEdit" value="#{i18n['add']}" />
+		<h:form>
+			<h:dataTable var="currConference" value="#{conferences}"
+				rendered="#{not empty conferences}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">#{i18n['id']}</f:facet>
+                #{currConference.id}
+            </h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['name']}</f:facet>
+                #{currConference.name}
+            </h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['start']}</f:facet>
+					<h:outputText value="#{currConference.start}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['end']}</f:facet>
+					<h:outputText value="#{currConference.end}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="actions">#{i18n['actions']}</f:facet>
+
+					<h:link outcome="conferenceEdit" value="#{i18n['edit']}">
+						<f:param name="id" value="#{currConference.id}" />
+					</h:link>
+
+					<h:link outcome="conferenceDetails" value="#{i18n['show']}">
+						<f:param name="id" value="#{currConference.id}" />
+					</h:link>
+
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

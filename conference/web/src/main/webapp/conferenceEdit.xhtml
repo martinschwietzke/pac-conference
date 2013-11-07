@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="id" value="#{conferenceDetails.id}" />
+		</f:metadata>
+
+		<h:form id="conferenceEditForm">
+
+			<h:messages styleClass="messages" errorClass="invalid"
+				infoClass="valid" warnClass="warning" globalOnly="true" />
+
+			<h2>
+				<h:outputText value="#{i18n['create-conference']}"
+					rendered="#{conferenceDetails.conference.new}" />
+				<h:outputText value="#{i18n['edit-conference']}"
+					rendered="#{!conferenceDetails.conference.new}" />
+			</h2>
+
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="name" value="#{i18n['name']}" />
+				<h:inputText id="name" value="#{conferenceDetails.conference.name}" />
+				<h:message for="name" errorClass="invalid" />
+
+				<h:outputLabel for="location" value="#{i18n['location']}" />
+				<h:inputText id="location"
+					value="#{conferenceDetails.conference.location}" />
+				<h:message for="location" errorClass="invalid" />
+
+				<h:outputLabel for="description" value="#{i18n['description']}" />
+				<h:inputTextarea id="description"
+					value="#{conferenceDetails.conference.description}" />
+				<h:message for="description" errorClass="invalid" />
+
+				<h:outputLabel for="start" value="#{i18n['start']}" />
+				<ace:dateTimeEntry id="start"
+					value="#{conferenceDetails.conference.start}" pattern="dd.MM.yyyy"
+					renderAsPopup="#{true}" />
+				<h:message for="start" errorClass="invalid" />
+
+				<h:outputLabel for="end" value="#{i18n['end']}" />
+				<ace:dateTimeEntry id="end"
+					value="#{conferenceDetails.conference.end}" pattern="dd.MM.yyyy"
+					renderAsPopup="#{true}" />
+				<h:message for="end" errorClass="invalid" />
+
+				<h:outputLabel for="archived" value="#{i18n['archived']}" />
+				<h:selectBooleanCheckbox id="archived"
+					value="#{conferenceDetails.conference.archived}" />
+				<h:message for="archived" errorClass="invalid" />
+
+			</h:panelGrid>
+
+			<p>
+				<h:commandButton id="saveConference"
+					action="#{conferenceDetails.createConference}"
+					value="#{i18n['create']}"
+					rendered="${conferenceDetails.conference.new}" />
+
+				<h:commandButton id="updateConference"
+					action="#{conferenceDetails.updateConference}"
+					value="#{i18n['save']}"
+					rendered="${!conferenceDetails.conference.new}" />
+
+				<h:link styleClass="button" outcome="conferenceList"
+					value="#{i18n['cancel']}" />
+
+			</p>
+
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>

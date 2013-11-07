@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="id" value="#{roomDetails.id}" />
+		</f:metadata>
+
+		<h:form id="roomEditForm">
+
+			<h:messages styleClass="messages" errorClass="invalid"
+				infoClass="valid" warnClass="warning" globalOnly="true" />
+
+			<h2>
+				<h:outputText value="#{i18n['create-room']}"
+					rendered="#{roomDetails.room.new}" />
+				<h:outputText value="#{i18n['edit-room']}"
+					rendered="#{!roomDetails.room.new}" />
+			</h2>
+
+			<h:panelGrid columns="3" columnClasses="titleCell">
+
+				<h:outputLabel for="name" value="#{i18n['name']}" />
+				<h:inputText id="name" value="#{roomDetails.room.name}" />
+				<h:message for="name" errorClass="invalid" />
+
+				<h:outputLabel for="capacity" value="#{i18n['capacity']}" />
+				<h:inputText id="capacity" value="#{roomDetails.room.capacity}" />
+				<h:message for="capacity" errorClass="invalid" />
+
+			</h:panelGrid>
+
+			<p>
+				<h:panelGrid columns="2">
+					<h:commandButton id="saveRoom" action="#{roomDetails.createRoom}"
+						value="#{i18n['create']}" rendered="${roomDetails.room.new}" />
+
+					<h:commandButton id="updateConference"
+						action="#{roomDetails.updateRoom}" value="#{i18n['save']}"
+						rendered="${!roomDetails.room.new}" />
+
+					<h:link styleClass="button" outcome="roomList"
+						value="#{i18n['cancel']}" />
+
+				</h:panelGrid>
+			</p>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	template="/WEB-INF/templates/default.xhtml">
+
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="id" value="#{talkDetails.id}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form rendered="#{not empty talkDetails.talk}">
+			<h:panelGrid columns="3">
+				<h:outputLabel for="name" value="#{i18n['name']}" />
+				<h:inputText id="name" value="#{talkDetails.talk.name}" />
+				<h:message for="name" errorClass="invalid" />
+
+				<h:outputLabel for="description" value="#{i18n['description']}" />
+				<h:inputText id="description"
+					value="#{talkDetails.talk.description}" />
+				<h:message for="description" errorClass="invalid" />
+
+				<h:outputLabel for="start" value="#{i18n['start']}" />
+				<ace:dateTimeEntry id="start" value="#{talkDetails.talk.start}"
+					pattern="dd.MM.yyyy" renderAsPopup="#{true}" />
+				<h:message for="start" errorClass="invalid" />
+
+				<h:outputLabel for="duration" value="#{i18n['duration']}" />
+				<h:inputText id="duration" value="#{talkDetails.talk.duration}" />
+				<h:message for="duration" errorClass="invalid" />
+
+				<h:outputLabel for="room" value="#{i18n['room']}" />
+				<h:selectOneListbox id="room" value="#{talkDetails.roomId}" size="1">
+					<f:selectItems value="#{rooms}" var="room" itemLabel="#{room.name}"
+						itemValue="#{room.id}" />
+				</h:selectOneListbox>
+				<h:message for="room" errorClass="invalid" />
+
+				<h:outputLabel for="conference" value="#{i18n['conference']}" />
+				<h:panelGroup>
+					<h:link outcome="conferenceDetails"
+						value="#{talkDetails.talk.conference.name}"
+						rendered="#{talkDetails.talk.conference != null}">
+						<f:param name="id" value="#{talkDetails.talk.conference.id}"></f:param>
+					</h:link>
+					<h:panelGroup>
+						<h:selectOneListbox id="conference"
+							value="#{talkDetails.conferenceId}" size="1">
+							<f:selectItems value="#{conferences}" var="conf"
+								itemLabel="#{conf.name}" itemValue="#{conf.id}" />
+						</h:selectOneListbox>
+					</h:panelGroup>
+
+				</h:panelGroup>
+				<h:message for="conference" errorClass="invalid" />
+
+				<h:outputLabel value="#{i18n['speakers']}" />
+				<h:panelGroup>
+					<ui:repeat var="currSpeaker" value="#{talkDetails.speakers}">
+						<h:link outcome="speakerDetails" value="#{currSpeaker.name}">
+							<f:param name="id" value="#{currSpeaker.id}"></f:param>
+						</h:link>
+						<br />
+					</ui:repeat>
+				</h:panelGroup>
+			</h:panelGrid>
+
+			<p>
+				<h:panelGrid columns="2">
+					<h:commandButton id="save" action="#{talkDetails.createTalk}"
+						value="#{i18n['create']}" rendered="${talkDetails.talk.new}" />
+
+					<h:commandButton id="update" action="#{talkDetails.updateTalk}"
+						value="#{i18n['save']}" rendered="${!talkDetails.talk.new}" />
+
+					<h:link id="cancel" styleClass="button" outcome="talkList"
+						value="#{i18n['cancel']}" />
+
+				</h:panelGrid>
+			</p>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

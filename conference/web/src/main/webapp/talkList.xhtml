@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>Welcome to PAC Conference!</h1>
+
+		<h2>#{i18n['talks']}</h2>
+
+		<h:messages styleClass="messages" errorClass="invalid"
+			infoClass="valid" warnClass="warning" globalOnly="true" />
+
+		<h:panelGroup rendered="#{empty talks}">
+			<em>#{i18n['no-talks-exists']}</em>
+		</h:panelGroup>
+
+		<h:link outcome="talkEdit" value="#{i18n['add']}" />
+
+		<h:form>
+			<h:dataTable var="currTalk" value="#{talks}"
+				rendered="#{not empty talks}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">#{i18n['id']}</f:facet>
+                #{currTalk.id}
+            </h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['name']}</f:facet>
+					<h:link outcome="talkDetails" value="#{currTalk.name}">
+						<f:param name="id" value="#{currTalk.id}" />
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['start']}</f:facet>
+					<h:outputText value="#{currTalk.start}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['duration']}</f:facet>
+					<h:outputText value="#{currTalk.duration}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['room']}</f:facet>
+					<h:link outcome="roomDetails" value="#{currTalk.room.name}">
+						<f:param name="id" value="#{currTalk.room.id}" />
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['capacity']}</f:facet>
+					<h:outputText value="#{currTalk.room.capacity}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['conference']}</f:facet>
+					<h:link outcome="conferenceDetails"
+						value="#{currTalk.conference.name}">
+						<f:param name="id" value="#{currTalk.conference.id}" />
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['location']}</f:facet>
+					<h:outputText value="#{currTalk.conference.location}" />
+				</h:column>
+				<h:column>
+					<f:facet name="actions">#{i18n['actions']}</f:facet>
+
+					<h:link outcome="talkEdit" value="#{i18n['edit']}">
+						<f:param name="id" value="#{currTalk.id}" />
+					</h:link>
+
+					<h:link outcome="talkDetails" value="#{i18n['show']}">
+						<f:param name="id" value="#{currTalk.id}" />
+					</h:link>
+
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
