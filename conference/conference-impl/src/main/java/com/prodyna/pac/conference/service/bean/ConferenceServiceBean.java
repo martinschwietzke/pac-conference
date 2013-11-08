@@ -43,6 +43,9 @@ public class ConferenceServiceBean implements ConferenceService {
 	@Override
 	public Conference createConference(Conference conference) throws Exception
 	{
+		if (conference == null) {
+			throw new IllegalArgumentException("Conference must not be null");
+		}
 
 		log.info("Creating conference [" + conference.getName() + "]");
 		em.persist(conference);
@@ -77,6 +80,10 @@ public class ConferenceServiceBean implements ConferenceService {
 	@Override
 	public void updateConference(Conference conference) throws Exception
 	{
+
+		if (conference == null) {
+			throw new IllegalArgumentException("Conference must not be null");
+		}
 
 		log.info("Updating conference [" + conference.getName() + "]");
 		em.merge(conference);

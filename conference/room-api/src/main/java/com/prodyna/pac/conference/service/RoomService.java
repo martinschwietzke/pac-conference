@@ -19,5 +19,4 @@ public interface RoomService {
 	Room getRoomById(long roomId) throws Exception;
 
 	List<Room> getAllRooms() throws Exception;
-
 }

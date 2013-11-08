@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -18,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-@NamedQuery(name = Room.FIND_ALL, query = "SELECT r FROM Room r")
+@NamedQueries({ @NamedQuery(name = Room.FIND_ALL, query = "SELECT r FROM Room r") })
 public class Room extends AbstractEntity {
 
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.room.findAll";

@@ -80,6 +80,24 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>conference-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>room-impl</artifactId>
+			<type>ejb</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>conference-impl</artifactId>
+			<type>ejb</type>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

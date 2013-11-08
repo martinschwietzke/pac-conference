@@ -4,7 +4,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/WEB-INF/templates/default.xhtml">
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:ace="http://www.icefaces.org/icefaces/components">
 	<ui:define name="content">
 
 		<h2>#{i18n['rooms']}</h2>
@@ -34,14 +35,23 @@
             </h:column>
 				<h:column>
 					<f:facet name="actions">#{i18n['actions']}</f:facet>
-
-					<h:link id="edit" outcome="roomEdit" value="#{i18n['edit']}">
-						<f:param name="id" value="#{currRoom.id}" />
-					</h:link>
-
-					<h:commandLink action="#{roomDetails.deleteRoom(currRoom)}"
-						value="#{i18n['delete']}" />
-
+					<ace:menuButton value="#{i18n['action']}">
+						<ace:menuItem>
+							<h:link id="edit" outcome="roomEdit" value="#{i18n['edit']}">
+								<f:param name="id" value="#{currRoom.id}" />
+							</h:link>
+						</ace:menuItem>
+						<ace:menuItem>
+							<h:commandLink action="#{roomDetails.deleteRoom(currRoom)}"
+								value="#{i18n['delete']}" />
+						</ace:menuItem>
+						<ace:menuItem>
+							<h:link id="details" outcome="roomDetails"
+								value="#{i18n['show']}">
+								<f:param name="id" value="#{currRoom.id}" />
+							</h:link>
+						</ace:menuItem>
+					</ace:menuButton>
 				</h:column>
 			</h:dataTable>
 		</h:form>

@@ -12,7 +12,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -52,6 +51,9 @@ public class Talk extends AbstractEntity {
 	private Date start;
 
 	@NotNull
+	private Date end;
+
+	@NotNull
 	@Min(1)
 	private int duration;
 
@@ -82,6 +84,16 @@ public class Talk extends AbstractEntity {
 	public String getName()
 	{
 		return this.name;
+	}
+
+	public Date getEnd()
+	{
+		return end;
+	}
+
+	public void setEnd(Date end)
+	{
+		this.end = end;
 	}
 
 	public void setName(String name)
@@ -138,4 +150,5 @@ public class Talk extends AbstractEntity {
 	{
 		this.start = start;
 	}
+
 }

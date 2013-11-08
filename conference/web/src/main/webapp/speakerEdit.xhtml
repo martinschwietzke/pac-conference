@@ -14,80 +14,77 @@
 			<f:viewParam name="id" value="#{speakerDetails.id}" />
 		</f:metadata>
 
+		<h:messages styleClass="messages" errorClass="invalid"
+			infoClass="valid" warnClass="warning" globalOnly="true" />
 
-		<h:graphicImage rendered="#{speakerDetails.hasProfileImage()}"
-			value="#{speakerDetails.profileImagePath}" width="75px" />
-		<h:form>
+		<h:panelGrid columns="2" styleClass="panelGrid">
+			<h:graphicImage rendered="#{speakerDetails.hasProfileImage()}"
+				value="#{speakerDetails.profileImagePath}" width="75px" />
 
-			<ace:fileEntry id="file-entry" relativePath="/files/"
-				maxFileCount="10"
-				maxFileCountMessage="Limited to 10 files uploaded concurrantly."
-				fileEntryListener="#{speakerDetails.uploadListener}"
-				maxFileSize="6291456"
-				maxFileSizeMessage="Submitted file is too large."
-				maxTotalSize="18874368"
-				maxTotalSizeMessage="Total size of submitted files is too large."
-				required="true"
-				requiredMessage="The file is required to submit this form."
-				useOriginalFilename="true" useSessionSubdir="true" />
+			<h:form id="speakerEditForm">
+				<h2>
+					<h:outputText value="#{i18n['create-speaker']}"
+						rendered="#{newRoom.id == null}" />
+					<h:outputText value="#{i18n['edit-speaker']}"
+						rendered="#{newRoom.id != null}" />
+				</h2>
 
-			<h:commandButton id="submit" type="submit" value="Send File" />
-		</h:form>
 
-		<h:form id="speakerEditForm">
-			<h2>
-				<h:outputText value="#{i18n['create-speaker']}"
-					rendered="#{newRoom.id == null}" />
-				<h:outputText value="#{i18n['edit-speaker']}"
-					rendered="#{newRoom.id != null}" />
-			</h2>
 
-			<h:messages styleClass="messages" errorClass="invalid"
-				infoClass="valid" warnClass="warning" globalOnly="true" />
 
-			<ace:fileEntry id="file-entry2" relativePath="/files/"
-				maxFileCount="10"
-				maxFileCountMessage="Limited to 10 files uploaded concurrantly."
-				fileEntryListener="#{speakerDetails.uploadListener}"
-				maxFileSize="6291456"
-				maxFileSizeMessage="Submitted file is too large."
-				maxTotalSize="18874368"
-				maxTotalSizeMessage="Total size of submitted files is too large."
-				required="false"
-				requiredMessage="The file is required to submit this form."
-				useOriginalFilename="true" useSessionSubdir="true" />
-				
-				<h:commandButton id="submit" type="submit" value="Send File" />
 
-			<h:panelGrid columns="3" columnClasses="titleCell">
-				<h:outputLabel for="firstname" value="#{i18n['firstname']}" />
-				<h:inputText id="firstname"
-					value="#{speakerDetails.speaker.firstname}" />
-				<h:message for="firstname" errorClass="invalid" />
+				<h:panelGrid columns="3" columnClasses="titleCell" styleClass="formGrid">
 
-				<h:outputLabel for="lastname" value="#{i18n['lastname']}" />
-				<h:inputText id="lastname"
-					value="#{speakerDetails.speaker.lastname}" />
-				<h:message for="lastname" errorClass="invalid" />
+					<h:outputLabel for="profileImage" value="#{i18n['image']}" />
+					<ace:fileEntry id="profileImage" relativePath="/files/"
+						maxFileCount="10"
+						maxFileCountMessage="Limited to 10 files uploaded concurrantly."
+						fileEntryListener="#{speakerDetails.uploadListener}"
+						maxFileSize="6291456"
+						maxFileSizeMessage="Submitted file is too large."
+						maxTotalSize="18874368"
+						maxTotalSizeMessage="Total size of submitted files is too large."
+						required="false"
+						requiredMessage="The file is required to submit this form."
+						useOriginalFilename="true" useSessionSubdir="true" />
 
-				<h:outputLabel for="description" value="#{i18n['description']}" />
-				<h:inputText id="description"
-					value="#{speakerDetails.speaker.description}" />
-				<h:message for="description" errorClass="invalid" />
+					<h:commandButton id="submit" type="submit"
+						value="#{i18n['upload']}" />
 
-			</h:panelGrid>
+					<h:outputLabel for="firstname" value="#{i18n['firstname']}" />
+					<h:inputText id="firstname"
+						value="#{speakerDetails.speaker.firstname}" />
+					<h:message for="firstname" errorClass="invalid" />
 
-			<p>
-				<h:commandButton id="save" action="#{speakerDetails.createSpeaker}"
-					value="#{i18n['create']}" rendered="${speakerDetails.speaker.new}" />
+					<h:outputLabel for="lastname" value="#{i18n['lastname']}" />
+					<h:inputText id="lastname"
+						value="#{speakerDetails.speaker.lastname}" />
+					<h:message for="lastname" errorClass="invalid" />
 
-				<h:commandButton id="update"
-					action="#{speakerDetails.updateSpeaker}" value="#{i18n['save']}"
-					rendered="${!speakerDetails.speaker.new}" />
+					<h:outputLabel for="description" value="#{i18n['description']}" />
+					<h:inputText id="description"
+						value="#{speakerDetails.speaker.description}" />
+					<h:message for="description" errorClass="invalid" />
 
-				<h:link id="cancel" styleClass="button" outcome="speakerList"
-					value="#{i18n['cancel']}" />
-			</p>
-		</h:form>
+				</h:panelGrid>
+
+				<p>
+					<h:commandButton id="save" action="#{speakerDetails.createSpeaker}"
+						value="#{i18n['create']}" rendered="${speakerDetails.speaker.new}" />
+
+					<h:commandButton id="update"
+						action="#{speakerDetails.updateSpeaker}" value="#{i18n['save']}"
+						rendered="${!speakerDetails.speaker.new}" />
+
+					<h:link id="cancel" styleClass="button" outcome="speakerList"
+						value="#{i18n['cancel']}" />
+				</p>
+			</h:form>
+		</h:panelGrid>
+
+
+
+
+
 	</ui:define>
 </ui:composition>

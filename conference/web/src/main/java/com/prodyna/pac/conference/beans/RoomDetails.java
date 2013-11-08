@@ -1,5 +1,8 @@
 package com.prodyna.pac.conference.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -7,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import com.prodyna.pac.conference.model.Room;
+import com.prodyna.pac.conference.model.Talk;
 import com.prodyna.pac.conference.service.RoomReferencedException;
 import com.prodyna.pac.conference.service.RoomService;
 import com.prodyna.pac.conference.service.TalkService;
@@ -46,6 +50,16 @@ public class RoomDetails extends AbstractEditEntityMaskBean {
 	public void setRoom(Room room)
 	{
 		this.room = room;
+	}
+
+	public List<Talk> getTalks() throws Exception
+	{
+
+		List<Talk> talksByRoom = new ArrayList<Talk>();
+		if (!getRoom().isNew()) {
+			talksByRoom = talkService.getTalksByRoom(getRoom().getId());
+		}
+		return talksByRoom;
 	}
 
 	public String createRoom() throws Exception

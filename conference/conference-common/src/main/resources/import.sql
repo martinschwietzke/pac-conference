@@ -11,11 +11,11 @@ insert into Conference(id, name, start, end, archived, location) values (1, 'Kon
 insert into Conference(id, name, start, end, archived, location) values (2, 'Konferenz 2', '2013-10-03 00:00:00' , '2013-10-08 00:00:00', 0, 'Wolfsburg') 
 insert into Conference(id, name, start, end, archived, location) values (3, 'Konferenz 3', '2013-10-06 00:00:00', '2013-10-11 00:00:00', 0, 'München') 
 
-insert into Talk(id, name, duration, room_id, conference_id, description, start) values (1, 'Talk 1', 60, 1, 1, 'Description 1', '2013-10-01 09:00:00') 
-insert into Talk(id, name, duration, room_id, conference_id, description, start) values (2, 'Talk 2', 120, 2, 1, 'Description 2', '2013-10-01 09:00:00') 
-insert into Talk(id, name, duration, room_id, conference_id, description, start) values (3, 'Talk 3', 180, 3, 1, 'Description 3', '2013-10-01 10:00:00') 
-insert into Talk(id, name, duration, room_id, conference_id, description, start) values (4, 'Talk 4', 180, 3, 1, 'Description 3', '2013-10-02 09:00:00') 
-insert into Talk(id, name, duration, room_id, conference_id, description, start) values (5, 'Talk 5', 180, 1, 1, 'Description 3', '2013-10-02 11:00:00')
+insert into Talk(id, name, duration, room_id, conference_id, description, start, end) values (1, 'Talk 1', 60, 1, 1, 'Description 1', '2013-10-01 09:00:00', '2013-10-01 09:00:00') 
+insert into Talk(id, name, duration, room_id, conference_id, description, start, end) values (2, 'Talk 2', 120, 2, 1, 'Description 2', '2013-10-01 09:00:00', '2013-10-01 12:00:00') 
+insert into Talk(id, name, duration, room_id, conference_id, description, start, end) values (3, 'Talk 3', 180, 3, 1, 'Description 3', '2013-10-01 10:00:00', '2013-10-01 12:00:00') 
+insert into Talk(id, name, duration, room_id, conference_id, description, start, end) values (4, 'Talk 4', 180, 3, 1, 'Description 3', '2013-10-02 09:00:00', '2013-10-01 12:00:00') 
+insert into Talk(id, name, duration, room_id, conference_id, description, start, end) values (5, 'Talk 5', 180, 1, 1, 'Description 3', '2013-10-02 11:00:00', '2013-10-01 12:00:00')
 
 insert into talkspeaker (speaker_id, talk_id) values (1, 1);
 insert into talkspeaker (speaker_id, talk_id) values (2, 1);

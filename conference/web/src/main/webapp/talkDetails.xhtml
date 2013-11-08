@@ -4,6 +4,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 
@@ -20,7 +23,7 @@
 				<f:param name="id" value="${talkDetails.id}" />
 			</h:link>
 
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="2" styleClass="panelGrid">
 				<h:outputLabel value="#{i18n['name']}" />
 				<h:outputText value="#{talkDetails.talk.name}" />
 
@@ -38,14 +41,52 @@
 
 				<h:outputLabel value="#{i18n['speakers']}" />
 				<h:panelGroup>
-					<ui:repeat var="currSpeaker" value="#{talkDetails.speakers}">
-						<h:link outcome="speakerDetails" value="#{currSpeaker.name}">
-							<f:param name="id" value="#{currSpeaker.id}"></f:param>
-						</h:link>
-						<br />
-					</ui:repeat>
+					<h:dataTable var="currSpeaker" value="#{talkDetails.speakers}"
+						rendered="#{not empty talkDetails.speakers}"
+						styleClass="simpletablestyle">
+						<h:column>
+							<f:facet name="header">#{i18n['id']}</f:facet>
+                #{currSpeaker.id}
+            </h:column>
+						<h:column>
+							<f:facet name="header">#{i18n['firstname']}</f:facet>
+							<h:link outcome="speakerDetails"
+								value=" #{currSpeaker.firstname}">
+								<f:param name="id" value="#{currSpeaker.id}"></f:param>
+							</h:link>
+
+						</h:column>
+						<h:column>
+							<f:facet name="header">#{i18n['lastname']}</f:facet>
+							<h:link outcome="speakerDetails" value=" #{currSpeaker.lastname}">
+								<f:param name="id" value="#{currSpeaker.id}"></f:param>
+							</h:link>
+						</h:column>
+						<h:column>
+							<f:facet name="actions">#{i18n['actions']}</f:facet>
+							<ace:menuButton value="#{i18n['action']}">
+								<ace:menuItem>
+									<h:link outcome="speakerEdit" value="#{i18n['edit']}">
+										<f:param name="id" value="#{currSpeaker.id}" />
+									</h:link>
+								</ace:menuItem>
+								<ace:menuItem>
+
+									<h:link outcome="speakerDetails" value="#{i18n['show']}">
+										<f:param name="id" value="#{currSpeaker.id}" />
+									</h:link>
+								</ace:menuItem>
+								<ace:menuItem>
+									<h:commandLink action="#{talkDetails.unassign(currSpeaker)}"
+										value="#{i18n['unassign']}" />
+								</ace:menuItem>
+							</ace:menuButton>
+						</h:column>
+					</h:dataTable>
 				</h:panelGroup>
 			</h:panelGrid>
+
+
 
 		</h:form>
 

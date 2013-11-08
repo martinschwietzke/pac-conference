@@ -13,6 +13,8 @@ import com.prodyna.pac.conference.model.Room;
 import com.prodyna.pac.conference.model.Speaker;
 import com.prodyna.pac.conference.model.Talk;
 import com.prodyna.pac.conference.service.ConferenceService;
+import com.prodyna.pac.conference.service.OutOfConferenceDateRangeException;
+import com.prodyna.pac.conference.service.RoomNotAvailableException;
 import com.prodyna.pac.conference.service.RoomService;
 import com.prodyna.pac.conference.service.TalkService;
 import com.prodyna.pac.conference.web.constants.ViewConstants;
@@ -112,7 +114,19 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 					FacesMessage.SEVERITY_INFO, "Saved!", "Talk saved"));
 
 			outcome = ViewConstants.VIEW_TALK_LIST;
-		} catch (Exception e) {
+		} catch (RoomNotAvailableException e) {
+			FacesMessage m = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Room is not available. Please choose another one or update times",
+					null);
+			facesContext.addMessage(null, m);
+		} catch (OutOfConferenceDateRangeException e) {
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Talk start and end must be in conference timespan.", null);
+			facesContext.addMessage(null, m);
+		}
+
+		catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					errorMessage, "Saving unsuccessful");
@@ -124,13 +138,26 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 
 	public void updateTalk() throws Exception
 	{
+
 		try {
 			Talk talkUpdate = talkService.updateTalk(talk);
 			talkService.updateTalkSpeakers(talkUpdate, speakers);
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Update!", "Talk updated"));
 
-		} catch (Exception e) {
+		} catch (RoomNotAvailableException e) {
+			FacesMessage m = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Room is not available. Please choose another one or update times",
+					null);
+			facesContext.addMessage(null, m);
+		} catch (OutOfConferenceDateRangeException e) {
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Talk start and end must be in conference timespan.", null);
+			facesContext.addMessage(null, m);
+		}
+
+		catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					errorMessage, "Updating talk unsuccessful");

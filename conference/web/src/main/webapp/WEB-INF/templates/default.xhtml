@@ -21,17 +21,20 @@
 </h:head>
 <h:body>
 	<div id="container">
-		<div id="navigation">
-			<h:link outcome="conferenceList" value="#{i18n['conferences']}" />
-			<h:link outcome="roomList" value="#{i18n['rooms']}" />
-			<h:link outcome="speakerList" value="#{i18n['speakers']}" />
-			<h:link outcome="talkList" value="#{i18n['talks']}" />
+		<div id="header">
+			<div id="navigation">
+				<h:link outcome="conferenceList" value="#{i18n['conferences']}" />
+				<h:link outcome="roomList" value="#{i18n['rooms']}" />
+				<h:link outcome="speakerList" value="#{i18n['speakers']}" />
+				<h:link outcome="talkList" value="#{i18n['talks']}" />
+			</div>
 		</div>
 		<div id="content">
-
-			<ui:insert name="content">
+			<div id="contentwrapper">
+				<ui:insert name="content">
                     [Template content will be inserted here]
-         </ui:insert>
+			</ui:insert>
+			</div>
 		</div>
 		<div id="aside"></div>
 		<div id="footer"></div>

@@ -4,6 +4,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 
@@ -24,6 +27,78 @@
 				<h:outputText value="#{roomDetails.room.capacity}" />
 
 			</h:panelGrid>
+
+			<h:dataTable var="currTalk" value="#{roomDetails.talks}"
+				rendered="#{not empty roomDetails}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">#{i18n['id']}</f:facet>
+                #{currTalk.id}
+            </h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['name']}</f:facet>
+					<h:link outcome="talkDetails" value="#{currTalk.name}">
+						<f:param name="id" value="#{currTalk.id}" />
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['start']}</f:facet>
+					<h:outputText value="#{currTalk.start}">
+						<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+							timeZone="Europe/Berlin" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['end']}</f:facet>
+					<h:outputText value="#{currTalk.end}">
+						<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+							timeZone="Europe/Berlin" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['duration']}</f:facet>
+					<h:outputText value="#{currTalk.duration}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['room']}</f:facet>
+					<h:link outcome="roomDetails" value="#{currTalk.room.name}">
+						<f:param name="id" value="#{currTalk.room.id}" />
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['capacity']}</f:facet>
+					<h:outputText value="#{currTalk.room.capacity}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['conference']}</f:facet>
+					<h:link outcome="conferenceDetails"
+						value="#{currTalk.conference.name}">
+						<f:param name="id" value="#{currTalk.conference.id}" />
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['location']}</f:facet>
+					<h:outputText value="#{currTalk.conference.location}" />
+				</h:column>
+				<h:column>
+					<f:facet name="actions">#{i18n['actions']}</f:facet>
+					<ace:menuButton value="#{i18n['action']}">
+						<ace:menuItem>
+							<h:link outcome="talkDetails" value="#{i18n['show']}">
+								<f:param name="id" value="#{currTalk.id}" />
+							</h:link>
+						</ace:menuItem>
+						<ace:menuItem>
+							<h:link outcome="talkEdit" value="#{i18n['edit']}">
+								<f:param name="id" value="#{currTalk.id}" />
+							</h:link>
+						</ace:menuItem>
+						<ace:menuItem>
+							<h:commandLink action="#{talkDetails.deleteTalk(currTalk)}"
+								value="#{i18n['delete']}" />
+						</ace:menuItem>
+					</ace:menuButton>
+				</h:column>
+			</h:dataTable>
 		</h:form>
 
 	</ui:define>

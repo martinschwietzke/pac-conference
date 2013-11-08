@@ -10,6 +10,9 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 /**
+ * {@link Interceptor} which can log all methods invocations with parameters and
+ * time.
+ * 
  * @author Martin Schwietzke, PRODYNA AG
  * 
  */

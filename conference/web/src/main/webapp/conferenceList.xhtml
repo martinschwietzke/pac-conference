@@ -47,17 +47,23 @@
 				<h:column>
 					<f:facet name="actions">#{i18n['actions']}</f:facet>
 
-					<h:link outcome="conferenceEdit" value="#{i18n['edit']}">
-						<f:param name="id" value="#{currConference.id}" />
-					</h:link>
-
-					<h:link outcome="conferenceDetails" value="#{i18n['show']}">
-						<f:param name="id" value="#{currConference.id}" />
-					</h:link>
-
-					<h:commandLink action="#{conferenceDetails.deleteConference(currConference)}"
-						value="#{i18n['delete']}" />
-
+					<ace:menuButton value="#{i18n['action']}">
+						<ace:menuItem>
+							<h:link outcome="conferenceEdit" value="#{i18n['edit']}">
+								<f:param name="id" value="#{currConference.id}" />
+							</h:link>
+						</ace:menuItem>
+						<ace:menuItem>
+							<h:link outcome="conferenceDetails" value="#{i18n['show']}">
+								<f:param name="id" value="#{currConference.id}" />
+							</h:link>
+						</ace:menuItem>
+						<ace:menuItem>
+							<h:commandLink
+								action="#{conferenceDetails.deleteConference(currConference)}"
+								value="#{i18n['delete']}" />
+						</ace:menuItem>
+					</ace:menuButton>
 				</h:column>
 			</h:dataTable>
 		</h:form>

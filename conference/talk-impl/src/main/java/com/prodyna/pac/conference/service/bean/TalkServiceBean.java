@@ -1,6 +1,8 @@
 package com.prodyna.pac.conference.service.bean;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import javax.ejb.Local;
@@ -16,6 +18,8 @@ import com.prodyna.pac.conference.interceptor.Performance;
 import com.prodyna.pac.conference.model.Speaker;
 import com.prodyna.pac.conference.model.Talk;
 import com.prodyna.pac.conference.model.TalkSpeaker;
+import com.prodyna.pac.conference.service.OutOfConferenceDateRangeException;
+import com.prodyna.pac.conference.service.RoomNotAvailableException;
 import com.prodyna.pac.conference.service.TalkService;
 
 /**
@@ -35,7 +39,7 @@ public class TalkServiceBean implements TalkService {
 	private EntityManager em;
 
 	@Inject
-	private Event<Talk> roomEventSrc;
+	private Event<Talk> talkEventSrc;
 
 	/*
 	 * (non-Javadoc)
@@ -45,14 +49,62 @@ public class TalkServiceBean implements TalkService {
 	 * .pac.conference.model.Talk)
 	 */
 	@Override
-	public Talk createTalk(Talk talk) throws Exception
+	public Talk createTalk(Talk talk) throws RoomNotAvailableException,
+			OutOfConferenceDateRangeException, Exception
 	{
+		long calcEnd = talk.getStart().getTime()
+				+ TimeUnit.MINUTES.toMillis(talk.getDuration());
+		talk.setEnd(new Date(calcEnd));
+
+		assertRoomIsAvailable(talk);
+		assertTalkIsInConferenceDateRange(talk);
 
 		log.info("Creating Talk [" + talk.getName() + "]");
 		em.persist(talk);
-		roomEventSrc.fire(talk);
+		talkEventSrc.fire(talk);
 
 		return talk;
+	}
+
+	private void assertRoomIsAvailable(Talk talk) throws Exception,
+			RoomNotAvailableException
+	{
+
+		boolean roomAvailable = isRoomAvailable(talk.getRoom().getId(),
+				talk.getStart(), talk.getEnd());
+
+		if (!roomAvailable) {
+			throw new RoomNotAvailableException();
+		}
+	}
+
+	private void assertTalkIsInConferenceDateRange(Talk talk) throws Exception,
+			OutOfConferenceDateRangeException
+	{
+		long confStart = talk.getConference().getStart().getTime();
+		long confEnd = talk.getConference().getEnd().getTime();
+		long talkStart = talk.getStart().getTime();
+		long talkEnd = talk.getEnd().getTime();
+
+		boolean isValidRange = confStart <= talkStart && confEnd >= talkEnd;
+
+		if (!isValidRange) {
+			throw new OutOfConferenceDateRangeException();
+		}
+	}
+
+	public boolean isRoomAvailable(long roomId, Date start, Date end)
+			throws Exception
+	{
+		List<Talk> talks = this.getTalksByRoom(roomId);
+		boolean available = true;
+		for (Talk talk : talks) {
+			if (talk.getStart().before(end) && talk.getEnd().after(start)) {
+				available = false;
+				break;
+			}
+		}
+		return available;
 	}
 
 	/*
@@ -71,7 +123,7 @@ public class TalkServiceBean implements TalkService {
 
 		deleteAssignedTalksSpeakers(merge.getId());
 		em.remove(merge);
-		roomEventSrc.fire(talk);
+		talkEventSrc.fire(talk);
 	}
 
 	/*
@@ -82,12 +134,16 @@ public class TalkServiceBean implements TalkService {
 	 * .pac.conference.model.Talk)
 	 */
 	@Override
-	public Talk updateTalk(Talk talk) throws Exception
+	public Talk updateTalk(Talk talk) throws RoomNotAvailableException,
+			OutOfConferenceDateRangeException, Exception
 	{
+
+		assertRoomIsAvailable(talk);
+		assertTalkIsInConferenceDateRange(talk);
 
 		log.info("Updating Talk [" + talk.getName() + "]");
 		Talk merge = em.merge(talk);
-		roomEventSrc.fire(talk);
+		talkEventSrc.fire(talk);
 		return merge;
 
 	}

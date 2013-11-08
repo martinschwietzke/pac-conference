@@ -9,8 +9,6 @@
 	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<h1>Welcome to PAC Conference!</h1>
-
 		<h2>#{i18n['talks']}</h2>
 
 		<h:messages styleClass="messages" errorClass="invalid"
@@ -38,7 +36,15 @@
 				<h:column>
 					<f:facet name="header">#{i18n['start']}</f:facet>
 					<h:outputText value="#{currTalk.start}">
-						<f:convertDateTime pattern="dd.MM.yyyy" />
+						<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+							timeZone="Europe/Berlin" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{i18n['end']}</f:facet>
+					<h:outputText value="#{currTalk.end}">
+						<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+							timeZone="Europe/Berlin" />
 					</h:outputText>
 				</h:column>
 				<h:column>
@@ -68,17 +74,22 @@
 				</h:column>
 				<h:column>
 					<f:facet name="actions">#{i18n['actions']}</f:facet>
-
-					<h:link outcome="talkEdit" value="#{i18n['edit']}">
-						<f:param name="id" value="#{currTalk.id}" />
-					</h:link>
-
-					<h:link outcome="talkDetails" value="#{i18n['show']}">
-						<f:param name="id" value="#{currTalk.id}" />
-					</h:link>
-
-					<h:commandLink action="#{talkDetails.deleteTalk(currTalk)}"
-						value="#{i18n['delete']}" />
+					<ace:menuButton value="#{i18n['action']}">
+						<ace:menuItem>
+							<h:link outcome="talkDetails" value="#{i18n['show']}">
+								<f:param name="id" value="#{currTalk.id}" />
+							</h:link>
+						</ace:menuItem>
+						<ace:menuItem>
+							<h:link outcome="talkEdit" value="#{i18n['edit']}">
+								<f:param name="id" value="#{currTalk.id}" />
+							</h:link>
+						</ace:menuItem>
+						<ace:menuItem>
+							<h:commandLink action="#{talkDetails.deleteTalk(currTalk)}"
+								value="#{i18n['delete']}" />
+						</ace:menuItem>
+					</ace:menuButton>
 				</h:column>
 			</h:dataTable>
 		</h:form>

@@ -49,7 +49,6 @@ public class RoomServiceBean implements RoomService {
 	@Override
 	public void createRoom(Room room) throws Exception
 	{
-
 		log.info("Creating Room [" + room.getName() + "]");
 		em.persist(room);
 		roomEventSrc.fire(room);
@@ -122,6 +121,6 @@ public class RoomServiceBean implements RoomService {
 	{
 
 		return em.createNamedQuery(Room.FIND_ALL, Room.class).getResultList();
-
 	}
+
 }

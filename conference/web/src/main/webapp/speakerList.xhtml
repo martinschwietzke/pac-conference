@@ -4,6 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 
@@ -39,18 +40,24 @@
 				</h:column>
 				<h:column>
 					<f:facet name="actions">#{i18n['actions']}</f:facet>
+					<ace:menuButton value="#{i18n['action']}">
+						<ace:menuItem>
+							<h:link outcome="speakerEdit" value="#{i18n['edit']}">
+								<f:param name="id" value="#{currSpeaker.id}" />
+							</h:link>
+						</ace:menuItem>
+						<ace:menuItem>
 
-					<h:link outcome="speakerEdit" value="#{i18n['edit']}">
-						<f:param name="id" value="#{currSpeaker.id}" />
-					</h:link>
-
-					<h:link outcome="speakerDetails" value="#{i18n['show']}">
-						<f:param name="id" value="#{currSpeaker.id}" />
-					</h:link>
-
-					<h:commandLink
-						action="#{speakerDetails.deleteSpeaker(currSpeaker)}"
-						value="#{i18n['delete']}" />
+							<h:link outcome="speakerDetails" value="#{i18n['show']}">
+								<f:param name="id" value="#{currSpeaker.id}" />
+							</h:link>
+						</ace:menuItem>
+						<ace:menuItem>
+							<h:commandLink
+								action="#{speakerDetails.deleteSpeaker(currSpeaker)}"
+								value="#{i18n['delete']}" />
+						</ace:menuItem>
+					</ace:menuButton>
 				</h:column>
 			</h:dataTable>
 		</h:form>

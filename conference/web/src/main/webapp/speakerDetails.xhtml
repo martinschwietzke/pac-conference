@@ -8,41 +8,40 @@
 	<ui:define name="content">
 
 		<f:metadata>
-			<f:viewParam name="id" value="#{speakerDetails.id}"
-				converterMessage="Unknown product, please use a link from within the system."
-				required="true"
-				requiredMessage="Bad request, please use a link from within the system." />
+			<f:viewParam name="id" value="#{speakerDetails.id}" />
 		</f:metadata>
-		
+
 		<h:link outcome="speakerEdit" value="#{i18n['edit']}">
 			<f:param name="id" value="${speakerDetails.id}" />
 		</h:link>
 
 		<h:form rendered="#{not empty speakerDetails.speaker}">
-			<h:graphicImage rendered="#{speakerDetails.hasProfileImage()}"
-				value="#{speakerDetails.profileImagePath}" width="75px" />
-			<h:panelGrid columns="2">
-				<h:outputLabel value="#{i18n['name']}" />
-				<h:outputText value="#{speakerDetails.speaker.name}" />
+			<h:panelGrid columns="2" styleClass="panelGrid">
+				<h:graphicImage rendered="#{speakerDetails.hasProfileImage()}"
+					value="#{speakerDetails.profileImagePath}" width="75px" />
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{i18n['name']}" />
+					<h:outputText value="#{speakerDetails.speaker.name}" />
 
-				<h:outputLabel value="#{i18n['description']}" />
-				<h:outputText value="#{speakerDetails.speaker.description}" />
+					<h:outputLabel value="#{i18n['description']}" />
+					<h:outputText value="#{speakerDetails.speaker.description}" />
 
-				<h:outputLabel value="#{i18n['talks']}" />
-				<h:panelGroup>
-					<ui:repeat var="currTalk" value="#{speakerDetails.talks}">
-						<h:link outcome="talkDetails" value="#{currTalk.name}">
-							<f:param name="id" value="#{currTalk.id}" />
-						</h:link>
+					<h:outputLabel value="#{i18n['talks']}" />
+					<h:panelGroup>
+						<ui:repeat var="currTalk" value="#{speakerDetails.talks}">
+							<h:link outcome="talkDetails" value="#{currTalk.name}">
+								<f:param name="id" value="#{currTalk.id}" />
+							</h:link>
 (
 						<h:link outcome="conferenceDetails"
-							value="#{currTalk.conference.name}">
-							<f:param name="id" value="#{currTalk.conference.id}" />
-						</h:link>)
+								value="#{currTalk.conference.name}">
+								<f:param name="id" value="#{currTalk.conference.id}" />
+							</h:link>)
 						<br />
-					</ui:repeat>
-				</h:panelGroup>
+						</ui:repeat>
+					</h:panelGroup>
 
+				</h:panelGrid>
 			</h:panelGrid>
 		</h:form>
 	</ui:define>

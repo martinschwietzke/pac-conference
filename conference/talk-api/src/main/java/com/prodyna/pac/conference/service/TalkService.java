@@ -11,11 +11,13 @@ import com.prodyna.pac.conference.model.Talk;
  */
 public interface TalkService {
 
-	Talk createTalk(Talk talk) throws Exception;
+	Talk createTalk(Talk talk) throws RoomNotAvailableException,
+			OutOfConferenceDateRangeException, Exception;
 
 	void deleteTalk(Talk talk) throws Exception;
 
-	Talk updateTalk(Talk talk) throws Exception;
+	Talk updateTalk(Talk talk) throws RoomNotAvailableException,
+			OutOfConferenceDateRangeException, Exception;
 
 	Talk getTalkById(long talkId) throws Exception;
 
