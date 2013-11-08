@@ -74,6 +74,22 @@ public class ConferenceServiceBean implements ConferenceService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * com.prodyna.pac.conference.service.ConferenceService#deleteConference
+	 * (long)
+	 */
+	@Override
+	public void deleteConference(long conferenceId) throws Exception
+	{
+		Conference c = getConferenceById(conferenceId);
+		if (c != null) {
+			em.remove(c);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * com.prodyna.pac.conference.service.ConferenceService#updateConference
 	 * (com.prodyna.pac.conference.model.Conference)
 	 */

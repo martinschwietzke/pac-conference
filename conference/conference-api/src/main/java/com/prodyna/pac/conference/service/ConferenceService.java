@@ -20,4 +20,6 @@ public interface ConferenceService {
 
 	List<Conference> getAllConferences() throws Exception;
 
+	void deleteConference(long conferenceId) throws Exception;
+
 }
