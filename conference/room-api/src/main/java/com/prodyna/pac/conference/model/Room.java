@@ -19,10 +19,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-@NamedQueries({ @NamedQuery(name = Room.FIND_ALL, query = "SELECT r FROM Room r") })
+@NamedQueries({
+		@NamedQuery(name = Room.FIND_ALL, query = "SELECT r FROM Room r"),
+		@NamedQuery(name = Room.COUNT_REFERENCING_TALKS, query = "SELECT COUNT(t) FROM Talk t WHERE t.room.id = :roomId") })
 public class Room extends AbstractEntity {
 
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.room.findAll";
+	public final static String COUNT_REFERENCING_TALKS = "de.prodyna.pac.conference.model.room.countReferencingTalks";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

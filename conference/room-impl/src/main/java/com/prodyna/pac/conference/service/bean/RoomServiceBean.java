@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.prodyna.pac.conference.interceptor.Logged;
 import com.prodyna.pac.conference.interceptor.Performance;
@@ -35,9 +36,6 @@ public class RoomServiceBean implements RoomService {
 
 	@Inject
 	private Event<Room> roomEventSrc;
-
-	@Inject
-	TalkService talkService;
 
 	/*
 	 * (non-Javadoc)
@@ -70,8 +68,11 @@ public class RoomServiceBean implements RoomService {
 					"Room must not be null and have an id set.");
 		}
 
-		List<Talk> talks = talkService.getTalksByRoom(room.getId());
-		if (!talks.isEmpty()) {
+		Query q = em.createNamedQuery(Room.COUNT_REFERENCING_TALKS);
+		q.setParameter("roomId", room.getId());
+		Long count = (Long) q.getSingleResult();
+
+		if (count > 0) {
 			throw new RoomReferencedException();
 		}
 
