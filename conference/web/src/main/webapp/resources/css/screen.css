@@ -109,6 +109,11 @@ table.simpletablestyle {
 	border-radius: 2px;
 }
 
+.messages .invalid {
+	background-color: red;
+	color: white;
+}
+
 .labelColumn {
 	width: 150px;
 }

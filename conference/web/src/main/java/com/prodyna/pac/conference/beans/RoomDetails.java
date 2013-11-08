@@ -121,7 +121,7 @@ public class RoomDetails extends AbstractEditEntityMaskBean {
 					.addMessage(
 							null,
 							new FacesMessage(
-									FacesMessage.SEVERITY_INFO,
+									FacesMessage.SEVERITY_ERROR,
 									"Room '"
 											+ room.getName()
 											+ "' cannot be deleted because it is still in use.",
