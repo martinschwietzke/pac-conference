@@ -68,6 +68,8 @@ public class TalkServiceBean implements TalkService {
 
 		log.info("Deleting Talk [" + talk.getName() + "]");
 		Talk merge = em.merge(talk);
+
+		deleteAssignedTalksSpeakers(merge.getId());
 		em.remove(merge);
 		roomEventSrc.fire(talk);
 	}
@@ -209,9 +211,7 @@ public class TalkServiceBean implements TalkService {
 			throws Exception
 	{
 
-		Query q = em.createNamedQuery(Talk.DELETE_TALK_SPEAKERS_BY_TALK_ID);
-		q.setParameter("talkId", talk.getId());
-		q.executeUpdate();
+		deleteAssignedTalksSpeakers(talk.getId());
 
 		for (Speaker speaker : speakers) {
 			TalkSpeaker ts = new TalkSpeaker();
@@ -219,5 +219,12 @@ public class TalkServiceBean implements TalkService {
 			ts.setTalk(talk);
 			em.persist(ts);
 		}
+	}
+
+	private void deleteAssignedTalksSpeakers(long talkId)
+	{
+		Query q = em.createNamedQuery(Talk.DELETE_TALK_SPEAKERS_BY_TALK_ID);
+		q.setParameter("talkId", talkId);
+		q.executeUpdate();
 	}
 }

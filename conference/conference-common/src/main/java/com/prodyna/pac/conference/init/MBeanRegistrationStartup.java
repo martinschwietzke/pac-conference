@@ -32,7 +32,8 @@ public class MBeanRegistrationStartup {
 		MBeanServer ms = ManagementFactory.getPlatformMBeanServer();
 
 		try {
-
+			log.info("Registering Performance MXBean ["
+					+ PerformanceMXBean.OBJECT_NAME + "]");
 			ms.registerMBean(new Performance(), new ObjectName(
 					PerformanceMXBean.OBJECT_NAME));
 
@@ -50,7 +51,8 @@ public class MBeanRegistrationStartup {
 		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
 
 		try {
-
+			log.info("Unregistering Performance MXBean ["
+					+ PerformanceMXBean.OBJECT_NAME + "]");
 			mbs.unregisterMBean(new ObjectName(PerformanceMXBean.OBJECT_NAME));
 
 		} catch (Exception e) {

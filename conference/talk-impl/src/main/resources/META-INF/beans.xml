@@ -5,4 +5,7 @@
 		<class>com.prodyna.pac.conference.interceptor.LoggingInterceptor</class>
 		<class>com.prodyna.pac.conference.interceptor.PerformanceInterceptor</class>
 	</interceptors>
+	<decorators>
+		<class>com.prodyna.pac.conference.talk.service.decorator.TalkServiceDecorator</class>
+	</decorators>
 </beans>

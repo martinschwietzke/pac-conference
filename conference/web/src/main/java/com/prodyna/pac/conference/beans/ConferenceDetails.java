@@ -1,11 +1,16 @@
 package com.prodyna.pac.conference.beans;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 
 import com.prodyna.pac.conference.model.Conference;
@@ -127,5 +132,36 @@ public class ConferenceDetails extends AbstractEditEntityMaskBean implements
 	public void deleteConference(Conference conference) throws Exception
 	{
 		conferenceService.deleteConference(conference);
+	}
+
+	public void validateStartEndDate(ComponentSystemEvent event)
+	{
+
+		FacesContext fc = FacesContext.getCurrentInstance();
+
+		UIComponent component = event.getComponent();
+
+		UIInput uiInputStart = (UIInput) component.findComponent("start");
+		Date startDate = (Date) uiInputStart.getLocalValue();
+		String startDateId = uiInputStart.getClientId();
+
+		UIInput uiInputEnd = (UIInput) component.findComponent("end");
+		Date endDate = (Date) uiInputEnd.getLocalValue();
+		String endDateId = uiInputEnd.getClientId();
+
+		if (startDate.after(endDate)) {
+
+			FacesMessage msg = new FacesMessage(
+					"Start date must be after end date");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			fc.addMessage(startDateId, msg);
+
+			FacesMessage msg2 = new FacesMessage(
+					"End date must be before start date");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			fc.addMessage(endDateId, msg2);
+			fc.renderResponse();
+		}
+
 	}
 }

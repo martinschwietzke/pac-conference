@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
+
+import javax.inject.Inject;
 
 /**
  * MBean implementation.
@@ -17,6 +20,9 @@ public class Performance implements PerformanceMXBean {
 	@Override
 	public void report(String service, String method, long time)
 	{
+		System.out.println("[" + service + "] [" + method + "] [" + time
+				+ "]ms");
+
 		String key = service + ":" + method;
 		PerformanceEntry entry = entries.get(key);
 		if (entry == null) {

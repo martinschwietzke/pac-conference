@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQuery(name = Conference.FIND_ALL, query = "SELECT c FROM Conference c")
+@CheckEndDataAfterStartDate(startDate = "start", endDate = "end")
 public class Conference extends AbstractEntity {
 
 	@Override
@@ -51,7 +52,7 @@ public class Conference extends AbstractEntity {
 	private Date start;
 
 	@NotNull
-	//@GreaterThen(property = "start")
+	// @GreaterThen(property = "start")
 	private Date end;
 
 	@NotNull

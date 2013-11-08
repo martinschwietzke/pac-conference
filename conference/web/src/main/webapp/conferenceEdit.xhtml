@@ -14,7 +14,7 @@
 			<f:viewParam name="id" value="#{conferenceDetails.id}" />
 		</f:metadata>
 
-		<h:form id="conferenceEditForm">
+		<h:form id="conferenceEditForm" >
 
 			<h:messages styleClass="messages" errorClass="invalid"
 				infoClass="valid" warnClass="warning" globalOnly="true" />
@@ -25,6 +25,8 @@
 				<h:outputText value="#{i18n['edit-conference']}"
 					rendered="#{!conferenceDetails.conference.new}" />
 			</h2>
+			
+			<f:event listener="#{conferenceDetails.validateStartEndDate}" type="postValidate" />
 
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="name" value="#{i18n['name']}" />

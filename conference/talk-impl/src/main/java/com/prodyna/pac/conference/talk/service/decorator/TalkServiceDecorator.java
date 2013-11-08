@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.service.decorator;
+package com.prodyna.pac.conference.talk.service.decorator;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,10 +21,17 @@ import javax.naming.InitialContext;
 import com.prodyna.pac.conference.model.Talk;
 import com.prodyna.pac.conference.service.TalkService;
 
+/**
+ * Service {@link Decorator} for {@link TalkService} which sends JMS
+ * notifications to queue if changes happens to {@link Talk} entities.
+ * 
+ * @author Martin Schwietzke, PRODYNA AG
+ * 
+ */
 @Decorator
 public abstract class TalkServiceDecorator implements TalkService {
 
-	public static final String TALK_UPDATE_QUEUE_NAME = "queue/talkupdate";
+	public static final String TALK_CHANGE_QUEUE_NAME = "queue/talkchange";
 
 	@Inject
 	@Delegate
@@ -52,7 +59,7 @@ public abstract class TalkServiceDecorator implements TalkService {
 		try {
 			queueConnection = queueConnectionFactory.createQueueConnection();
 
-			Queue queue = (Queue) initialContext.lookup(TALK_UPDATE_QUEUE_NAME);
+			Queue queue = (Queue) initialContext.lookup(TALK_CHANGE_QUEUE_NAME);
 
 			queueSession = queueConnection.createQueueSession(true,
 					QueueSession.AUTO_ACKNOWLEDGE);
@@ -61,7 +68,7 @@ public abstract class TalkServiceDecorator implements TalkService {
 
 		} catch (Exception e) {
 			throw new RuntimeException("Error on creating queue ["
-					+ TALK_UPDATE_QUEUE_NAME + "]", e);
+					+ TALK_CHANGE_QUEUE_NAME + "]", e);
 		}
 	}
 
@@ -77,8 +84,51 @@ public abstract class TalkServiceDecorator implements TalkService {
 
 		} catch (JMSException e) {
 			throw new RuntimeException("Error on stopping queue ["
-					+ TALK_UPDATE_QUEUE_NAME + "]", e);
+					+ TALK_CHANGE_QUEUE_NAME + "]", e);
 		}
+	}
+
+	@Override
+	public Talk createTalk(Talk talk) throws Exception
+	{
+		Talk t = talkService.createTalk(talk);
+		try {
+			MapMessage message = queueSession.createMapMessage();
+			message.setString("action", "create");
+			message.setString("talkName", talk.getName());
+			message.setLong("talkId", talk.getId());
+			sender.send(message);
+		} catch (JMSException e) {
+			logger.log(
+					Level.SEVERE,
+					"Error on sending message for creating talk ["
+							+ talk.getId() + "]", e);
+		}
+
+		return t;
+
+	}
+
+	@Override
+	public Talk updateTalk(Talk talk) throws Exception
+	{
+		Talk t = talkService.updateTalk(talk);
+
+		try {
+			MapMessage message = queueSession.createMapMessage();
+			message.setString("action", "update");
+			message.setLong("talkId", talk.getId());
+			message.setString("talkName", talk.getName());
+			sender.send(message);
+		} catch (JMSException e) {
+			logger.log(
+					Level.SEVERE,
+					"Error on sending message for updating talk ["
+							+ talk.getId() + "]", e);
+		}
+
+		return t;
+
 	}
 
 	@Override
