@@ -2,16 +2,19 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: #F1F1F1;
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size: 0.8em;
 	color: #363636;
-	font-family: Helvetica;
+}
+
+body,input,textara,select,option, button, .button {
+	font-size: 12px !important;
+	box-shadow: none !important;
+	font-family: "Helvetica", sans-serif !important;
+	color: #666666;
 }
 
 #header {
 	height: 65px;
 	background-color: darkblue;
-	,
 }
 
 #navigation,#navigation a {
@@ -41,7 +44,7 @@ a.button {
 	font-weight: normal;
 }
 
-input,textarea {
+input,textarea, select {
 	border-radius: 3px;
 	border-style: solid;
 	border-width: 1px;
@@ -71,16 +74,21 @@ table.simpletablestyle {
 	padding-bottom: 1em;
 }
 
-.panelGrid, .panelGrid td {
+.panelGrid,.panelGrid td {
 	vertical-align: top;
 }
+
+.labelColumn {
+	width:150px;
+}
+
 .icePnlPopHdr {
-    padding:10px 5px;
+	padding: 10px 5px;
 }
 
 .icePnlPop {
- background-color:white; 
-  padding:5px;
+	background-color: white;
+	padding: 5px;
 }
 
 .icePnlPopBody {
