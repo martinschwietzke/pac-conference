@@ -1,5 +1,6 @@
 package com.prodyna.pac.conference.test;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -89,15 +90,21 @@ public class TalkServiceTest {
 	@Test
 	public void testCreateTalk() throws Exception
 	{
-		int conferenceCount = talkService.getAllTalks().size();
+		int expectedTalkCount = 5;
+		long unusedRoomId = 4;
+		long conferenceId = 1;
 
-		Conference conf = conferenceService.getConferenceById(1);
-		Room room = roomService.getRoomById(1);
+		Assert.assertEquals(expectedTalkCount, talkService.getAllTalks().size());
 
+		Conference conf = conferenceService.getConferenceById(conferenceId);
+		Room room = roomService.getRoomById(unusedRoomId);
+		Calendar cal = Calendar.getInstance();
+		cal.set(2013, 10, 5, 15, 0);
 		Date start = new Date();
 		Talk t = new Talk();
 		t.setConference(conf);
 		t.setDescription("description");
+		t.setDuration(120);
 		t.setStart(start);
 		t.setName("name");
 		t.setRoom(room);
@@ -114,7 +121,8 @@ public class TalkServiceTest {
 
 		int conferenceCountNew = talkService.getAllTalks().size();
 
-		Assert.assertEquals(conferenceCountNew, conferenceCount + 1);
+		Assert.assertEquals(conferenceCountNew, expectedTalkCount + 1);
 
 	}
+
 }

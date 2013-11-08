@@ -18,16 +18,16 @@
 	<title>${rootArtifactId}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<h:outputStylesheet name="css/screen.css" />
+	<h:outputScript name="js/conference.js" />
 </h:head>
 <h:body>
 	<div id="container">
-		<div id="header">
-			<div id="navigation">
-				<h:link outcome="conferenceList" value="#{i18n['conferences']}" />
-				<h:link outcome="roomList" value="#{i18n['rooms']}" />
-				<h:link outcome="speakerList" value="#{i18n['speakers']}" />
-				<h:link outcome="talkList" value="#{i18n['talks']}" />
-			</div>
+		<div id="header"></div>
+		<div id="navigation">
+			<h:link outcome="conferenceList" value="#{i18n['conferences']}" />
+			<h:link outcome="roomList" value="#{i18n['rooms']}" />
+			<h:link outcome="speakerList" value="#{i18n['speakers']}" />
+			<h:link outcome="talkList" value="#{i18n['talks']}" />
 		</div>
 		<div id="content">
 			<div id="contentwrapper">

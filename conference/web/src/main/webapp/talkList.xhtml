@@ -18,9 +18,12 @@
 			<em>#{i18n['no-talks-exists']}</em>
 		</h:panelGroup>
 
-		<h:link outcome="talkEdit" value="#{i18n['add']}" />
-
 		<h:form>
+			<ace:menuButton value="#{i18n['action']}">
+				<ace:menuItem>
+					<h:link outcome="talkEdit" value="#{i18n['add']}" />
+				</ace:menuItem>
+			</ace:menuButton>
 			<h:dataTable var="currTalk" value="#{talks}"
 				rendered="#{not empty talks}" styleClass="simpletablestyle">
 				<h:column>

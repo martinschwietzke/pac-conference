@@ -149,7 +149,7 @@ public class ConferenceDetails extends AbstractEditEntityMaskBean implements
 		Date endDate = (Date) uiInputEnd.getLocalValue();
 		String endDateId = uiInputEnd.getClientId();
 
-		if (startDate.after(endDate)) {
+		if (startDate != null && endDate != null && startDate.after(endDate)) {
 
 			FacesMessage msg = new FacesMessage(
 					"Start date must be after end date");

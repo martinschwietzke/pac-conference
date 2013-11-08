@@ -19,8 +19,12 @@
 			<em>#{i18n['no-conferences-exists']}</em>
 		</h:panelGroup>
 
-		<h:link outcome="conferenceEdit" value="#{i18n['add']}" />
 		<h:form>
+			<ace:menuButton value="#{i18n['action']}">
+				<ace:menuItem>
+					<h:link outcome="conferenceEdit" value="#{i18n['add']}" />
+				</ace:menuItem>
+			</ace:menuButton>
 			<h:dataTable var="currConference" value="#{conferences}"
 				rendered="#{not empty conferences}" styleClass="simpletablestyle">
 				<h:column>

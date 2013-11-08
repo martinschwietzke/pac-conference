@@ -5,7 +5,7 @@ body {
 	color: #363636;
 }
 
-body,input,textara,select,option, button, .button {
+body,input,textara,select,option,button,.button {
 	font-size: 12px !important;
 	box-shadow: none !important;
 	font-family: "Helvetica", sans-serif !important;
@@ -13,16 +13,31 @@ body,input,textara,select,option, button, .button {
 }
 
 #header {
-	height: 65px;
+	height: 85px;
 	background-color: darkblue;
 }
 
-#navigation,#navigation a {
+#navigation {
 	color: white;
+	background-color: grey;
+	float: left;
+	width: 100%;
+}
+
+#navigation a {
+	color: white;
+	font-size: 18px;
+	display: block;
+	float: left;
+	margin-left: 5px;
+	padding: 5px;
+	text-decoration: none;
+	border-right: 1px inset silver;
 }
 
 #contentwrapper {
 	padding: 1em;
+	padding-top: 3em;
 }
 
 /******************************/
@@ -44,14 +59,14 @@ a.button {
 	font-weight: normal;
 }
 
-input,textarea, select {
+input,textarea,select {
 	border-radius: 3px;
 	border-style: solid;
 	border-width: 1px;
 	padding: 0.5em;
 }
 
-input[type="text"],select {
+input[type="text"],select,textarea {
 	width: 300px;
 }
 
@@ -78,8 +93,24 @@ table.simpletablestyle {
 	vertical-align: top;
 }
 
+.messages,.messages li {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.messages li {
+	padding: 7px;
+}
+
+.messages .valid {
+	background-color: green;
+	color: white;
+	border-radius: 2px;
+}
+
 .labelColumn {
-	width:150px;
+	width: 150px;
 }
 
 .icePnlPopHdr {

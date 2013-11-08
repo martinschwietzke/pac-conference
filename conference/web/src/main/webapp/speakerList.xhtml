@@ -17,8 +17,13 @@
 			<em>#{i18n['no-speakers-exists']}</em>
 		</h:panelGroup>
 
-		<h:link outcome="speakerEdit" value="#{i18n['add']}" />
 		<h:form>
+			<ace:menuButton value="#{i18n['action']}">
+				<ace:menuItem>
+					<h:link outcome="speakerEdit" value="#{i18n['add']}" />
+				</ace:menuItem>
+			</ace:menuButton>
+
 			<h:dataTable var="currSpeaker" value="#{speakers}"
 				rendered="#{not empty speakers}" styleClass="simpletablestyle">
 				<h:column>
