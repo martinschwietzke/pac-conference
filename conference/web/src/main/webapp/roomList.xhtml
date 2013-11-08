@@ -18,13 +18,14 @@
 		</h:panelGroup>
 
 		<h:form>
-			<ace:menuButton value="#{i18n['action']}">
+			<ace:menuButton value="#{i18n['action']}"
+				styleClass="mainActionsMenu">
 				<ace:menuItem>
 					<h:link outcome="roomEdit" value="#{i18n['add']}" />
 				</ace:menuItem>
 			</ace:menuButton>
 			<h:dataTable var="currRoom" value="#{rooms}"
-				rendered="#{not empty rooms}" styleClass="simpletablestyle">
+				rendered="#{not empty rooms}" styleClass="simpletablestyle mainentitytable">
 				<h:column>
 					<f:facet name="header">#{i18n['id']}</f:facet>
                 #{currRoom.id}

@@ -36,4 +36,6 @@ public interface TalkService {
 
 	void updateTalkSpeakers(Talk talk, List<Speaker> speakers) throws Exception;
 
+	void deleteTalk(long talkId) throws Exception;
+
 }

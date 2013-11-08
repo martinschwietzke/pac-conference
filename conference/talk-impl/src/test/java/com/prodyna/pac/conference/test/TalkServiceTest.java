@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -87,6 +88,9 @@ public class TalkServiceTest {
 	@Inject
 	Logger log;
 
+	@Inject
+	EntityManager em;
+
 	@Test
 	public void testCreateTalk() throws Exception
 	{
@@ -122,6 +126,31 @@ public class TalkServiceTest {
 		int conferenceCountNew = talkService.getAllTalks().size();
 
 		Assert.assertEquals(conferenceCountNew, expectedTalkCount + 1);
+
+	}
+
+	@Test
+	public void testDeleteTalk() throws Exception
+	{
+		Talk talk1 = em.find(Talk.class, 1l);
+
+		Assert.assertNotNull(talk1);
+
+		talkService.deleteTalk(talk1.getId());
+
+		Talk talk1Del = em.find(Talk.class, talk1.getId());
+
+		Assert.assertNull(talk1Del);
+
+		Talk talk2 = em.find(Talk.class, 2l);
+
+		Assert.assertNotNull(talk2);
+
+		talkService.deleteTalk(talk2.getId());
+
+		Talk talk2Del = em.find(Talk.class, talk2.getId());
+
+		Assert.assertNull(talk2Del);
 
 	}
 

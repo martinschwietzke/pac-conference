@@ -45,11 +45,12 @@ public class RoomServiceBean implements RoomService {
 	 * .pac.conference.model.Room)
 	 */
 	@Override
-	public void createRoom(Room room) throws Exception
+	public Room createRoom(Room room) throws Exception
 	{
 		log.info("Creating Room [" + room.getName() + "]");
 		em.persist(room);
 		roomEventSrc.fire(room);
+		return room;
 	}
 
 	/*
@@ -91,12 +92,13 @@ public class RoomServiceBean implements RoomService {
 	 * .pac.conference.model.Room)
 	 */
 	@Override
-	public void updateRoom(Room room) throws Exception
+	public Room updateRoom(Room room) throws Exception
 	{
 
 		log.info("Updating Room [" + room.getName() + "]");
-		em.merge(room);
+		Room merge = em.merge(room);
 		roomEventSrc.fire(room);
+		return merge;
 
 	}
 

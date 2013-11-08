@@ -1,5 +1,6 @@
 package com.prodyna.pac.conference.test;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -10,6 +11,7 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -79,4 +81,46 @@ public class RoomServiceTest {
 		roomService.deleteRoom(r);
 	}
 
+	@Test
+	public void testCreateRoom() throws Exception
+	{
+		Room room = new Room();
+		room.setCapacity(100);
+		room.setName("room");
+
+		Room r = roomService.createRoom(room);
+
+		Assert.assertEquals(100, r.getCapacity());
+		Assert.assertEquals("room", r.getName());
+
+	}
+
+	@Test
+	public void testUpdateRoom() throws Exception
+	{
+		Room room = roomService.getRoomById(1);
+		room.setCapacity(999);
+		room.setName("Room updated");
+
+		Room r = roomService.updateRoom(room);
+
+		Assert.assertEquals(999, r.getCapacity());
+		Assert.assertEquals("Room updated", r.getName());
+
+	}
+
+	@Test
+	public void testGetAllRooms() throws Exception
+	{
+		List<Room> rooms = roomService.getAllRooms();
+
+		Assert.assertEquals(3, rooms.size());
+		Assert.assertEquals(rooms.get(0).getName(), "Raum 1");
+		Assert.assertEquals(rooms.get(0).getCapacity(), 50);
+		Assert.assertEquals(rooms.get(1).getName(), "Raum 2");
+		Assert.assertEquals(rooms.get(1).getCapacity(), 100);
+		Assert.assertEquals(rooms.get(2).getName(), "Raum 3");
+		Assert.assertEquals(rooms.get(2).getCapacity(), 75);
+
+	}
 }

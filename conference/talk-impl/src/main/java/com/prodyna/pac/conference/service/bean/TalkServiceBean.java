@@ -129,6 +129,22 @@ public class TalkServiceBean implements TalkService {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.prodyna.pac.conference.service.TalkService#deleteTalk(long)
+	 */
+	@Override
+	public void deleteTalk(long talkId) throws Exception
+	{
+		Talk talk = getTalkById(talkId);
+		if (talk != null) {
+			log.info("Deleting Talk [" + talk.getName() + "]");
+			deleteAssignedTalksSpeakers(talk.getId());
+			em.remove(talk);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * com.prodyna.pac.conference.service.TalkService#updateTalk(com.prodyna
 	 * .pac.conference.model.Talk)

@@ -10,11 +10,11 @@ import com.prodyna.pac.conference.model.Room;
  */
 public interface RoomService {
 
-	void createRoom(Room room) throws Exception;
+	Room createRoom(Room room) throws Exception;
 
 	void deleteRoom(Room room) throws RoomReferencedException, Exception;
 
-	void updateRoom(Room room) throws Exception;
+	Room updateRoom(Room room) throws Exception;
 
 	Room getRoomById(long roomId) throws Exception;
 
