@@ -5,11 +5,11 @@ body {
 	color: #363636;
 }
 
-body,input,textara,select,option,button,.button {
-	font-size: 12px !important;
+body,input,textara,select,button,option,a.button {
 	box-shadow: none !important;
-	font-family: "Helvetica", sans-serif !important;
+	font-family: Helvetica, sans-serif !important;
 	color: #666666;
+	font-size: 0.9em;
 }
 
 #header {
@@ -22,6 +22,7 @@ body,input,textara,select,option,button,.button {
 	background-color: grey;
 	float: left;
 	width: 100%;
+	border-bottom: 2px solid orange;
 }
 
 #navigation li {
@@ -81,6 +82,7 @@ a.button {
 	border-radius: 2px;
 	color: grey;
 	font-weight: normal;
+	margin-left:5px;
 }
 
 input,textarea,select {
@@ -100,7 +102,7 @@ table.simpletablestyle {
 
 .simpletablestyle td,.simpletablestyle th {
 	padding: 0.6em;
-	border: 1px solid grey;
+	border: 1px solid #ddd;
 	text-align: left;
 }
 

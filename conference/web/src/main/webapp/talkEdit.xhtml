@@ -20,9 +20,17 @@
 		<h:messages styleClass="messages" errorClass="invalid"
 			infoClass="valid" warnClass="warning" globalOnly="true" />
 
+		<h2>
+			<h:outputText value="#{i18n['create-talk']}"
+				rendered="#{talkDetails.talk.new}" />
+			<h:outputText value="#{i18n['edit-talk']}"
+				rendered="#{!talkDetails.talk.new}" />
+		</h2>
+
 		<h:form rendered="#{not empty talkDetails.talk}">
 
-			<h:panelGrid columnClasses="labelColumn,inputColumn" columns="3" styleClass="formGrid panelGrid">
+			<h:panelGrid columnClasses="labelColumn,inputColumn" columns="3"
+				styleClass="formGrid panelGrid">
 				<h:outputLabel for="name" value="#{i18n['name']}" />
 				<h:inputText id="name" value="#{talkDetails.talk.name}" />
 				<h:message for="name" errorClass="invalid" />
