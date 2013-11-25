@@ -42,14 +42,12 @@
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-room-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-common</artifactId>
 			<scope>provided</scope>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<!-- Test scope dependencies -->
@@ -76,19 +74,16 @@
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-speaker-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-talk-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-conference-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

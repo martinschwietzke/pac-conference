@@ -21,7 +21,6 @@
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

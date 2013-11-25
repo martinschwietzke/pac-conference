@@ -12,6 +12,10 @@
 		<project>pac-conference-talk-api</project>
 		<project>pac-conference-conference-common</project>
 		<project>pac-conference-conference-api</project>
+		<project>pac-conference-web</project>
+		<project>pac-conference-conference-impl</project>
+		<project>pac-conference-common</project>
+		<project>pac-conference-api</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

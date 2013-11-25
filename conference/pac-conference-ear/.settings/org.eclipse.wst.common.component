@@ -2,34 +2,34 @@
     <wb-module deploy-name="pac-conference-ear">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
-        <dependent-module archiveName="pac-conference-web.war" deploy-path="/" handle="module:/resource/conference-web/conference-web">
+        <dependent-module archiveName="pac-conference-web.war" deploy-path="/" handle="module:/resource/pac-conference-web/pac-conference-web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="pac-conference-common.jar" deploy-path="/" handle="module:/resource/conference-common/conference-common">
+        <dependent-module archiveName="pac-conference-common.jar" deploy-path="/" handle="module:/resource/pac-conference-common/pac-conference-common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="pac-conference-conference-impl.jar" deploy-path="/" handle="module:/resource/conference-impl/conference-impl">
+        <dependent-module archiveName="pac-conference-conference-impl.jar" deploy-path="/" handle="module:/resource/pac-conference-conference-impl/pac-conference-conference-impl">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="pac-conference-speaker-impl.jar" deploy-path="/" handle="module:/resource/speaker-impl/speaker-impl">
+        <dependent-module archiveName="pac-conference-speaker-impl.jar" deploy-path="/" handle="module:/resource/pac-conference-speaker-impl/pac-conference-speaker-impl">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="pac-conference-room-impl.jar" deploy-path="/" handle="module:/resource/room-impl/room-impl">
+        <dependent-module archiveName="pac-conference-room-impl.jar" deploy-path="/" handle="module:/resource/pac-conference-room-impl/pac-conference-room-impl">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="pac-conference-talk-impl.jar" deploy-path="/" handle="module:/resource/talk-impl/talk-impl">
+        <dependent-module archiveName="pac-conference-talk-impl.jar" deploy-path="/" handle="module:/resource/pac-conference-talk-impl/pac-conference-talk-impl">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="pac-conference-conference-api.jar" deploy-path="/lib" handle="module:/resource/conference-api/conference-api">
+        <dependent-module archiveName="pac-conference-conference-api.jar" deploy-path="/lib" handle="module:/resource/pac-conference-conference-api/pac-conference-conference-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="pac-conference-speaker-api.jar" deploy-path="/lib" handle="module:/resource/speaker-api/speaker-api">
+        <dependent-module archiveName="pac-conference-speaker-api.jar" deploy-path="/lib" handle="module:/resource/pac-conference-speaker-api/pac-conference-speaker-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="pac-conference-room-api.jar" deploy-path="/lib" handle="module:/resource/room-api/room-api">
+        <dependent-module archiveName="pac-conference-room-api.jar" deploy-path="/lib" handle="module:/resource/pac-conference-room-api/pac-conference-room-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="pac-conference-talk-api.jar" deploy-path="/lib" handle="module:/resource/talk-api/talk-api">
+        <dependent-module archiveName="pac-conference-talk-api.jar" deploy-path="/lib" handle="module:/resource/pac-conference-talk-api/pac-conference-talk-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

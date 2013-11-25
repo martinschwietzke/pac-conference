@@ -56,25 +56,21 @@
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-conference-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-speaker-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-room-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-talk-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 		</dependency>
 	</dependencies>
