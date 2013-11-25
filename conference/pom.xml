@@ -28,6 +28,7 @@
 		<module>pac-conference-room-impl</module>						
 		<module>pac-conference-speaker-api</module>
 		<module>pac-conference-speaker-impl</module>
+		<module>test-module</module>
 	</modules>
 
 	<properties>
