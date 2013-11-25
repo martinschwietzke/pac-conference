@@ -21,25 +21,22 @@
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<type>ejb</type>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-room-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-conference-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-speaker-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
