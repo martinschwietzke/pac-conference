@@ -17,17 +17,17 @@
 		</license>
 	</licenses>
 	<modules>
-		<module>web</module>
-		<module>ear</module>
-		<module>conference-common</module>
-		<module>conference-api</module>
-		<module>conference-impl</module>
-		<module>talk-api</module>
-		<module>talk-impl</module>			
-		<module>room-api</module>
-		<module>room-impl</module>						
-		<module>speaker-api</module>
-		<module>speaker-impl</module>
+		<module>pac-conference-web</module>
+		<module>pac-conference-ear</module>
+		<module>pac-conference-common</module>
+		<module>pac-conference-conference-api</module>
+		<module>pac-conference-conference-impl</module>
+		<module>pac-conference-talk-api</module>
+		<module>pac-conference-talk-impl</module>			
+		<module>pac-conference-room-api</module>
+		<module>pac-conference-room-impl</module>						
+		<module>pac-conference-speaker-api</module>
+		<module>pac-conference-speaker-impl</module>
 	</modules>
 
 	<properties>
@@ -50,7 +50,7 @@
 			repository. -->
 		<!-- <version.jboss.bom>1.0.4.Final-redhat-4</version.jboss.bom>> -->
 
-		<version.jboss.as>7.2.0.Final</version.jboss.as>
+		<version.jboss.as>7.1.3.Final</version.jboss.as>
 		<!-- Alternatively, comment out the above line, and un-comment the line 
 			below to use version 7.2.0.Final-redhat-8 which is a release certified to 
 			work with JBoss EAP 6. It requires you have access to the JBoss EAP 6 maven 
@@ -75,25 +75,25 @@
 				ourselves in every module -->
 			<dependency>
 				<groupId>com.prodyna.pac</groupId>
-				<artifactId>conference-impl</artifactId>
+				<artifactId>pac-conference-conference-impl</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
 				<groupId>com.prodyna.pac</groupId>
-				<artifactId>speaker-impl</artifactId>
+				<artifactId>pac-conference-speaker-impl</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
 				<groupId>com.prodyna.pac</groupId>
-				<artifactId>room-impl</artifactId>
+				<artifactId>pac-conference-room-impl</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
 				<groupId>com.prodyna.pac</groupId>
-				<artifactId>talk-impl</artifactId>
+				<artifactId>pac-conference-talk-impl</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
@@ -103,7 +103,7 @@
 				in every module -->
 			<dependency>
 				<groupId>com.prodyna.pac</groupId>
-				<artifactId>conference-web</artifactId>
+				<artifactId>pac-conference-web</artifactId>
 				<version>${project.version}</version>
 				<type>war</type>
 				<scope>compile</scope>
@@ -135,7 +135,7 @@
 
 			<dependency>
 				<groupId>com.prodyna.pac</groupId>
-				<artifactId>conference-common</artifactId>
+				<artifactId>pac-conference-common</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 				<type>ejb</type>
 			</dependency>
