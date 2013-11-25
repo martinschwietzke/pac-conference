@@ -10,8 +10,8 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.prodyna.pac.conference.model.Speaker;
-import com.prodyna.pac.conference.service.SpeakerService;
+import com.prodyna.pac.conference.speaker.model.Speaker;
+import com.prodyna.pac.conference.speaker.service.SpeakerService;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG

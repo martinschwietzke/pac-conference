@@ -24,8 +24,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.prodyna.pac.conference.model.Conference;
-import com.prodyna.pac.conference.service.ConferenceService;
+import com.prodyna.pac.conference.conference.model.Conference;
+import com.prodyna.pac.conference.conference.service.ConferenceService;
 
 /**
  * JAX-RS Example

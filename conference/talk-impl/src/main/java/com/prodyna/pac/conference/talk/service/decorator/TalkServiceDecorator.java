@@ -18,8 +18,8 @@ import javax.jms.QueueSender;
 import javax.jms.QueueSession;
 import javax.naming.InitialContext;
 
-import com.prodyna.pac.conference.model.Talk;
-import com.prodyna.pac.conference.service.TalkService;
+import com.prodyna.pac.conference.talk.model.Talk;
+import com.prodyna.pac.conference.talk.service.TalkService;
 
 /**
  * Service {@link Decorator} for {@link TalkService} which sends JMS
@@ -98,6 +98,7 @@ public abstract class TalkServiceDecorator implements TalkService {
 			message.setString("talkName", talk.getName());
 			message.setLong("talkId", talk.getId());
 			sender.send(message);
+			queueSession.commit();
 		} catch (JMSException e) {
 			logger.log(
 					Level.SEVERE,
@@ -120,6 +121,7 @@ public abstract class TalkServiceDecorator implements TalkService {
 			message.setLong("talkId", talk.getId());
 			message.setString("talkName", talk.getName());
 			sender.send(message);
+			queueSession.commit();
 		} catch (JMSException e) {
 			logger.log(
 					Level.SEVERE,

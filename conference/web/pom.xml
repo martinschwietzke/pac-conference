@@ -82,14 +82,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.richfaces</groupId>
-			<artifactId>richfaces-bom</artifactId>
-			<version>4.3.3.Final</version>
-			<type>pom</type>
-		</dependency>
-
-
-		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>room-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
@@ -113,7 +105,6 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
-
 
 		<!-- Test scope dependencies -->
 		<dependency>

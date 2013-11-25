@@ -9,11 +9,11 @@
 		<!-- The datasource is deployed as <EAR>/META-INF/conference-ds.xml, you 
 			can find it in the source at ear/src/main/application/META-INF/conference-ds.xml -->
 		<jta-data-source>java:jboss/datasources/conferenceDS</jta-data-source>
-		<class>com.prodyna.pac.conference.model.Room</class>
-		<class>com.prodyna.pac.conference.model.Speaker</class>
-		<class>com.prodyna.pac.conference.model.Talk</class>
-		<class>com.prodyna.pac.conference.model.TalkSpeaker</class>
-		<class>com.prodyna.pac.conference.model.Conference</class>
+		<class>com.prodyna.pac.conference.room.model.Room</class>
+		<class>com.prodyna.pac.conference.speaker.model.Speaker</class>
+		<class>com.prodyna.pac.conference.talk.model.Talk</class>
+		<class>com.prodyna.pac.conference.talk.model.TalkSpeaker</class>
+		<class>com.prodyna.pac.conference.conference.model.Conference</class>
 		<properties>
 			<!-- Properties for Hibernate -->
 			<property name="hibernate.hbm2ddl.auto" value="create" />

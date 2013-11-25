@@ -9,11 +9,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import com.prodyna.pac.conference.model.Room;
-import com.prodyna.pac.conference.model.Talk;
-import com.prodyna.pac.conference.service.RoomReferencedException;
-import com.prodyna.pac.conference.service.RoomService;
-import com.prodyna.pac.conference.service.TalkService;
+import com.prodyna.pac.conference.room.model.Room;
+import com.prodyna.pac.conference.room.service.RoomReferencedException;
+import com.prodyna.pac.conference.room.service.RoomService;
+import com.prodyna.pac.conference.talk.model.Talk;
+import com.prodyna.pac.conference.talk.service.TalkService;
 import com.prodyna.pac.conference.web.constants.ViewConstants;
 
 @ManagedBean(name = RoomDetails.BEAN_NAME)

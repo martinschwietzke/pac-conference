@@ -28,8 +28,6 @@
 			<artifactId>conference-web</artifactId>
 			<type>war</type>
 		</dependency>
-		<!-- <dependency> <groupId>com.prodyna.pac</groupId> <artifactId>conference-ejb</artifactId> 
-			<type>ejb</type> </dependency> -->
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>conference-common</artifactId>
@@ -55,7 +53,6 @@
 			<artifactId>talk-impl</artifactId>
 			<type>ejb</type>
 		</dependency>
-
 		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>conference-api</artifactId>
@@ -81,7 +78,6 @@
 			<type>jar</type>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>

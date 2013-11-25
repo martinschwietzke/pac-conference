@@ -13,10 +13,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 
-import com.prodyna.pac.conference.model.Conference;
-import com.prodyna.pac.conference.model.Talk;
-import com.prodyna.pac.conference.service.ConferenceService;
-import com.prodyna.pac.conference.service.TalkService;
+import com.prodyna.pac.conference.conference.model.Conference;
+import com.prodyna.pac.conference.conference.service.ConferenceService;
+import com.prodyna.pac.conference.talk.model.Talk;
+import com.prodyna.pac.conference.talk.service.TalkService;
 import com.prodyna.pac.conference.web.constants.ViewConstants;
 
 @ManagedBean(name = "conferenceDetails")
