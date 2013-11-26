@@ -1,6 +1,9 @@
 package com.prodyna.pac.conference.common.model;
 
 /**
+ * Abstract entity class from which all entities in Conference application
+ * should inherit from.
+ * 
  * @author Martin Schwietzke, PRODYNA AG
  * 
  */

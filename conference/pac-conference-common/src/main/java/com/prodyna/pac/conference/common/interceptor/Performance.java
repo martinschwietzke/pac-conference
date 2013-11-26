@@ -11,14 +11,16 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
-/**
- * @author Martin Schwietzke, PRODYNA AG
- * 
- */
 @InterceptorBinding
 @Inherited
 @Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 @Documented
+/**
+ * {@link Interceptor} binding annotation for {@link PerformanceInterceptor} interceptor.
+ * 
+ * @author Martin Schwietzke, PRODYNA AG
+ * 
+ */
 public @interface Performance {
 }

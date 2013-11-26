@@ -10,6 +10,13 @@ import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+/**
+ * This is a producer class producing common injected resources like loggers or
+ * the {@link EntityManager}.
+ * 
+ * @author Martin Schwietzke, PRODYNA AG
+ * 
+ */
 public class ResourcesProducer {
 
 	@Produces

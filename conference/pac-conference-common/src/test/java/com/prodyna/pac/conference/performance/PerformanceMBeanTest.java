@@ -15,6 +15,12 @@ import com.prodyna.pac.conference.common.monitoring.Performance;
 import com.prodyna.pac.conference.common.monitoring.PerformanceEntry;
 import com.prodyna.pac.conference.common.monitoring.PerformanceMXBean;
 
+/**
+ * This test class tests functionality of {@link PerformanceMXBean}.
+ * 
+ * @author Martin Schwietzke, PRODYNA AG
+ * 
+ */
 public class PerformanceMBeanTest {
 
 	private static PerformanceMXBean perf;

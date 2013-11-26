@@ -4,19 +4,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
-
-import javax.inject.Inject;
 
 /**
- * MBean implementation.
+ * MBean implementation for {@link PerformanceMXBean} MBean.
  * 
+ * @author Martin Schwietzke, PRODYNA AG
  * 
  */
 public class Performance implements PerformanceMXBean {
 
 	private Map<String, PerformanceEntry> entries = new HashMap<String, PerformanceEntry>();
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.common.monitoring.PerformanceMXBean#report
+	 * (java.lang.String, java.lang.String, long)
+	 */
 	@Override
 	public void report(String service, String method, long time)
 	{
@@ -32,6 +37,12 @@ public class Performance implements PerformanceMXBean {
 		entry.report(time);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.common.monitoring.PerformanceMXBean#getAll()
+	 */
 	@Override
 	public List<PerformanceEntry> getAll()
 	{
@@ -40,12 +51,24 @@ public class Performance implements PerformanceMXBean {
 		return entriesList;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.common.monitoring.PerformanceMXBean#getCount()
+	 */
 	@Override
 	public int getCount()
 	{
 		return entries.size();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.prodyna.pac.conference.common.monitoring.PerformanceMXBean#
+	 * getWorstMethodByTime()
+	 */
 	@Override
 	public PerformanceEntry getWorstMethodByTime()
 	{
@@ -63,6 +86,12 @@ public class Performance implements PerformanceMXBean {
 		return worstByTime;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.prodyna.pac.conference.common.monitoring.PerformanceMXBean#
+	 * getWorstMethodByCount()
+	 */
 	@Override
 	public PerformanceEntry getWorstMethodByCount()
 	{
@@ -80,6 +109,12 @@ public class Performance implements PerformanceMXBean {
 		return worstByCount;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.prodyna.pac.conference.common.monitoring.PerformanceMXBean#reset()
+	 */
 	@Override
 	public void reset()
 	{

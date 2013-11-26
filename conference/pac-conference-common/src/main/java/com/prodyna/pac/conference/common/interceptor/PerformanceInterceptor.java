@@ -15,6 +15,10 @@ import javax.management.ObjectName;
 import com.prodyna.pac.conference.common.monitoring.PerformanceMXBean;
 
 /**
+ * {@link Interceptor} which reports performance indicators of method
+ * invocations to {@link PerformanceMXBean} MBean.
+ * 
+ * 
  * @author Martin Schwietzke, PRODYNA AG
  * 
  */

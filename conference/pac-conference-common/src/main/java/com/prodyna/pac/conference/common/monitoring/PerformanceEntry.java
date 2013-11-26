@@ -4,6 +4,9 @@ import java.beans.ConstructorProperties;
 import java.io.Serializable;
 
 /**
+ * This bean holds and calculates performance values for a certain service
+ * method.
+ * 
  * @author Martin Schwietzke, PRODYNA AG
  * 
  */

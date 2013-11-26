@@ -15,6 +15,9 @@ import com.prodyna.pac.conference.common.monitoring.Performance;
 import com.prodyna.pac.conference.common.monitoring.PerformanceMXBean;
 
 /**
+ * This EJB {@link Startup} class initializes all MBeans related to the
+ * Conference application.
+ * 
  * @author Martin Schwietzke, PRODYNA AG
  * 
  */

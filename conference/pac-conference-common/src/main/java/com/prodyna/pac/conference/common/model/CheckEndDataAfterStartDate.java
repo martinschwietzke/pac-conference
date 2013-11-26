@@ -9,6 +9,14 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+/**
+ * This is a custom bean validation annotation to check a valid date range in a
+ * bean.
+ * 
+ * @see EndDateAfterStartDateConstraintValidator
+ * @author Martin Schwietzke, PRODYNA AG
+ * 
+ */
 @Constraint(validatedBy = { EndDateAfterStartDateConstraintValidator.class })
 @Documented
 @Target(ElementType.TYPE)
