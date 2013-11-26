@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,6 +25,7 @@ import com.prodyna.pac.conference.common.model.AbstractEntity;
 @NamedQueries({
 		@NamedQuery(name = Room.FIND_ALL, query = "SELECT r FROM Room r"),
 		@NamedQuery(name = Room.COUNT_REFERENCING_TALKS, query = "SELECT COUNT(t) FROM Talk t WHERE t.room.id = :roomId") })
+@Table(name = "room")
 public class Room extends AbstractEntity {
 
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.room.findAll";

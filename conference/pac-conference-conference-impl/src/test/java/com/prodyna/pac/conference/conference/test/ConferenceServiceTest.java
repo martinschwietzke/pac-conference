@@ -11,31 +11,35 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.prodyna.pac.conference.conference.model.Conference;
 import com.prodyna.pac.conference.conference.service.ConferenceService;
+import com.prodyna.pac.conference.conference.service.bean.ConferenceServiceBean;
 
+/**
+ * Test class for {@link ConferenceServiceBean}.
+ * 
+ * @author Martin Schwietzke, PRODYNA AG
+ * 
+ */
 @RunWith(Arquillian.class)
 public class ConferenceServiceTest {
+
+	private static final String TEST_DATA_SET_JSON_FILE = "testDataSet.json";
+
+	private static final long COUNT_ALL_CONFERENCES = 4;
 
 	@Deployment
 	public static Archive<?> createTestArchive()
@@ -60,7 +64,6 @@ public class ConferenceServiceTest {
 		war.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 		// Deploy our test datasource
 		war.addAsWebInfResource("test-ds.xml", "test-ds.xml");
-		// war.addAsResource("import.sql");
 
 		return war;
 	}
@@ -72,56 +75,35 @@ public class ConferenceServiceTest {
 	EntityManager entityManager;
 
 	@Inject
-	UserTransaction utx;
-
-	@Inject
 	Logger log;
 
-	@Before
-	public void clear() throws NotSupportedException, SystemException
-	{
-
-	}
-
-	@After
-	public void clearAfter() throws NotSupportedException, SystemException,
-			SecurityException, IllegalStateException, RollbackException,
-			HeuristicMixedException, HeuristicRollbackException
-	{
-		// utx.begin();
-		// entityManager.joinTransaction();
-		// System.out.println("Dumping old records...");
-		//
-		// entityManager.createNativeQuery("delete from talkspeaker")
-		// .executeUpdate();
-		// entityManager.createNativeQuery("delete from talk").executeUpdate();
-		// entityManager.createNativeQuery("delete from room").executeUpdate();
-		// entityManager.createQuery("delete from Conference").executeUpdate();
-		//
-		// utx.commit();
-	}
-
 	@Test
+	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
 	public void testGetConferenceById() throws Exception
 	{
 		Conference c = this.conferenceService.getConferenceById(1);
 
-		Calendar instance = GregorianCalendar.getInstance();
-		instance.set(2013, 9, 1, 0, 0, 0);
-		instance.set(Calendar.MILLISECOND, 0);
+		Calendar start = GregorianCalendar.getInstance();
+		start.set(2013, 10, 1, 0, 0, 0);
+		start.set(Calendar.MILLISECOND, 0);
+
+		Calendar end = GregorianCalendar.getInstance();
+		end.set(2013, 10, 15, 0, 0, 0);
+		end.set(Calendar.MILLISECOND, 0);
 
 		Assert.assertNotNull(c);
 		Assert.assertEquals("Konferenz 1", c.getName());
 		Assert.assertEquals("Eschborn", c.getLocation());
-		// Assert.assertEquals(instance.getTime(), c.getStart());
-		// Assert.assertEquals(false, c.isArchived());
+		Assert.assertEquals(start.getTime(), c.getStart());
+		Assert.assertEquals(end.getTime(), c.getEnd());
+		Assert.assertEquals(false, c.isArchived());
 
 	}
 
 	@Test
+	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
 	public void testCreateConference() throws Exception
 	{
-		int conferenceCount = conferenceService.getAllConferences().size();
 
 		Date start = new Date();
 		Date end = new Date(start.getTime() + 10000);
@@ -144,9 +126,50 @@ public class ConferenceServiceTest {
 		Assert.assertEquals(c.getLocation(), newConf.getLocation());
 		Assert.assertEquals(c.getName(), newConf.getName());
 
-		int conferenceCountNew = conferenceService.getAllConferences().size();
+		long count = (Long) entityManager.createQuery(
+				"select count(c) from Conference c").getSingleResult();
+		Assert.assertEquals(COUNT_ALL_CONFERENCES + 1, count);
 
-		Assert.assertEquals(conferenceCountNew, conferenceCount + 1);
+	}
+
+	@Test
+	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	public void testGetAllConference() throws Exception
+	{
+		List<Conference> c = conferenceService.getAllConferences();
+		Assert.assertEquals(COUNT_ALL_CONFERENCES, c.size());
+
+	}
+
+	@Test
+	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	public void testDeleteConference() throws Exception
+	{
+		// delete conferencee 3 - by entity
+
+		Conference conf3 = entityManager.find(Conference.class, 3L);
+
+		Assert.assertNotNull(conf3);
+		Assert.assertNotNull(conf3.getId());
+
+		conferenceService.deleteConference(conf3);
+
+		Conference conf3Del = entityManager.find(Conference.class, 3L);
+
+		Assert.assertNull(conf3Del);
+
+		// delete conference 4 - only by id
+
+		Conference conf4 = entityManager.find(Conference.class, 4L);
+
+		Assert.assertNotNull(conf4);
+		Assert.assertNotNull(conf4.getId());
+
+		conferenceService.deleteConference(conf4.getId());
+
+		Conference conf4Del = entityManager.find(Conference.class, 4L);
+
+		Assert.assertNull(conf4Del);
 
 	}
 }

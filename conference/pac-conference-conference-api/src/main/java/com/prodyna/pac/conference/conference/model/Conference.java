@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -25,6 +26,7 @@ import com.prodyna.pac.conference.common.model.CheckEndDataAfterStartDate;
 @XmlRootElement
 @NamedQuery(name = Conference.FIND_ALL, query = "SELECT c FROM Conference c")
 @CheckEndDataAfterStartDate(startDate = "start", endDate = "end")
+@Table(name = "conference")
 public class Conference extends AbstractEntity {
 
 	@Override

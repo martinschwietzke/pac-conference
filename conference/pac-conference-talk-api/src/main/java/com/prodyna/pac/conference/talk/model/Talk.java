@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,6 +34,7 @@ import com.prodyna.pac.conference.room.model.Room;
 		@NamedQuery(name = Talk.FIND_BY_ROOM_ID, query = "SELECT t FROM Talk t WHERE t.room.id = :roomId"),
 		@NamedQuery(name = Talk.FIND_SPEAKERS_BY_TALK_ID, query = "SELECT ts.speaker FROM TalkSpeaker ts WHERE ts.talk.id = :talkId"),
 		@NamedQuery(name = Talk.DELETE_TALK_SPEAKERS_BY_TALK_ID, query = "DELETE FROM TalkSpeaker ts WHERE ts.talk.id = :talkId") })
+@Table(name = "talk")
 public class Talk extends AbstractEntity {
 
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.talk.findAll";

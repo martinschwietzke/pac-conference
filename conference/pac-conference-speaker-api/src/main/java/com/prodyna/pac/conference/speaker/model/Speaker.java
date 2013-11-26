@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -21,6 +22,7 @@ import com.prodyna.pac.conference.common.model.AbstractEntity;
 @Entity
 @XmlRootElement
 @NamedQuery(name = Speaker.FIND_ALL, query = "SELECT s FROM Speaker s")
+@Table(name = "speaker")
 public class Speaker extends AbstractEntity {
 
 	public final static String FIND_ALL = "de.prodyna.pac.conference.model.speaker.findAll";

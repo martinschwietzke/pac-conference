@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -23,6 +24,7 @@ import com.prodyna.pac.conference.speaker.model.Speaker;
 @NamedQueries({
 		@NamedQuery(name = TalkSpeaker.FIND_SPEAKERS_BY_TALK_ID, query = "SELECT ts.speaker FROM TalkSpeaker ts WHERE ts.talk.id = :talkId"),
 		@NamedQuery(name = TalkSpeaker.FIND_TALK_BY_SPEAKER_ID, query = "SELECT ts.talk FROM TalkSpeaker ts WHERE ts.speaker.id = :speakerId") })
+@Table(name = "talkspeaker")
 public class TalkSpeaker extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
