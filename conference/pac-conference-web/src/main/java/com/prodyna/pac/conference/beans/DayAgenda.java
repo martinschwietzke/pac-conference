@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.prodyna.pac.conference.talk.model.Talk;
+import com.prodyna.pac.conference.talk.api.model.Talk;
 
 public class DayAgenda {
 

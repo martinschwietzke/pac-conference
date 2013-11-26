@@ -15,11 +15,11 @@ import org.icefaces.ace.component.fileentry.FileEntry;
 import org.icefaces.ace.component.fileentry.FileEntryEvent;
 import org.icefaces.ace.component.fileentry.FileEntryResults;
 
-import com.prodyna.pac.conference.speaker.model.Speaker;
-import com.prodyna.pac.conference.speaker.service.SpeakerReferencedException;
-import com.prodyna.pac.conference.speaker.service.SpeakerService;
-import com.prodyna.pac.conference.talk.model.Talk;
-import com.prodyna.pac.conference.talk.service.TalkService;
+import com.prodyna.pac.conference.speaker.api.model.Speaker;
+import com.prodyna.pac.conference.speaker.api.service.SpeakerReferencedException;
+import com.prodyna.pac.conference.speaker.api.service.SpeakerService;
+import com.prodyna.pac.conference.talk.api.model.Talk;
+import com.prodyna.pac.conference.talk.api.service.TalkService;
 import com.prodyna.pac.conference.web.constants.ViewConstants;
 
 @ManagedBean(name = "speakerDetails")

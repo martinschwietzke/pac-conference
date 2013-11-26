@@ -24,9 +24,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.prodyna.pac.conference.conference.model.Conference;
-import com.prodyna.pac.conference.conference.service.ConferenceService;
-import com.prodyna.pac.conference.conference.service.bean.ConferenceServiceBean;
+import com.prodyna.pac.conference.conference.api.model.Conference;
+import com.prodyna.pac.conference.conference.api.service.ConferenceService;
+import com.prodyna.pac.conference.conference.impl.service.bean.ConferenceServiceBean;
 
 /**
  * Test class for {@link ConferenceServiceBean}.

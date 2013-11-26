@@ -1,5 +1,8 @@
 package com.prodyna.pac.conference.room.test;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -7,60 +10,50 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.prodyna.pac.conference.common.exception.ConferenceServiceException;
-import com.prodyna.pac.conference.common.init.ResourcesProducer;
-import com.prodyna.pac.conference.common.interceptor.Logged;
-import com.prodyna.pac.conference.common.interceptor.Performance;
-import com.prodyna.pac.conference.common.model.AbstractEntity;
-import com.prodyna.pac.conference.common.model.Entity;
-import com.prodyna.pac.conference.conference.model.Conference;
-import com.prodyna.pac.conference.room.model.Room;
-import com.prodyna.pac.conference.room.service.RoomReferencedException;
-import com.prodyna.pac.conference.room.service.RoomService;
-import com.prodyna.pac.conference.room.service.bean.RoomServiceBean;
-import com.prodyna.pac.conference.speaker.model.Speaker;
-import com.prodyna.pac.conference.talk.model.Talk;
-import com.prodyna.pac.conference.talk.model.TalkSpeaker;
-import com.prodyna.pac.conference.talk.service.OutOfConferenceDateRangeException;
-import com.prodyna.pac.conference.talk.service.RoomNotAvailableException;
-import com.prodyna.pac.conference.talk.service.TalkService;
+import com.prodyna.pac.conference.room.api.model.Room;
+import com.prodyna.pac.conference.room.api.service.RoomReferencedException;
+import com.prodyna.pac.conference.room.api.service.RoomService;
 
 @RunWith(Arquillian.class)
 public class RoomServiceTest {
+
+	private static final String TEST_DATA_SET_JSON_FILE = "testDataSet.json";
+
+	private static final long COUNT_ALL_ROOMS = 4;
 
 	@Deployment
 	public static Archive<?> createTestArchive()
 	{
 
 		WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war");
-		war.addClass(Entity.class);
-		war.addClass(AbstractEntity.class);
-		war.addClass(Talk.class);
-		war.addClass(Room.class);
-		war.addClass(TalkService.class);
-		war.addClass(ConferenceServiceException.class);
-		war.addClass(RoomReferencedException.class);
-		war.addClass(RoomNotAvailableException.class);
-		war.addClass(OutOfConferenceDateRangeException.class);
-		war.addClass(RoomService.class);
-		war.addClass(Speaker.class);
-		war.addClass(Conference.class);
-		war.addClass(RoomServiceBean.class);
-		war.addClass(ResourcesProducer.class);
-		war.addClass(TalkSpeaker.class);
-		war.addClass(Logged.class);
-		war.addClass(Performance.class);
+		List<File> libs = new ArrayList<File>();
+		libs.addAll(Arrays.asList(Maven
+				.resolver()
+				.loadPomFromFile("pom.xml")
+				.resolve(
+						Arrays.asList(
+								"com.prodyna.pac:pac-conference-room-impl",
+								"com.prodyna.pac:pac-conference-room-api",
+								"com.prodyna.pac:pac-conference-conference-api",
+								"com.prodyna.pac:pac-conference-speaker-api",
+								"com.prodyna.pac:pac-conference-talk-api",
+								"com.prodyna.pac:pac-conference-common"))
+				.withoutTransitivity().asFile()));
+
+		war.addAsLibraries(libs.toArray(new File[0]));
+
 		war.addAsResource("META-INF/test-persistence.xml",
 				"META-INF/persistence.xml");
-		war.addAsResource("import.sql", "import.sql");
 		war.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 		// Deploy our test datasource
 		war.addAsWebInfResource("test-ds.xml", "test-ds.xml");
@@ -75,6 +68,7 @@ public class RoomServiceTest {
 	Logger log;
 
 	@Test(expected = RoomReferencedException.class)
+	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
 	public void testDeleteRoomInUse() throws Exception
 	{
 		Room r = roomService.getRoomById(1);
@@ -82,6 +76,7 @@ public class RoomServiceTest {
 	}
 
 	@Test
+	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
 	public void testCreateRoom() throws Exception
 	{
 		Room room = new Room();
@@ -96,6 +91,7 @@ public class RoomServiceTest {
 	}
 
 	@Test
+	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
 	public void testUpdateRoom() throws Exception
 	{
 		Room room = roomService.getRoomById(1);
@@ -110,17 +106,20 @@ public class RoomServiceTest {
 	}
 
 	@Test
+	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
 	public void testGetAllRooms() throws Exception
 	{
 		List<Room> rooms = roomService.getAllRooms();
 
-		Assert.assertEquals(3, rooms.size());
-		Assert.assertEquals(rooms.get(0).getName(), "Raum 1");
+		Assert.assertEquals(COUNT_ALL_ROOMS, rooms.size());
+		Assert.assertEquals(rooms.get(0).getName(), "Room 1");
 		Assert.assertEquals(rooms.get(0).getCapacity(), 50);
-		Assert.assertEquals(rooms.get(1).getName(), "Raum 2");
+		Assert.assertEquals(rooms.get(1).getName(), "Room 2");
 		Assert.assertEquals(rooms.get(1).getCapacity(), 100);
-		Assert.assertEquals(rooms.get(2).getName(), "Raum 3");
-		Assert.assertEquals(rooms.get(2).getCapacity(), 75);
+		Assert.assertEquals(rooms.get(2).getName(), "Room 3 - unreferenced");
+		Assert.assertEquals(rooms.get(2).getCapacity(), 100);
+		Assert.assertEquals(rooms.get(3).getName(), "Room 4");
+		Assert.assertEquals(rooms.get(3).getCapacity(), 100);
 
 	}
 }

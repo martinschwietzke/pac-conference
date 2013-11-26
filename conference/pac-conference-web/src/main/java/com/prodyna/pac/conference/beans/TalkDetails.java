@@ -8,15 +8,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import com.prodyna.pac.conference.conference.model.Conference;
-import com.prodyna.pac.conference.conference.service.ConferenceService;
-import com.prodyna.pac.conference.room.model.Room;
-import com.prodyna.pac.conference.room.service.RoomService;
-import com.prodyna.pac.conference.speaker.model.Speaker;
-import com.prodyna.pac.conference.talk.model.Talk;
-import com.prodyna.pac.conference.talk.service.OutOfConferenceDateRangeException;
-import com.prodyna.pac.conference.talk.service.RoomNotAvailableException;
-import com.prodyna.pac.conference.talk.service.TalkService;
+import com.prodyna.pac.conference.conference.api.model.Conference;
+import com.prodyna.pac.conference.conference.api.service.ConferenceService;
+import com.prodyna.pac.conference.room.api.model.Room;
+import com.prodyna.pac.conference.room.api.service.RoomService;
+import com.prodyna.pac.conference.speaker.api.model.Speaker;
+import com.prodyna.pac.conference.talk.api.model.Talk;
+import com.prodyna.pac.conference.talk.api.service.OutOfConferenceDateRangeException;
+import com.prodyna.pac.conference.talk.api.service.RoomNotAvailableException;
+import com.prodyna.pac.conference.talk.api.service.TalkService;
 import com.prodyna.pac.conference.web.constants.ViewConstants;
 
 @ManagedBean(name = "talkDetails")

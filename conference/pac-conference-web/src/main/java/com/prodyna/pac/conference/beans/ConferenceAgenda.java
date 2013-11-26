@@ -6,8 +6,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.prodyna.pac.conference.conference.model.Conference;
-import com.prodyna.pac.conference.talk.model.Talk;
+import com.prodyna.pac.conference.conference.api.model.Conference;
+import com.prodyna.pac.conference.talk.api.model.Talk;
 
 public class ConferenceAgenda implements Serializable {
 
