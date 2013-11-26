@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.model;
+package com.prodyna.pac.conference.common.model;
 
 import java.beans.PropertyDescriptor;
 import java.util.Date;

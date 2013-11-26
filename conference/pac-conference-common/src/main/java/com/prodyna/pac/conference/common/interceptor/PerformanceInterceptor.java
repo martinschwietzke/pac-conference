@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.interceptor;
+package com.prodyna.pac.conference.common.interceptor;
 
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Method;
@@ -12,7 +12,7 @@ import javax.management.MBeanServer;
 import javax.management.MBeanServerInvocationHandler;
 import javax.management.ObjectName;
 
-import com.prodyna.pac.conference.monitoring.PerformanceMXBean;
+import com.prodyna.pac.conference.common.monitoring.PerformanceMXBean;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG

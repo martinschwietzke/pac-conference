@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.interceptor;
+package com.prodyna.pac.conference.common.interceptor;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;

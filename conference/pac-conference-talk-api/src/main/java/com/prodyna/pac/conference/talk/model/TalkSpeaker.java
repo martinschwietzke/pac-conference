@@ -11,7 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.prodyna.pac.conference.model.AbstractEntity;
+import com.prodyna.pac.conference.common.model.AbstractEntity;
 import com.prodyna.pac.conference.speaker.model.Speaker;
 
 /**

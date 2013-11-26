@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.monitoring;
+package com.prodyna.pac.conference.common.monitoring;
 
 import java.beans.ConstructorProperties;
 import java.io.Serializable;

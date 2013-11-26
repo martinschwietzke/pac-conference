@@ -9,8 +9,8 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import com.prodyna.pac.conference.interceptor.Logged;
-import com.prodyna.pac.conference.interceptor.Performance;
+import com.prodyna.pac.conference.common.interceptor.Logged;
+import com.prodyna.pac.conference.common.interceptor.Performance;
 import com.prodyna.pac.conference.speaker.model.Speaker;
 import com.prodyna.pac.conference.speaker.service.SpeakerReferencedException;
 import com.prodyna.pac.conference.speaker.service.SpeakerService;

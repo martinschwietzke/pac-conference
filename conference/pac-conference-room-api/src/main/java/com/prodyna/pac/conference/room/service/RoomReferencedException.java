@@ -1,6 +1,6 @@
 package com.prodyna.pac.conference.room.service;
 
-import com.prodyna.pac.conference.exception.ConferenceServiceException;
+import com.prodyna.pac.conference.common.exception.ConferenceServiceException;
 import com.prodyna.pac.conference.room.model.Room;
 
 /**

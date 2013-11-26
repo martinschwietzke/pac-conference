@@ -7,14 +7,13 @@ import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 import org.junit.Assert;
-
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.prodyna.pac.conference.monitoring.Performance;
-import com.prodyna.pac.conference.monitoring.PerformanceEntry;
-import com.prodyna.pac.conference.monitoring.PerformanceMXBean;
+import com.prodyna.pac.conference.common.monitoring.Performance;
+import com.prodyna.pac.conference.common.monitoring.PerformanceEntry;
+import com.prodyna.pac.conference.common.monitoring.PerformanceMXBean;
 
 public class PerformanceMBeanTest {
 

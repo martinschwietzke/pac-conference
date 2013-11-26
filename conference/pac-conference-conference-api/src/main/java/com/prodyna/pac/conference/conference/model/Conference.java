@@ -12,8 +12,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.prodyna.pac.conference.model.AbstractEntity;
-import com.prodyna.pac.conference.model.CheckEndDataAfterStartDate;
+import com.prodyna.pac.conference.common.model.AbstractEntity;
+import com.prodyna.pac.conference.common.model.CheckEndDataAfterStartDate;
 
 /**
  * Entity implementation class for Entity: Conference
@@ -55,7 +55,6 @@ public class Conference extends AbstractEntity {
 	private Date start;
 
 	@NotNull
-	// @GreaterThen(property = "start")
 	private Date end;
 
 	@NotNull

@@ -2,7 +2,7 @@
 <beans xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://jboss.org/schema/cdi/beans_1_0.xsd">
 	<interceptors>
-		<class>com.prodyna.pac.conference.interceptor.LoggingInterceptor</class>
-		<class>com.prodyna.pac.conference.interceptor.PerformanceInterceptor</class>
+		<class>com.prodyna.pac.conference.common.interceptor.LoggingInterceptor</class>
+		<class>com.prodyna.pac.conference.common.interceptor.PerformanceInterceptor</class>
 	</interceptors>
 </beans>

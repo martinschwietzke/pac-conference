@@ -15,8 +15,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.prodyna.pac.conference.common.model.AbstractEntity;
 import com.prodyna.pac.conference.conference.model.Conference;
-import com.prodyna.pac.conference.model.AbstractEntity;
 import com.prodyna.pac.conference.room.model.Room;
 
 /**

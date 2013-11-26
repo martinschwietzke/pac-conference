@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.interceptor;
+package com.prodyna.pac.conference.common.interceptor;
 
 import java.lang.reflect.Method;
 import java.util.logging.Level;

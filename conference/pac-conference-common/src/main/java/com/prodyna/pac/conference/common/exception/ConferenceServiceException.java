@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.exception;
+package com.prodyna.pac.conference.common.exception;
 
 public class ConferenceServiceException extends Exception {
 

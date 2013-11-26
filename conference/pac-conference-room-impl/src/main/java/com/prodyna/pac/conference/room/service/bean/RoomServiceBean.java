@@ -10,8 +10,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.prodyna.pac.conference.interceptor.Logged;
-import com.prodyna.pac.conference.interceptor.Performance;
+import com.prodyna.pac.conference.common.interceptor.Logged;
+import com.prodyna.pac.conference.common.interceptor.Performance;
 import com.prodyna.pac.conference.room.model.Room;
 import com.prodyna.pac.conference.room.service.RoomReferencedException;
 import com.prodyna.pac.conference.room.service.RoomService;

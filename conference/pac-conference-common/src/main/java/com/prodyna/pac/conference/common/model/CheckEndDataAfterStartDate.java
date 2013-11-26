@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.model;
+package com.prodyna.pac.conference.common.model;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

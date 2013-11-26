@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.init;
+package com.prodyna.pac.conference.common.init;
 
 import java.lang.management.ManagementFactory;
 import java.util.logging.Logger;
@@ -11,8 +11,8 @@ import javax.inject.Inject;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
-import com.prodyna.pac.conference.monitoring.Performance;
-import com.prodyna.pac.conference.monitoring.PerformanceMXBean;
+import com.prodyna.pac.conference.common.monitoring.Performance;
+import com.prodyna.pac.conference.common.monitoring.PerformanceMXBean;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG

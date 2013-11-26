@@ -9,10 +9,10 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import com.prodyna.pac.conference.common.interceptor.Logged;
+import com.prodyna.pac.conference.common.interceptor.Performance;
 import com.prodyna.pac.conference.conference.model.Conference;
 import com.prodyna.pac.conference.conference.service.ConferenceService;
-import com.prodyna.pac.conference.interceptor.Logged;
-import com.prodyna.pac.conference.interceptor.Performance;
 
 /**
  * @author Martin Schwietzke, PRODYNA AG

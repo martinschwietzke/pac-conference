@@ -13,8 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import com.prodyna.pac.conference.interceptor.Logged;
-import com.prodyna.pac.conference.interceptor.Performance;
+import com.prodyna.pac.conference.common.interceptor.Logged;
+import com.prodyna.pac.conference.common.interceptor.Performance;
 import com.prodyna.pac.conference.speaker.model.Speaker;
 import com.prodyna.pac.conference.talk.model.Talk;
 import com.prodyna.pac.conference.talk.model.TalkSpeaker;

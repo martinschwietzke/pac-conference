@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.init;
+package com.prodyna.pac.conference.common.init;
 
 import java.util.logging.Logger;
 

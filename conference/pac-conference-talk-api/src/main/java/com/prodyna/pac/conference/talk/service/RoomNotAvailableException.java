@@ -1,6 +1,6 @@
 package com.prodyna.pac.conference.talk.service;
 
-import com.prodyna.pac.conference.exception.ConferenceServiceException;
+import com.prodyna.pac.conference.common.exception.ConferenceServiceException;
 
 public class RoomNotAvailableException extends ConferenceServiceException {
 
