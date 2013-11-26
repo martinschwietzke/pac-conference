@@ -9,12 +9,15 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import com.prodyna.pac.conference.common.exception.ConferenceServiceException;
 import com.prodyna.pac.conference.common.interceptor.Logged;
 import com.prodyna.pac.conference.common.interceptor.Performance;
 import com.prodyna.pac.conference.conference.model.Conference;
 import com.prodyna.pac.conference.conference.service.ConferenceService;
 
 /**
+ * EJB stateless session bean implementation for {@link ConferenceService}.
+ * 
  * @author Martin Schwietzke, PRODYNA AG
  * 
  */
@@ -36,12 +39,12 @@ public class ConferenceServiceBean implements ConferenceService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.prodyna.pac.conference.conference.service.ConferenceService#createConference
-	 * (com.prodyna.pac.conference.conference.model.Conference)
+	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#
+	 * createConference(com.prodyna.pac.conference.conference.model.Conference)
 	 */
 	@Override
-	public Conference createConference(Conference conference) throws Exception
+	public Conference createConference(Conference conference)
+			throws ConferenceServiceException
 	{
 		if (conference == null) {
 			throw new IllegalArgumentException("Conference must not be null");
@@ -56,12 +59,12 @@ public class ConferenceServiceBean implements ConferenceService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.prodyna.pac.conference.conference.service.ConferenceService#deleteConference
-	 * (com.prodyna.pac.conference.conference.model.Conference)
+	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#
+	 * deleteConference (com.prodyna.pac.conference.conference.model.Conference)
 	 */
 	@Override
-	public void deleteConference(Conference conference) throws Exception
+	public void deleteConference(Conference conference)
+			throws ConferenceServiceException
 	{
 
 		log.info("Deleting conference [" + conference.getName() + "]");
@@ -73,12 +76,12 @@ public class ConferenceServiceBean implements ConferenceService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.prodyna.pac.conference.conference.service.ConferenceService#deleteConference
-	 * (long)
+	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#
+	 * deleteConference (long)
 	 */
 	@Override
-	public void deleteConference(long conferenceId) throws Exception
+	public void deleteConference(long conferenceId)
+			throws ConferenceServiceException
 	{
 		Conference c = getConferenceById(conferenceId);
 		if (c != null) {
@@ -89,12 +92,12 @@ public class ConferenceServiceBean implements ConferenceService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.prodyna.pac.conference.conference.service.ConferenceService#updateConference
-	 * (com.prodyna.pac.conference.conference.model.Conference)
+	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#
+	 * updateConference (com.prodyna.pac.conference.conference.model.Conference)
 	 */
 	@Override
-	public void updateConference(Conference conference) throws Exception
+	public void updateConference(Conference conference)
+			throws ConferenceServiceException
 	{
 
 		if (conference == null) {
@@ -110,12 +113,12 @@ public class ConferenceServiceBean implements ConferenceService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.prodyna.pac.conference.conference.service.ConferenceService#getConferenceById
-	 * (long)
+	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#
+	 * getConferenceById (long)
 	 */
 	@Override
-	public Conference getConferenceById(long conferenceId) throws Exception
+	public Conference getConferenceById(long conferenceId)
+			throws ConferenceServiceException
 	{
 
 		return em.find(Conference.class, conferenceId);
@@ -124,11 +127,12 @@ public class ConferenceServiceBean implements ConferenceService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.prodyna.pac.conference.conference.service.ConferenceService#getAllConferences()
+	 * @see com.prodyna.pac.conference.conference.service.ConferenceService#
+	 * getAllConferences()
 	 */
 	@Override
-	public List<Conference> getAllConferences() throws Exception
+	public List<Conference> getAllConferences()
+			throws ConferenceServiceException
 	{
 
 		return em.createNamedQuery(Conference.FIND_ALL, Conference.class)

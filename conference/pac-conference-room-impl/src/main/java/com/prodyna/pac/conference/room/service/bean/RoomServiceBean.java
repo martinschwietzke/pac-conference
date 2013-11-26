@@ -15,10 +15,10 @@ import com.prodyna.pac.conference.common.interceptor.Performance;
 import com.prodyna.pac.conference.room.model.Room;
 import com.prodyna.pac.conference.room.service.RoomReferencedException;
 import com.prodyna.pac.conference.room.service.RoomService;
-import com.prodyna.pac.conference.talk.model.Talk;
-import com.prodyna.pac.conference.talk.service.TalkService;
 
 /**
+ * EJB stateless session bean implementation for {@link RoomService}.
+ * 
  * @author Martin Schwietzke, PRODYNA AG
  * 
  */
@@ -105,7 +105,8 @@ public class RoomServiceBean implements RoomService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.prodyna.pac.conference.talk.service.RoomService#getSpeakerById(long)
+	 * @see
+	 * com.prodyna.pac.conference.talk.service.RoomService#getSpeakerById(long)
 	 */
 	@Override
 	public Room getRoomById(long roomId) throws Exception

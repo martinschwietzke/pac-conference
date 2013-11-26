@@ -23,9 +23,9 @@
 		<module>pac-conference-conference-api</module>
 		<module>pac-conference-conference-impl</module>
 		<module>pac-conference-talk-api</module>
-		<module>pac-conference-talk-impl</module>			
+		<module>pac-conference-talk-impl</module>
 		<module>pac-conference-room-api</module>
-		<module>pac-conference-room-impl</module>						
+		<module>pac-conference-room-impl</module>
 		<module>pac-conference-speaker-api</module>
 		<module>pac-conference-speaker-impl</module>
 	</modules>
@@ -127,7 +127,7 @@
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
-			
+
 
 			<!-- Define the version of the WAR so that we don't need to repeat ourselves 
 				in every module -->
@@ -161,10 +161,84 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
+	<dependencies>
 
+		<!-- Test scope dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Optional, but highly recommended -->
+		<!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA) 
+			JPA from JUnit/TestNG -->
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.arquillian.protocol</groupId>
+			<artifactId>arquillian-protocol-servlet</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.as</groupId>
+			<artifactId>jboss-as-arquillian-container-remote</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.spec.javax.jms</groupId>
+			<artifactId>jboss-jms-api_1.1_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -184,22 +258,22 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
-        <distributionManagement>
-                <repository>
-                        <id>file-repository</id>
-                        <name>Local Repository</name>
-                        <url>file://${user.dir}/target/deploy/repository</url>
-                </repository>
-                <site>
-                        <id>local-site</id>
-                        <name>Local deployed site</name>
-                        <url>file://${user.dir}/target/deploy/site</url>
-                </site>
-        </distributionManagement>
-        <scm>
-                <developerConnection>scm:git:ssh://martinschwietzke@github.com//martinschwietzke/pac-conference.git</developerConnection>
-                <url>https://github.com/martinschwietzke/pac-conference.git</url>
-        </scm>	
+
+	<distributionManagement>
+		<repository>
+			<id>file-repository</id>
+			<name>Local Repository</name>
+			<url>file://${user.dir}/target/deploy/repository</url>
+		</repository>
+		<site>
+			<id>local-site</id>
+			<name>Local deployed site</name>
+			<url>file://${user.dir}/target/deploy/site</url>
+		</site>
+	</distributionManagement>
+	<scm>
+		<developerConnection>scm:git:ssh://martinschwietzke@github.com//martinschwietzke/pac-conference.git</developerConnection>
+		<url>https://github.com/martinschwietzke/pac-conference.git</url>
+	</scm>
 
 </project>

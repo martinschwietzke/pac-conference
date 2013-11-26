@@ -18,6 +18,8 @@ import com.prodyna.pac.conference.talk.model.Talk;
 import com.prodyna.pac.conference.talk.service.TalkService;
 
 /**
+ * EJB stateless session bean implementation for {@link SpeakerService}.
+ * 
  * @author Martin Schwietzke, PRODYNA AG
  * 
  */
@@ -43,8 +45,8 @@ public class SpeakerServiceBean implements SpeakerService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.service.SpeakerService#createSpeaker(com.prodyna
-	 * .pac.conference.model.Speaker)
+	 * com.prodyna.pac.conference.talk.service.SpeakerService#createSpeaker(
+	 * com.prodyna .pac.conference.model.Speaker)
 	 */
 	@Override
 	public void createSpeaker(Speaker speaker) throws Exception
@@ -59,8 +61,8 @@ public class SpeakerServiceBean implements SpeakerService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.service.SpeakerService#deleteSpeaker(com.prodyna
-	 * .pac.conference.model.Speaker)
+	 * com.prodyna.pac.conference.talk.service.SpeakerService#deleteSpeaker(
+	 * com.prodyna .pac.conference.model.Speaker)
 	 */
 	@Override
 	public void deleteSpeaker(Speaker speaker)
@@ -88,8 +90,8 @@ public class SpeakerServiceBean implements SpeakerService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.service.SpeakerService#updateSpeaker(com.prodyna
-	 * .pac.conference.model.Speaker)
+	 * com.prodyna.pac.conference.talk.service.SpeakerService#updateSpeaker(
+	 * com.prodyna .pac.conference.model.Speaker)
 	 */
 	@Override
 	public void updateSpeaker(Speaker speaker) throws Exception
@@ -105,7 +107,8 @@ public class SpeakerServiceBean implements SpeakerService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.service.SpeakerService#getSpeakerById(long)
+	 * com.prodyna.pac.conference.talk.service.SpeakerService#getSpeakerById
+	 * (long)
 	 */
 	@Override
 	public Speaker getSpeakerById(long speakerId) throws Exception
@@ -117,7 +120,8 @@ public class SpeakerServiceBean implements SpeakerService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.prodyna.pac.conference.talk.service.SpeakerService#getAllSpeakers()
+	 * @see
+	 * com.prodyna.pac.conference.talk.service.SpeakerService#getAllSpeakers()
 	 */
 	@Override
 	public List<Speaker> getAllSpeakers() throws Exception

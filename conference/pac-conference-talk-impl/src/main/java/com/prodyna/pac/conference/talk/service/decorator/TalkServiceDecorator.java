@@ -18,6 +18,7 @@ import javax.jms.QueueSender;
 import javax.jms.QueueSession;
 import javax.naming.InitialContext;
 
+import com.prodyna.pac.conference.common.exception.ConferenceServiceException;
 import com.prodyna.pac.conference.talk.model.Talk;
 import com.prodyna.pac.conference.talk.service.TalkService;
 
@@ -89,7 +90,7 @@ public abstract class TalkServiceDecorator implements TalkService {
 	}
 
 	@Override
-	public Talk createTalk(Talk talk) throws Exception
+	public Talk createTalk(Talk talk) throws ConferenceServiceException
 	{
 		Talk t = talkService.createTalk(talk);
 		try {
@@ -111,7 +112,7 @@ public abstract class TalkServiceDecorator implements TalkService {
 	}
 
 	@Override
-	public Talk updateTalk(Talk talk) throws Exception
+	public Talk updateTalk(Talk talk) throws ConferenceServiceException
 	{
 		Talk t = talkService.updateTalk(talk);
 
@@ -134,7 +135,7 @@ public abstract class TalkServiceDecorator implements TalkService {
 	}
 
 	@Override
-	public void deleteTalk(Talk talk) throws Exception
+	public void deleteTalk(Talk talk) throws ConferenceServiceException
 	{
 		talkService.deleteTalk(talk);
 

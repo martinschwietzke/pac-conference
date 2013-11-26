@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import com.prodyna.pac.conference.common.exception.ConferenceServiceException;
 import com.prodyna.pac.conference.common.interceptor.Logged;
 import com.prodyna.pac.conference.common.interceptor.Performance;
 import com.prodyna.pac.conference.speaker.model.Speaker;
@@ -23,6 +24,8 @@ import com.prodyna.pac.conference.talk.service.RoomNotAvailableException;
 import com.prodyna.pac.conference.talk.service.TalkService;
 
 /**
+ * EJB stateless session bean implementation for {@link TalkService}.
+ * 
  * @author Martin Schwietzke, PRODYNA AG
  * 
  */
@@ -50,7 +53,7 @@ public class TalkServiceBean implements TalkService {
 	 */
 	@Override
 	public Talk createTalk(Talk talk) throws RoomNotAvailableException,
-			OutOfConferenceDateRangeException, Exception
+			OutOfConferenceDateRangeException, ConferenceServiceException
 	{
 		long calcEnd = talk.getStart().getTime()
 				+ TimeUnit.MINUTES.toMillis(talk.getDuration());
@@ -66,8 +69,8 @@ public class TalkServiceBean implements TalkService {
 		return talk;
 	}
 
-	private void assertRoomIsAvailable(Talk talk) throws Exception,
-			RoomNotAvailableException
+	private void assertRoomIsAvailable(Talk talk)
+			throws ConferenceServiceException, RoomNotAvailableException
 	{
 
 		boolean roomAvailable = isRoomAvailable(talk.getRoom().getId(),
@@ -78,7 +81,8 @@ public class TalkServiceBean implements TalkService {
 		}
 	}
 
-	private void assertTalkIsInConferenceDateRange(Talk talk) throws Exception,
+	private void assertTalkIsInConferenceDateRange(Talk talk)
+			throws ConferenceServiceException,
 			OutOfConferenceDateRangeException
 	{
 		long confStart = talk.getConference().getStart().getTime();
@@ -94,7 +98,7 @@ public class TalkServiceBean implements TalkService {
 	}
 
 	public boolean isRoomAvailable(long roomId, Date start, Date end)
-			throws Exception
+			throws ConferenceServiceException
 	{
 		List<Talk> talks = this.getTalksByRoom(roomId);
 		boolean available = true;
@@ -115,7 +119,7 @@ public class TalkServiceBean implements TalkService {
 	 * .pac.conference.model.Talk)
 	 */
 	@Override
-	public void deleteTalk(Talk talk) throws Exception
+	public void deleteTalk(Talk talk) throws ConferenceServiceException
 	{
 
 		log.info("Deleting Talk [" + talk.getName() + "]");
@@ -132,7 +136,7 @@ public class TalkServiceBean implements TalkService {
 	 * @see com.prodyna.pac.conference.talk.service.TalkService#deleteTalk(long)
 	 */
 	@Override
-	public void deleteTalk(long talkId) throws Exception
+	public void deleteTalk(long talkId) throws ConferenceServiceException
 	{
 		Talk talk = getTalkById(talkId);
 		if (talk != null) {
@@ -151,7 +155,7 @@ public class TalkServiceBean implements TalkService {
 	 */
 	@Override
 	public Talk updateTalk(Talk talk) throws RoomNotAvailableException,
-			OutOfConferenceDateRangeException, Exception
+			OutOfConferenceDateRangeException, ConferenceServiceException
 	{
 
 		assertRoomIsAvailable(talk);
@@ -167,10 +171,11 @@ public class TalkServiceBean implements TalkService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.prodyna.pac.conference.talk.service.TalkService#getTalkById(long)
+	 * @see
+	 * com.prodyna.pac.conference.talk.service.TalkService#getTalkById(long)
 	 */
 	@Override
-	public Talk getTalkById(long talkId) throws Exception
+	public Talk getTalkById(long talkId) throws ConferenceServiceException
 	{
 
 		return em.find(Talk.class, talkId);
@@ -182,7 +187,7 @@ public class TalkServiceBean implements TalkService {
 	 * @see com.prodyna.pac.conference.talk.service.TalkService#getAllTalks()
 	 */
 	@Override
-	public List<Talk> getAllTalks() throws Exception
+	public List<Talk> getAllTalks() throws ConferenceServiceException
 	{
 
 		return em.createNamedQuery(Talk.FIND_ALL, Talk.class).getResultList();
@@ -193,10 +198,12 @@ public class TalkServiceBean implements TalkService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.service.TalkService#getTalksByConference(long)
+	 * com.prodyna.pac.conference.talk.service.TalkService#getTalksByConference
+	 * (long)
 	 */
 	@Override
-	public List<Talk> getTalksByConference(long conferenceId) throws Exception
+	public List<Talk> getTalksByConference(long conferenceId)
+			throws ConferenceServiceException
 	{
 
 		TypedQuery<Talk> q = em.createNamedQuery(Talk.FIND_BY_CONFERENCE_ID,
@@ -210,10 +217,12 @@ public class TalkServiceBean implements TalkService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.prodyna.pac.conference.talk.service.TalkService#getTalksByRoom(long)
+	 * @see
+	 * com.prodyna.pac.conference.talk.service.TalkService#getTalksByRoom(long)
 	 */
 	@Override
-	public List<Talk> getTalksByRoom(long roomId) throws Exception
+	public List<Talk> getTalksByRoom(long roomId)
+			throws ConferenceServiceException
 	{
 
 		TypedQuery<Talk> q = em.createNamedQuery(Talk.FIND_BY_ROOM_ID,
@@ -228,11 +237,12 @@ public class TalkServiceBean implements TalkService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.service.TalkService#getTalksBySpeaker(com.
-	 * prodyna.pac.conference.model.Speaker)
+	 * com.prodyna.pac.conference.talk.service.TalkService#getTalksBySpeaker
+	 * (com. prodyna.pac.conference.model.Speaker)
 	 */
 	@Override
-	public List<Talk> getTalksBySpeaker(Speaker speaker) throws Exception
+	public List<Talk> getTalksBySpeaker(Speaker speaker)
+			throws ConferenceServiceException
 	{
 
 		TypedQuery<Talk> q = em.createNamedQuery(
@@ -247,10 +257,12 @@ public class TalkServiceBean implements TalkService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.service.TalkService#getSpeakersByTalk(long)
+	 * com.prodyna.pac.conference.talk.service.TalkService#getSpeakersByTalk
+	 * (long)
 	 */
 	@Override
-	public List<Speaker> getSpeakersByTalk(long talk) throws Exception
+	public List<Speaker> getSpeakersByTalk(long talk)
+			throws ConferenceServiceException
 	{
 
 		TypedQuery<Speaker> q = em.createNamedQuery(
@@ -265,12 +277,12 @@ public class TalkServiceBean implements TalkService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.service.TalkService#updateTalkSpeakers(long,
-	 * java.util.List)
+	 * com.prodyna.pac.conference.talk.service.TalkService#updateTalkSpeakers
+	 * (long, java.util.List)
 	 */
 	@Override
 	public void updateTalkSpeakers(long talkId, List<Speaker> speakers)
-			throws Exception
+			throws ConferenceServiceException
 	{
 
 		Talk talk = getTalkById(talkId);
@@ -280,7 +292,7 @@ public class TalkServiceBean implements TalkService {
 
 	@Override
 	public void updateTalkSpeakers(Talk talk, List<Speaker> speakers)
-			throws Exception
+			throws ConferenceServiceException
 	{
 
 		deleteAssignedTalksSpeakers(talk.getId());

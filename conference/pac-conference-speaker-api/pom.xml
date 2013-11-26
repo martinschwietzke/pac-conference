@@ -9,16 +9,6 @@
 	<artifactId>pac-conference-speaker-api</artifactId>
 	<dependencies>
 		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>com.prodyna.pac</groupId>
 			<artifactId>pac-conference-common</artifactId>
 			<type>ejb</type>
