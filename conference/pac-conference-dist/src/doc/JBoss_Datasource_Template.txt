@@ -1,0 +1,36 @@
+                <datasource jndi-name="java:jboss/datasources/conferenceDS" pool-name="conferenceDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:mysql://localhost:3306/conference</connection-url>
+                    <driver>mysql</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>100</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>conference</user-name>
+                        <password>conference</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
+                <datasource jndi-name="java:jboss/datasources/conferenceTestDS" pool-name="conferenceTestDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:mysql://localhost:3306/conference_test</connection-url>
+                    <driver>mysql</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>100</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>conference_test</user-name>
+                        <password>conference_test</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
