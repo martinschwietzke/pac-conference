@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.enterprise.event.Event;
+import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -18,6 +20,7 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.prodyna.pac.conference.common.exception.ConferenceServiceException;
 import com.prodyna.pac.conference.conference.api.model.Conference;
 import com.prodyna.pac.conference.room.api.model.Room;
 import com.prodyna.pac.conference.talk.api.model.Talk;
@@ -144,4 +147,21 @@ public class TalkServiceTest extends AbstractArquillianEjbTest {
 
 	}
 
+	@Test
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
+	public void testTalkUpdateEvent() throws ConferenceServiceException
+	{
+		Talk talkById = talkService.getTalkById(1);
+
+		talkById.setDescription("new description");
+
+		talkService.updateTalk(talkById);
+
+		// TODO mschwietzke event test does not work :(
+	}
+
+	public void observe(@Observes Event<Talk> event)
+	{
+		// TODO mschwietzke event test does not work :(
+	}
 }

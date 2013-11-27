@@ -48,8 +48,8 @@ public class TalkServiceBean implements TalkService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.api.service.TalkService#createTalk(com.prodyna
-	 * .pac.conference.model.Talk)
+	 * com.prodyna.pac.conference.talk.api.service.TalkService#createTalk(com
+	 * .prodyna .pac.conference.model.Talk)
 	 */
 	@Override
 	public Talk createTalk(Talk talk) throws RoomNotAvailableException,
@@ -74,7 +74,7 @@ public class TalkServiceBean implements TalkService {
 	{
 
 		boolean roomAvailable = isRoomAvailable(talk.getRoom().getId(),
-				talk.getStart(), talk.getEnd());
+				talk.getStart(), talk.getEnd(), talk.getId());
 
 		if (!roomAvailable) {
 			throw new RoomNotAvailableException();
@@ -97,13 +97,14 @@ public class TalkServiceBean implements TalkService {
 		}
 	}
 
-	public boolean isRoomAvailable(long roomId, Date start, Date end)
-			throws ConferenceServiceException
+	public boolean isRoomAvailable(long roomId, Date start, Date end,
+			Long talkId) throws ConferenceServiceException
 	{
 		List<Talk> talks = this.getTalksByRoom(roomId);
 		boolean available = true;
 		for (Talk talk : talks) {
-			if (talk.getStart().before(end) && talk.getEnd().after(start)) {
+			if (talk.getStart().before(end) && talk.getEnd().after(start)
+					&& talk.getId() != talkId) {
 				available = false;
 				break;
 			}
@@ -115,8 +116,8 @@ public class TalkServiceBean implements TalkService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.api.service.TalkService#deleteTalk(com.prodyna
-	 * .pac.conference.model.Talk)
+	 * com.prodyna.pac.conference.talk.api.service.TalkService#deleteTalk(com
+	 * .prodyna .pac.conference.model.Talk)
 	 */
 	@Override
 	public void deleteTalk(Talk talk) throws ConferenceServiceException
@@ -133,7 +134,8 @@ public class TalkServiceBean implements TalkService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.prodyna.pac.conference.talk.api.service.TalkService#deleteTalk(long)
+	 * @see
+	 * com.prodyna.pac.conference.talk.api.service.TalkService#deleteTalk(long)
 	 */
 	@Override
 	public void deleteTalk(long talkId) throws ConferenceServiceException
@@ -150,8 +152,8 @@ public class TalkServiceBean implements TalkService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.api.service.TalkService#updateTalk(com.prodyna
-	 * .pac.conference.model.Talk)
+	 * com.prodyna.pac.conference.talk.api.service.TalkService#updateTalk(com
+	 * .prodyna .pac.conference.model.Talk)
 	 */
 	@Override
 	public Talk updateTalk(Talk talk) throws RoomNotAvailableException,
@@ -184,7 +186,8 @@ public class TalkServiceBean implements TalkService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.prodyna.pac.conference.talk.api.service.TalkService#getAllTalks()
+	 * @see
+	 * com.prodyna.pac.conference.talk.api.service.TalkService#getAllTalks()
 	 */
 	@Override
 	public List<Talk> getAllTalks() throws ConferenceServiceException
@@ -218,7 +221,8 @@ public class TalkServiceBean implements TalkService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.prodyna.pac.conference.talk.api.service.TalkService#getTalksByRoom(long)
+	 * com.prodyna.pac.conference.talk.api.service.TalkService#getTalksByRoom
+	 * (long)
 	 */
 	@Override
 	public List<Talk> getTalksByRoom(long roomId)
