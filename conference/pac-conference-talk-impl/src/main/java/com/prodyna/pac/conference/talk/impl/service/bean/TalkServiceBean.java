@@ -96,7 +96,8 @@ public class TalkServiceBean implements TalkService {
 			throw new OutOfConferenceDateRangeException();
 		}
 	}
-
+	
+	@Override
 	public boolean isRoomAvailable(long roomId, Date start, Date end,
 			Long talkId) throws ConferenceServiceException
 	{

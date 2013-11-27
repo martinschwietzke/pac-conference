@@ -1,13 +1,19 @@
 package com.prodyna.pac.conference.web.beans;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 
+import com.prodyna.pac.conference.common.exception.ConferenceServiceException;
 import com.prodyna.pac.conference.conference.api.model.Conference;
 import com.prodyna.pac.conference.conference.api.service.ConferenceService;
 import com.prodyna.pac.conference.room.api.model.Room;
@@ -134,6 +140,44 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 		}
 
 		return outcome;
+	}
+
+	public void validateRoomIsAvailable(ComponentSystemEvent event)
+			throws ConferenceServiceException
+	{
+
+		FacesContext fc = FacesContext.getCurrentInstance();
+
+		UIComponent component = event.getComponent();
+
+		Integer duration = null;
+		Date endDate = null;
+
+		UIInput uiInputStart = (UIInput) component.findComponent("start");
+		Date startDate = (Date) uiInputStart.getLocalValue();
+
+		UIInput uiInputDur = (UIInput) component.findComponent("duration");
+		duration = (Integer) uiInputDur.getLocalValue();
+
+		if (startDate == null || duration == null) {
+			return;
+		}
+
+		endDate = new Date(startDate.getTime() + (duration * 1000));
+
+		UIInput uiInputRoom = (UIInput) component.findComponent("room");
+		Long roomId = (Long) uiInputRoom.getLocalValue();
+
+		if (!talkService.isRoomAvailable(roomId, startDate, endDate, -1L)) {
+
+			FacesMessage msg = new FacesMessage(
+					"Room is not available in resulting timespan");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			fc.addMessage(uiInputRoom.getClientId(), msg);
+
+			fc.renderResponse();
+		}
+
 	}
 
 	public void updateTalk() throws Exception

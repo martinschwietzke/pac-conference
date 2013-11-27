@@ -1,5 +1,6 @@
 package com.prodyna.pac.conference.talk.api.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.prodyna.pac.conference.common.exception.ConferenceServiceException;
@@ -136,5 +137,8 @@ public interface TalkService {
 	 *             Thrown on error while deleting the talk.
 	 */
 	void deleteTalk(long talkId) throws ConferenceServiceException;
+
+	boolean isRoomAvailable(long roomId, Date start, Date end, Long talkId)
+			throws ConferenceServiceException;
 
 }

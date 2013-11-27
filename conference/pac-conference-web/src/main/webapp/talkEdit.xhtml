@@ -28,6 +28,8 @@
 		</h2>
 
 		<h:form rendered="#{not empty talkDetails.talk}">
+		
+			<f:event listener="#{talkDetails.validateRoomIsAvailable}" type="postValidate" />
 
 			<h:panelGrid columnClasses="labelColumn,inputColumn" columns="3"
 				styleClass="formGrid panelGrid">
