@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.beans;
+package com.prodyna.pac.conference.web.beans;
 
 import java.io.Serializable;
 

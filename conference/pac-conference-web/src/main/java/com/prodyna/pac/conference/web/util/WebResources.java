@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.util;
+package com.prodyna.pac.conference.web.util;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;

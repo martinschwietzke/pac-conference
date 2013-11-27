@@ -30,6 +30,7 @@
 		<module>pac-conference-speaker-impl</module>
 		<module>pac-conference-dist</module>
 		<module>pac-conference-test-common</module>
+		<module>pac-conference-rest</module>
 	</modules>
 
 	<properties>
@@ -151,6 +152,13 @@
 			<dependency>
 				<groupId>com.prodyna.pac</groupId>
 				<artifactId>pac-conference-web</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>
+
+			<dependency>
+				<groupId>com.prodyna.pac</groupId>
+				<artifactId>pac-conference-rest</artifactId>
 				<version>${project.version}</version>
 				<type>war</type>
 			</dependency>

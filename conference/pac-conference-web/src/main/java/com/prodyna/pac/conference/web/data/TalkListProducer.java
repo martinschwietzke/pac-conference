@@ -1,4 +1,4 @@
-package com.prodyna.pac.conference.data;
+package com.prodyna.pac.conference.web.data;
 
 import java.util.List;
 

@@ -73,6 +73,11 @@
 			<artifactId>pac-conference-talk-api</artifactId>
 			<type>jar</type>
 		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>pac-conference-rest</artifactId>
+			<type>war</type>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>

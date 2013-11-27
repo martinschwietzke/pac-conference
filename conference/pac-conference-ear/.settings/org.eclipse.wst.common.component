@@ -32,5 +32,8 @@
         <dependent-module archiveName="pac-conference-talk-api.jar" deploy-path="/lib" handle="module:/resource/pac-conference-talk-api/pac-conference-talk-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="pac-conference-rest.war" deploy-path="/" handle="module:/resource/pac-conference-rest/pac-conference-rest">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
