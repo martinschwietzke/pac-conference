@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.prodyna.pac</groupId>
 	<artifactId>conference</artifactId>
-	<version>1.0.0-ALPHA1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<url>http://jboss.org/jbossas</url>
