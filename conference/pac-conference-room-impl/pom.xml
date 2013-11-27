@@ -41,6 +41,11 @@
 			<type>ejb</type>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>pac-conference-test-common</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

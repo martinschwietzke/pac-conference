@@ -7,13 +7,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -22,11 +19,12 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import com.prodyna.pac.conference.conference.api.model.Conference;
 import com.prodyna.pac.conference.conference.api.service.ConferenceService;
 import com.prodyna.pac.conference.conference.impl.service.bean.ConferenceServiceBean;
+import com.prodyna.pac.conference.testcommon.AbstractArquillianEjbTest;
+import com.prodyna.pac.conference.testcommon.TestConstants;
 
 /**
  * Test class for {@link ConferenceServiceBean}.
@@ -34,10 +32,7 @@ import com.prodyna.pac.conference.conference.impl.service.bean.ConferenceService
  * @author Martin Schwietzke, PRODYNA AG
  * 
  */
-@RunWith(Arquillian.class)
-public class ConferenceServiceTest {
-
-	private static final String TEST_DATA_SET_JSON_FILE = "testDataSet.json";
+public class ConferenceServiceTest extends AbstractArquillianEjbTest {
 
 	private static final long COUNT_ALL_CONFERENCES = 4;
 
@@ -54,7 +49,8 @@ public class ConferenceServiceTest {
 						Arrays.asList(
 								"com.prodyna.pac:pac-conference-common",
 								"com.prodyna.pac:pac-conference-conference-api",
-								"com.prodyna.pac:pac-conference-conference-impl"))
+								"com.prodyna.pac:pac-conference-conference-impl",
+								"com.prodyna.pac:pac-conference-test-common"))
 				.withoutTransitivity().asFile()));
 
 		war.addAsLibraries(libs.toArray(new File[0]));
@@ -71,14 +67,8 @@ public class ConferenceServiceTest {
 	@Inject
 	ConferenceService conferenceService;
 
-	@Inject
-	EntityManager entityManager;
-
-	@Inject
-	Logger log;
-
 	@Test
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testGetConferenceById() throws Exception
 	{
 		Conference c = this.conferenceService.getConferenceById(1);
@@ -101,7 +91,7 @@ public class ConferenceServiceTest {
 	}
 
 	@Test
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testCreateConference() throws Exception
 	{
 
@@ -133,7 +123,7 @@ public class ConferenceServiceTest {
 	}
 
 	@Test
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testGetAllConference() throws Exception
 	{
 		List<Conference> c = conferenceService.getAllConferences();
@@ -142,7 +132,7 @@ public class ConferenceServiceTest {
 	}
 
 	@Test
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testDeleteConference() throws Exception
 	{
 		// delete conferencee 3 - by entity

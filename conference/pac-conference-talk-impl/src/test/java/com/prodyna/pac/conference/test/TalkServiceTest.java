@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -20,17 +17,15 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import com.prodyna.pac.conference.conference.api.model.Conference;
 import com.prodyna.pac.conference.room.api.model.Room;
 import com.prodyna.pac.conference.talk.api.model.Talk;
 import com.prodyna.pac.conference.talk.api.service.TalkService;
+import com.prodyna.pac.conference.testcommon.AbstractArquillianEjbTest;
+import com.prodyna.pac.conference.testcommon.TestConstants;
 
-@RunWith(Arquillian.class)
-public class TalkServiceTest {
-
-	private static final String TEST_DATA_SET_JSON_FILE = "testDataSet.json";
+public class TalkServiceTest extends AbstractArquillianEjbTest {
 
 	private static final long COUNT_ALL_TALKS = 2;
 
@@ -51,7 +46,8 @@ public class TalkServiceTest {
 								"com.prodyna.pac:pac-conference-speaker-api",
 								"com.prodyna.pac:pac-conference-speaker-impl",
 								"com.prodyna.pac:pac-conference-talk-api",
-								"com.prodyna.pac:pac-conference-talk-impl"))
+								"com.prodyna.pac:pac-conference-talk-impl",
+								"com.prodyna.pac:pac-conference-test-common"))
 				.withoutTransitivity().asFile()));
 
 		war.addAsLibraries(libs.toArray(new File[0]));
@@ -68,14 +64,8 @@ public class TalkServiceTest {
 	@Inject
 	TalkService talkService;
 
-	@Inject
-	Logger log;
-
-	@Inject
-	EntityManager em;
-
 	@Test
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testCreateTalk() throws Exception
 	{
 		int expectedTalkCount = 2;
@@ -84,9 +74,14 @@ public class TalkServiceTest {
 
 		Assert.assertEquals(expectedTalkCount, talkService.getAllTalks().size());
 
-		Conference conf = em.find(Conference.class, conferenceId);
+		Conference conf = entityManager.find(Conference.class, conferenceId);
 
-		Room room = em.find(Room.class, unusedRoomId);
+		Assert.assertNotNull(conf);
+
+		Room room = entityManager.find(Room.class, unusedRoomId);
+
+		Assert.assertNotNull(room);
+
 		Calendar start = Calendar.getInstance();
 		start.set(2013, 10, 1, 15, 0);
 
@@ -115,33 +110,33 @@ public class TalkServiceTest {
 	}
 
 	@Test
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testDeleteTalk() throws Exception
 	{
-		Talk talk1 = em.find(Talk.class, 1l);
+		Talk talk1 = entityManager.find(Talk.class, 1l);
 
 		Assert.assertNotNull(talk1);
 
 		talkService.deleteTalk(talk1.getId());
 
-		Talk talk1Del = em.find(Talk.class, talk1.getId());
+		Talk talk1Del = entityManager.find(Talk.class, talk1.getId());
 
 		Assert.assertNull(talk1Del);
 
-		Talk talk2 = em.find(Talk.class, 2l);
+		Talk talk2 = entityManager.find(Talk.class, 2l);
 
 		Assert.assertNotNull(talk2);
 
 		talkService.deleteTalk(talk2.getId());
 
-		Talk talk2Del = em.find(Talk.class, talk2.getId());
+		Talk talk2Del = entityManager.find(Talk.class, talk2.getId());
 
 		Assert.assertNull(talk2Del);
 
 	}
 
 	@Test
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testGetAllConference() throws Exception
 	{
 		List<Talk> c = talkService.getAllTalks();

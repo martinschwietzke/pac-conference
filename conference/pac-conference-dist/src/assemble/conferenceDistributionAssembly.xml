@@ -49,6 +49,7 @@
 			<excludes>
 				<exclude>*:pac-conference-dist</exclude>
 				<exclude>*:pac-conference-ear</exclude>
+				<exclude>*:pac-conference-testcommon</exclude>
 			</excludes>
 			<binaries>
 				<attachmentClassifier>sources</attachmentClassifier>

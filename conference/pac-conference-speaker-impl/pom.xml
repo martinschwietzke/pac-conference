@@ -25,6 +25,11 @@
 			<artifactId>pac-conference-talk-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac</groupId>
+			<artifactId>pac-conference-test-common</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

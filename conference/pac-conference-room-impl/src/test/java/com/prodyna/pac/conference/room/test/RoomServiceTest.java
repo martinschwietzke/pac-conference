@@ -4,12 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -18,16 +16,14 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import com.prodyna.pac.conference.room.api.model.Room;
 import com.prodyna.pac.conference.room.api.service.RoomReferencedException;
 import com.prodyna.pac.conference.room.api.service.RoomService;
+import com.prodyna.pac.conference.testcommon.AbstractArquillianEjbTest;
+import com.prodyna.pac.conference.testcommon.TestConstants;
 
-@RunWith(Arquillian.class)
-public class RoomServiceTest {
-
-	private static final String TEST_DATA_SET_JSON_FILE = "testDataSet.json";
+public class RoomServiceTest extends AbstractArquillianEjbTest {
 
 	private static final long COUNT_ALL_ROOMS = 4;
 
@@ -47,7 +43,8 @@ public class RoomServiceTest {
 								"com.prodyna.pac:pac-conference-conference-api",
 								"com.prodyna.pac:pac-conference-speaker-api",
 								"com.prodyna.pac:pac-conference-talk-api",
-								"com.prodyna.pac:pac-conference-common"))
+								"com.prodyna.pac:pac-conference-common",
+								"com.prodyna.pac:pac-conference-test-common"))
 				.withoutTransitivity().asFile()));
 
 		war.addAsLibraries(libs.toArray(new File[0]));
@@ -64,19 +61,19 @@ public class RoomServiceTest {
 	@Inject
 	RoomService roomService;
 
-	@Inject
-	Logger log;
-
 	@Test(expected = RoomReferencedException.class)
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testDeleteRoomInUse() throws Exception
 	{
-		Room r = roomService.getRoomById(1);
+		Room r = entityManager.find(Room.class, 1L);
+
+		Assert.assertNotNull(r);
+
 		roomService.deleteRoom(r);
 	}
 
 	@Test
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testCreateRoom() throws Exception
 	{
 		Room room = new Room();
@@ -91,7 +88,7 @@ public class RoomServiceTest {
 	}
 
 	@Test
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testUpdateRoom() throws Exception
 	{
 		Room room = roomService.getRoomById(1);
@@ -106,7 +103,7 @@ public class RoomServiceTest {
 	}
 
 	@Test
-	@UsingDataSet(TEST_DATA_SET_JSON_FILE)
+	@UsingDataSet(TestConstants.TEST_DATA_SET_JSON_FILE)
 	public void testGetAllRooms() throws Exception
 	{
 		List<Room> rooms = roomService.getAllRooms();
