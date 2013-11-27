@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.prodyna.pac.conference.common.exception.ConferenceServiceException;
 import com.prodyna.pac.conference.common.interceptor.Logged;
 import com.prodyna.pac.conference.common.interceptor.Performance;
 import com.prodyna.pac.conference.room.api.model.Room;
@@ -45,7 +46,7 @@ public class RoomServiceBean implements RoomService {
 	 * .prodyna .pac.conference.model.Room)
 	 */
 	@Override
-	public Room createRoom(Room room) throws Exception
+	public Room createRoom(Room room) throws ConferenceServiceException
 	{
 		log.info("Creating Room [" + room.getName() + "]");
 		em.persist(room);
@@ -57,11 +58,28 @@ public class RoomServiceBean implements RoomService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * com.prodyna.pac.conference.room.api.service.RoomService#deleteRoom(java
+	 * .lang.Long)
+	 */
+	@Override
+	public void deleteRoom(Long roomId) throws RoomReferencedException,
+			ConferenceServiceException
+	{
+		Room r = getRoomById(roomId);
+
+		deleteRoom(r);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * com.prodyna.pac.conference.talk.api.service.RoomService#deleteRoom(com
 	 * .prodyna .pac.conference.model.Room)
 	 */
 	@Override
-	public void deleteRoom(Room room) throws RoomReferencedException, Exception
+	public void deleteRoom(Room room) throws RoomReferencedException,
+			ConferenceServiceException
 	{
 
 		if (room == null || room.getId() == null) {
@@ -92,7 +110,7 @@ public class RoomServiceBean implements RoomService {
 	 * .prodyna .pac.conference.model.Room)
 	 */
 	@Override
-	public Room updateRoom(Room room) throws Exception
+	public Room updateRoom(Room room) throws ConferenceServiceException
 	{
 
 		log.info("Updating Room [" + room.getName() + "]");
@@ -110,7 +128,7 @@ public class RoomServiceBean implements RoomService {
 	 * (long)
 	 */
 	@Override
-	public Room getRoomById(long roomId) throws Exception
+	public Room getRoomById(long roomId) throws ConferenceServiceException
 	{
 
 		return em.find(Room.class, roomId);
@@ -123,7 +141,7 @@ public class RoomServiceBean implements RoomService {
 	 * com.prodyna.pac.conference.talk.api.service.RoomService#getAllRooms()
 	 */
 	@Override
-	public List<Room> getAllRooms() throws Exception
+	public List<Room> getAllRooms() throws ConferenceServiceException
 	{
 
 		return em.createNamedQuery(Room.FIND_ALL, Room.class).getResultList();

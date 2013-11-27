@@ -23,7 +23,7 @@ public interface RoomService {
 	 * @throws ConferenceServiceException
 	 *             Thrown on error while creating new {@link Room}.
 	 */
-	Room createRoom(Room room) throws Exception;
+	Room createRoom(Room room) throws ConferenceServiceException;
 
 	/**
 	 * Deletes the given room.
@@ -33,7 +33,19 @@ public interface RoomService {
 	 * @throws ConferenceServiceException
 	 *             Thrown on error while deleting the room.
 	 */
-	void deleteRoom(Room room) throws RoomReferencedException, Exception;
+	void deleteRoom(Room room) throws RoomReferencedException,
+			ConferenceServiceException;
+
+	/**
+	 * Deletes the room for the given id.
+	 * 
+	 * @param room
+	 *            The room id of the {@link Room} to delete.
+	 * @throws ConferenceServiceException
+	 *             Thrown on error while deleting the room.
+	 */
+	void deleteRoom(Long roomId) throws RoomReferencedException,
+			ConferenceServiceException;
 
 	/**
 	 * Updates the given room.
@@ -43,7 +55,7 @@ public interface RoomService {
 	 * @throws ConferenceServiceException
 	 *             Thrown on error while updating the room.
 	 */
-	Room updateRoom(Room room) throws Exception;
+	Room updateRoom(Room room) throws ConferenceServiceException;
 
 	/**
 	 * Fetches a {@link Room} by it's identifier.
@@ -55,7 +67,7 @@ public interface RoomService {
 	 * @throws ConferenceServiceException
 	 *             Thrown on error when loading the room.
 	 */
-	Room getRoomById(long roomId) throws Exception;
+	Room getRoomById(long roomId) throws ConferenceServiceException;
 
 	/**
 	 * Loads all rooms.
@@ -64,5 +76,5 @@ public interface RoomService {
 	 * @throws ConferenceServiceException
 	 *             Thrown on error while fetching rooms.
 	 */
-	List<Room> getAllRooms() throws Exception;
+	List<Room> getAllRooms() throws ConferenceServiceException;
 }

@@ -39,7 +39,7 @@ public class SpeakerServiceBean implements SpeakerService {
 	private Event<Speaker> roomEventSrc;
 
 	@Inject
-	TalkService talkService;
+	private TalkService talkService;
 
 	/*
 	 * (non-Javadoc)
