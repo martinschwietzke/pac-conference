@@ -106,7 +106,7 @@ public class TalkDetails extends AbstractEditEntityMaskBean {
 	public String createTalk() throws Exception
 	{
 
-		String outcome = ViewConstants.VIEW_TALK_EDIT;
+		String outcome = null;
 		try {
 			talkService.createTalk(talk);
 			talkService.updateTalkSpeakers(talk, speakers);
