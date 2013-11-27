@@ -65,13 +65,13 @@ public class RoomDetails extends AbstractEditEntityMaskBean {
 	public String createRoom() throws Exception
 	{
 
-		String outcome = ViewConstants.VIEW_ROOM_EDIT;
+		String outcome = null;
 		try {
 			roomService.createRoom(room);
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Saved!", "Room saved"));
 			room = null;
-			outcome = ViewConstants.VIEW_SPEAKER_LIST;
+			outcome = ViewConstants.VIEW_ROOM_LIST;
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -84,12 +84,12 @@ public class RoomDetails extends AbstractEditEntityMaskBean {
 
 	public String updateRoom() throws Exception
 	{
-		String outcome = ViewConstants.VIEW_ROOM_EDIT;
+		String outcome = null;
 		try {
 			roomService.updateRoom(room);
 			facesContext.addMessage(null, new FacesMessage(
 					FacesMessage.SEVERITY_INFO, "Updated!", "Room updated"));
-			outcome = ViewConstants.VIEW_SPEAKER_LIST;
+			outcome = ViewConstants.VIEW_ROOM_LIST;
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
