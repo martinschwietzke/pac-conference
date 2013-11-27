@@ -70,7 +70,8 @@
 
 3.2	Die Webbapplikation ist nach erfolgreichen Deployment erreichbar unter:
 
-	http://localhost:8080/pac-conference-web/
+	UI Frontend: http://localhost:8080/pac-conference-web/
+	REST Services: http://localhost:8080/pac-conference-rest/
 
 
 
